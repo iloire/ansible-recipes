@@ -9,6 +9,11 @@
       apt:
         name: zsh
         state: latest
+    - name: install fzf
+      become: yes
+      apt:
+        name: fzf
+        state: latest
     - name: change user shell to zsh 
       become: yes
       user:
