@@ -1,0 +1,16 @@
+- name: set up zsh for user
+  hosts: localhost
+  become: no
+  vars:
+    the_user: "{{ ansible_user_id }}"
+  tasks:
+    - name: install zsh 
+      become: yes
+      apt:
+        name: zsh
+        state: latest
+    - name: change user shell to zsh 
+      become: yes
+      user:
+        name: "{{ the_user }}"
+        shell: /bin/zsh

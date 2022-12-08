@@ -1,0 +1,17 @@
+- name: Intro to Ansible Playbooks
+  hosts: localhost 
+  tasks:
+    - name: dotfiles checkout
+      ansible.builtin.git:
+        repo: 'https://github.com/iloire/dotfiles.git'
+        dest: ~/dotfiles
+    - name: oh my zsh checkout 
+      ansible.builtin.git:
+        repo: 'https://github.com/ohmyzsh/ohmyzsh.git'
+        dest: ~/.oh-my-zsh
+    - name: Creating hardlink
+      ansible.builtin.file:
+        src: "~/dotfiles/shell/zshrc"
+        dest: "~/.zshrc"
+        state: link 
+
