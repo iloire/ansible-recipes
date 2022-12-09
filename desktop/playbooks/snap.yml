@@ -1,0 +1,11 @@
+- name: Snap packages
+  hosts: localhost
+  become: yes
+  tasks:
+  - name: Install packages with snap
+    become: yes
+    snap:
+      name:
+        - spotify
+        - gimp
+
