@@ -1,0 +1,12 @@
+- name: install global nmp packages
+  hosts: localhost
+  tasks:
+    - name: Install node.js packages globally.
+      npm:
+        name: "{{item}}"
+        global: yes
+      loop:
+        - yarn
+        - diff-so-fancy
+        - prettier
+
