@@ -1,0 +1,18 @@
+- name: crontab
+  hosts: localhost
+  become: false
+  tasks:
+   - name: clean downloads folder
+     ansible.builtin.cron:
+       name: "clean downloads"
+       minute: "0"
+       hour: "20"
+       weekday: "1"
+       job: "/usr/bin/python $HOME/dotfiles/bin/clean-cookies.py --clean"
+   - name: purge docker files
+     ansible.builtin.cron:
+       name: "purge docker files"
+       minute: "0"
+       hour: "20"
+       weekday: "2"
+       job: "/usr/bin/docker system prune -f"
