@@ -16,3 +16,5 @@
   import_playbook: playbooks/apt.yml
 - name: google-chrome
   import_playbook: playbooks/google-chrome.yml
+- name: brave browser
+  import_playbook: playbooks/brave.yml
