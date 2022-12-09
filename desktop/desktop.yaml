@@ -1,0 +1,16 @@
+- name: dotfiles 
+  import_playbook: playbooks/dotfiles.yaml 
+- name: git
+  import_playbook: playbooks/git.yaml 
+- name: zsh
+  import_playbook: playbooks/zsh.yaml 
+- name: node/nvm
+  import_playbook: playbooks/node.yaml 
+- name: dotfiles 
+  import_playbook: playbooks/dotfiles.yaml 
+- name: git
+  import_playbook: playbooks/git.yaml 
+- name: nvim
+  import_playbook: playbooks/nvim.yaml 
+- name: apt
+  import_playbook: playbooks/apt.yml 
