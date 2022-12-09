@@ -1,9 +1,13 @@
 - name: Bootstrap development environment
   hosts: localhost
+  become: yes
+  pre_tasks:
+    - name: update repositories
+      apt: update_cache=yes
   tasks:
   - name: Install packages with apt
     become: yes
-    apt:
+    ansible.builtin.apt:
       name:
         - git
         - tmux
