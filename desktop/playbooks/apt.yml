@@ -13,4 +13,7 @@
         - tmux
         - vim
         - mc
+        - terminator
+        - python3.8
+        - flameshot
       state: present
