@@ -1,0 +1,19 @@
+- name: setup node
+  hosts: localhost
+  vars:
+      node_version: "18.12.1"
+  tasks:
+    - name: download nvm
+      get_url:
+        url: https://raw.githubusercontent.com/creationix/nvm/v0.38.0/install.sh
+        dest: /tmp/
+        mode: 0755
+
+    - name: install nvm
+      shell: /tmp/install.sh
+
+    - name: install node
+      shell: /bin/bash -c "source ~/.nvm/nvm.sh nvm install {{node_version}}" 
+
+    - name: set default node
+      shell: /bin/bash -c "source ~/.nvm/nvm.sh nvm alias {{node_version}}"      
