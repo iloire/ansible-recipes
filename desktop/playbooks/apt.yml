@@ -8,7 +8,7 @@
   - name: add lazygit ppa
     apt_repository:
       repo: 'ppa:lazygit-team/release'
-  - name: add telegram
+  - name: add telegram ppa
     apt_repository:
       repo: 'ppa:atareao/telegram'
   - name: Install packages with apt
@@ -25,5 +25,6 @@
         - lazygit
         - telegram
         - vlc
+        - libreoffice
       state: present
       update_cache: true
