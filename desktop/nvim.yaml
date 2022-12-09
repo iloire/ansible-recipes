@@ -1,0 +1,25 @@
+- name: config nvim
+  hosts: localhost 
+  tasks:
+          - name: Create a directory if it does not exist
+            ansible.builtin.file:
+                path: '~/apps'
+                state: directory
+                mode: '0755'
+          - name: download neovim
+            ansible.builtin.get_url:
+                url: 'https://github.com/neovim/neovim/releases/latest/download/nvim.appimage'
+                dest: '~/apps/nvim'
+                mode: '770'
+          - name: checkout packer
+            ansible.builtin.git:
+                    repo: 'https://github.com/wbthomason/packer.nvim'
+                    dest: '~/.local/share/nvim/site/pack/packer/start/packer.nvim'
+                    depth: 1
+          - name: Creating hardlink
+            ansible.builtin.file:
+                    src: "~/dotfiles/nvim"
+                    dest: "~/.config/nvim"
+                    state: link
+
+
