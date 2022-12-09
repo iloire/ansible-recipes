@@ -5,9 +5,15 @@
     - name: update repositories
       apt: update_cache=yes
   tasks:
+  - name: add lazygit ppa
+    apt_repository:
+      repo: 'ppa:lazygit-team/release'
+  - name: add telegram
+    apt_repository:
+      repo: 'ppa:atareao/telegram'
   - name: Install packages with apt
     become: yes
-    ansible.builtin.apt:
+    apt:
       name:
         - git
         - tmux
@@ -16,4 +22,8 @@
         - terminator
         - python3.8
         - flameshot
+        - lazygit
+        - telegram
+        - vlc
       state: present
+      update_cache: true
