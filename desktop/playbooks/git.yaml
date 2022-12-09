@@ -1,9 +1,8 @@
 - name: config git
-  hosts: localhost 
+  hosts: localhost
   tasks:
-          - name: Creating hardlink for git config
-            ansible.builtin.file:
-                    src: "~/dotfiles/git/.gitconfig"
-                    dest: "~/.gitconfig"
-                    state: link
-
+    - name: Creating hardlink for git config
+      ansible.builtin.file:
+        src: "~/dotfiles/git/.gitconfig"
+        dest: "~/.gitconfig"
+        state: link
