@@ -5,30 +5,31 @@
     - name: update repositories
       apt: update_cache=yes
   tasks:
-  - name: add lazygit ppa
-    apt_repository:
-      repo: 'ppa:lazygit-team/release'
-  - name: add telegram ppa
-    apt_repository:
-      repo: 'ppa:atareao/telegram'
-  - name: add alacritty ppa
-    apt_repository:
-      repo: 'ppa:aslatter/ppa'
-  - name: Install packages with apt
-    become: yes
-    apt:
-      name:
-        - git
-        - tmux
-        - vim
-        - mc
-        - terminator
-        - python3.8
-        - flameshot
-        - lazygit
-        - telegram
-        - vlc
-        - libreoffice
-        - alacritty
-      state: present
-      update_cache: true
+    - name: add lazygit ppa
+      apt_repository:
+        repo: "ppa:lazygit-team/release"
+    - name: add telegram ppa
+      apt_repository:
+        repo: "ppa:atareao/telegram"
+    - name: add alacritty ppa
+      apt_repository:
+        repo: "ppa:aslatter/ppa"
+    - name: Install packages with apt
+      become: yes
+      apt:
+        name:
+          - nvidia-driver-525
+          - git
+          - tmux
+          - vim
+          - mc
+          - terminator
+          - python3.8
+          - flameshot
+          - lazygit
+          - telegram
+          - vlc
+          - libreoffice
+          - alacritty
+        state: present
+        update_cache: true
