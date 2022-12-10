@@ -20,5 +20,7 @@
   import_playbook: playbooks/brave.yml
 - name: crontab
   import_playbook: playbooks/crontab.yml
-- name: snap 
+- name: snap
   import_playbook: playbooks/snap.yml
+- name: hosts
+  import_playbook: playbooks/hosts.yml
