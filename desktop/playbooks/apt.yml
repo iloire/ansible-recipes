@@ -11,6 +11,9 @@
   - name: add telegram ppa
     apt_repository:
       repo: 'ppa:atareao/telegram'
+  - name: add alacritty ppa
+    apt_repository:
+      repo: 'ppa:aslatter/ppa'
   - name: Install packages with apt
     become: yes
     apt:
@@ -26,5 +29,6 @@
         - telegram
         - vlc
         - libreoffice
+        - alacritty
       state: present
       update_cache: true
