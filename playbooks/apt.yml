@@ -1,13 +1,10 @@
-- name: Bootstrap development environment
+- name: install apt conmmon packages and apps
   hosts: localhost
   become: yes
   pre_tasks:
     - name: update repositories
       apt: update_cache=yes
   tasks:
-    - name: add lazygit ppa
-      apt_repository:
-        repo: "ppa:lazygit-team/release"
     - name: add telegram ppa
       apt_repository:
         repo: "ppa:atareao/telegram"
@@ -18,19 +15,20 @@
       become: yes
       apt:
         name:
+          - libfuse2*
           - nvidia-driver-525
           - git
           - tmux
           - vim
           - mc
           - terminator
-          - python3.8
+          - python3.10
           - flameshot
-          - lazygit
           - telegram
           - vlc
           - libreoffice
           - alacritty
+          - curl
         state: present
         update_cache: true
     - name: Remove packages
