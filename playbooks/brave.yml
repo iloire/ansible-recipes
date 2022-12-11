@@ -27,4 +27,4 @@
       ansible.builtin.apt:
         name: brave-browser
         state: present
-      become: trueq
+      become: true
