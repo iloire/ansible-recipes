@@ -24,3 +24,7 @@
   import_playbook: playbooks/snap.yml
 - name: hosts
   import_playbook: playbooks/hosts.yml
+- name: build essentials
+  import_playbook: playbooks/build-essentials.yml
+- name: lazygit
+  import_playbook: playbooks/lazygit.yml
