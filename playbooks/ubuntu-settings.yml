@@ -2,4 +2,6 @@
   become: false
   tasks:
     - name: Gnome theme
-      shell: gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+      shell: gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-bark-dark'
+    - name: dark theme
+      shell: gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
