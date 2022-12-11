@@ -29,6 +29,7 @@
           - libreoffice
           - alacritty
           - curl
+          - gnome-tweaks
         state: present
         update_cache: true
     - name: Remove packages
