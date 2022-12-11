@@ -33,3 +33,9 @@
           - alacritty
         state: present
         update_cache: true
+    - name: Remove packages
+      become: yes
+      apt:
+        name:
+          - thunderbird
+        state: absent
