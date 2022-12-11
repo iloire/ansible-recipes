@@ -1,0 +1,5 @@
+- hosts: localhost
+  become: false
+  tasks:
+    - name: Gnome theme
+      shell: gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
