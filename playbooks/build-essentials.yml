@@ -1,0 +1,14 @@
+- name: bootstrap development environment
+  hosts: localhost
+  become: yes
+  pre_tasks:
+    - name: update repositories
+      apt: update_cache=yes
+  tasks:
+    - name: install packages with apt
+      become: yes
+      apt:
+        name:
+          - build-essential
+        state: present
+        update_cache: true
