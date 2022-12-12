@@ -1,11 +1,16 @@
 - name: config terminator
   hosts: localhost
   tasks:
-    - name: Create a directory if it does not exist
+    - name: create a directory if it does not exist
       ansible.builtin.file:
         path: "~/.config/terminator"
         state: directory
+    - name: report if the file exists
+      shell: "ls ~/.config/terminator/config"
+      register: config_exists
+      ignore_errors: yes
     - name: Creating hardlink
+      when: config_exists is failed
       ansible.builtin.file:
         src: "~/dotfiles/terminator/config"
         dest: "~/.config/terminator/config"
