@@ -28,3 +28,7 @@
   import_playbook: playbooks/build-essentials.yml
 - name: lazygit
   import_playbook: playbooks/lazygit.yml
+- name: geek fonts
+  import_playbook: playbooks/geek-fonts.yml
+- name: terminator config
+  import_playbook: playbooks/terminator.yml
