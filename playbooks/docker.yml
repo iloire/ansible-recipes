@@ -1,0 +1,27 @@
+
+- name: bootstrap development environment
+  hosts: localhost
+  become: yes
+  pre_tasks:
+    - name: update repositories
+      apt: update_cache=yes
+  tasks:
+    - name: add Docker apt repository key.
+      apt_key:
+        url: "https://download.docker.com/linux/ubuntu/gpg"
+        state: present
+
+    - name: set the stable docker repository
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable"
+        state: present
+
+    - name: install packages with apt
+      become: yes
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-compose-plugin
+        state: present
