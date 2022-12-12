@@ -1,4 +1,3 @@
-
 - name: bootstrap development environment
   hosts: localhost
   become: yes
@@ -25,3 +24,14 @@
           - containerd.io
           - docker-compose-plugin
         state: present
+
+    - name: Ensure group "docker" exists
+      ansible.builtin.group:
+        name: docker
+        state: present
+
+    - name: adding existing user "{{ lookup('env', 'USER') }}" to group docker
+      user:
+        name: "{{ lookup('env', 'USER') }}"
+        groups: docker
+        append: yes
