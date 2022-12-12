@@ -1,7 +1,7 @@
 - name: install global nmp packages
   hosts: localhost
   vars:
-      node_version: "18.12.1"
+    node_version: "18.12.1"
   tasks:
     - name: set default node
       shell: /bin/bash -c "source ~/.nvm/nvm.sh nvm use {{node_version}}"
@@ -13,4 +13,4 @@
         - yarn
         - diff-so-fancy
         - prettier
-
+        - nodemon
