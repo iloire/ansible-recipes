@@ -30,6 +30,8 @@
           - alacritty
           - curl
           - gnome-tweaks
+          - dconf-cli
+          - dconf-editor
         state: present
         update_cache: true
     - name: Remove packages
