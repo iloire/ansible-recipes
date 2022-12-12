@@ -1,5 +1,6 @@
 - name: config git
   hosts: localhost
+  become: no
   tasks:
     - name: Creating hardlink for git config
       ansible.builtin.file:

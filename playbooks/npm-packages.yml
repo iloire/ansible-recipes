@@ -1,5 +1,6 @@
 - name: install global nmp packages
   hosts: localhost
+  become: yes
   tasks:
     - name: Install node.js packages globally.
       npm:

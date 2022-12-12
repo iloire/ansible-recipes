@@ -1,6 +1,6 @@
 - name: install lazygit
   hosts: localhost
-  become: true
+  become: yes
   tasks:
     - name: install command
       shell:

@@ -1,5 +1,6 @@
 - name: install geek fonts
   hosts: localhost
+  become: no
   tasks:
     - name: ensure fonts directory
       file:

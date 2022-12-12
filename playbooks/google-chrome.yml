@@ -1,6 +1,6 @@
 - name: install Google Chrome
   hosts: localhost
-  become: true
+  become: yes
   tasks:
     - name: Install apt-transport-https
       ansible.builtin.apt:

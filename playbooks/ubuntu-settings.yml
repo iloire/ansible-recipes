@@ -1,5 +1,5 @@
 - hosts: localhost
-  become: false
+  become: no
   tasks:
     - name: Gnome theme
       shell: gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-bark-dark'

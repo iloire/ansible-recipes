@@ -3,6 +3,7 @@
   become: yes
   tasks:
     - name: ensure fonts directory
+      become: no
       file:
         path: "{{ lookup('env', 'HOME') }}/.config/alacritty"
         state: directory

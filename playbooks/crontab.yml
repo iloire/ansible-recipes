@@ -1,6 +1,6 @@
 - name: crontab
   hosts: localhost
-  become: false
+  become: no
   tasks:
    - name: clean downloads folder
      ansible.builtin.cron:

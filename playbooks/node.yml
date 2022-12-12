@@ -1,5 +1,6 @@
 - name: setup node
   hosts: localhost
+  become: no
   vars:
       node_version: "18.12.1"
   tasks:
@@ -13,7 +14,7 @@
       shell: /tmp/install.sh
 
     - name: install node
-      shell: /bin/bash -c "source ~/.nvm/nvm.sh nvm install {{node_version}}" 
+      shell: /bin/bash -c "source ~/.nvm/nvm.sh nvm install {{node_version}}"
 
     - name: set default node
-      shell: /bin/bash -c "source ~/.nvm/nvm.sh nvm alias {{node_version}}"      
+      shell: /bin/bash -c "source ~/.nvm/nvm.sh nvm alias {{node_version}}"
