@@ -1,7 +1,10 @@
 - name: install global nmp packages
   hosts: localhost
-  become: yes
+  vars:
+      node_version: "18.12.1"
   tasks:
+    - name: set default node
+      shell: /bin/bash -c "source ~/.nvm/nvm.sh nvm use {{node_version}}"
     - name: Install node.js packages globally.
       npm:
         name: "{{item}}"
