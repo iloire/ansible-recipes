@@ -5,3 +5,7 @@
       shell: gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-bark-dark'
     - name: dark theme
       shell: gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+    - name: fav apps
+      dconf:
+        key: "/org/gnome/shell/favorite-apps"
+        value: "['org.gnome.Nautilus.desktop', 'firefox_firefox.desktop', 'google-chrome.desktop', 'libreoffice-writer.desktop', 'terminator.desktop', 'brave-browser.desktop', '1password.desktop', 'spotify_spotify.desktop', 'telegram.desktop']"
