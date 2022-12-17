@@ -33,6 +33,8 @@
           - dconf-editor
           - htop
           - torbrowser-launcher
+          - awesome
+          - ffmpeg
         state: present
         update_cache: true
     - name: Remove packages
