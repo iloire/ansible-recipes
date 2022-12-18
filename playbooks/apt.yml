@@ -35,6 +35,8 @@
           - torbrowser-launcher
           - awesome
           - ffmpeg
+          - imagemagick
+          - nautilus-image-converter
         state: present
         update_cache: true
     - name: Remove packages
