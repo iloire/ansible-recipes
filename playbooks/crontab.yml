@@ -7,6 +7,13 @@
        name: "clean downloads"
        minute: "0"
        hour: "20"
+       weekday: "2"
+       job: "find $HOME/Downloads/ -mtime +4 -type f -delete -depth 1"
+   - name: clean cookies
+     ansible.builtin.cron:
+       name: "clean cookies"
+       minute: "0"
+       hour: "20"
        weekday: "1"
        job: "/usr/bin/python $HOME/dotfiles/bin/clean-cookies.py --clean"
    - name: purge docker files
