@@ -11,6 +11,9 @@
     - name: add alacritty ppa
       apt_repository:
         repo: "ppa:aslatter/ppa"
+    - name: add obs-studio ppa
+      apt_repository:
+        repo: "ppa:obsproject/obs-studio"
     - name: Install packages with apt
       become: yes
       apt:
@@ -37,6 +40,7 @@
           - ffmpeg
           - imagemagick
           - nautilus-image-converter
+          - obs-studio
         state: present
         update_cache: true
     - name: Remove packages
