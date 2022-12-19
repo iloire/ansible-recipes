@@ -1,4 +1,4 @@
-- name: install apt conmmon packages and apps
+- name: install apt packages and apps
   hosts: localhost
   become: yes
   pre_tasks:
@@ -41,6 +41,7 @@
           - imagemagick
           - nautilus-image-converter
           - obs-studio
+          - kazam
         state: present
         update_cache: true
     - name: Remove packages
