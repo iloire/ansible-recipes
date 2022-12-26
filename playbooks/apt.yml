@@ -43,8 +43,14 @@
           - obs-studio
           - kazam
           - python3-pip
+          - mailutils
         state: present
         update_cache: true
+    - name: adding existing user "{{ lookup('env', 'USER') }}" to group mail
+      user:
+        name: "{{ lookup('env', 'USER') }}"
+        groups: mail
+        append: yes
     - name: Remove packages
       become: yes
       apt:
