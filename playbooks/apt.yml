@@ -42,6 +42,7 @@
           - nautilus-image-converter
           - obs-studio
           - kazam
+          - python3-pip
         state: present
         update_cache: true
     - name: Remove packages
