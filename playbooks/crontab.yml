@@ -15,7 +15,7 @@
        minute: "0"
        hour: "20"
        weekday: "1"
-       job: "/usr/bin/python $HOME/dotfiles/bin/clean-cookies.py --clean"
+       job: "/usr/bin/python3 $HOME/dotfiles/bin/clean-cookies.py --clean"
    - name: purge docker files
      ansible.builtin.cron:
        name: "purge docker files"
