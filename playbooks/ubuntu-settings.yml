@@ -9,3 +9,7 @@
       dconf:
         key: "/org/gnome/shell/favorite-apps"
         value: "['org.gnome.Nautilus.desktop', 'firefox_firefox.desktop', 'google-chrome.desktop', 'libreoffice-writer.desktop', 'terminator.desktop', 'brave-browser.desktop', '1password.desktop', 'spotify_spotify.desktop', 'telegram.desktop']"
+    - name: switch caps -> escape (nvim)
+      dconf:
+        key: "/org/gnome/desktop/input-sources/xkb-options"
+        value: "['caps:escape']"
