@@ -1,0 +1,16 @@
+- name: dotfiles
+  import_playbook: playbooks/dotfiles.yml
+- name: node/nvm
+  import_playbook: playbooks/node.yml
+- name: npm packages
+  import_playbook: playbooks/npm-packages.yml
+- name: dotfiles
+  import_playbook: playbooks/dotfiles.yml
+- name: neovim
+  import_playbook: playbooks/osx/neovim.yml
+- name: crontab
+  import_playbook: playbooks/crontab.yml
+- name: hosts
+  import_playbook: playbooks/hosts.yml
+- name: lazygit
+  import_playbook: playbooks/lazygit.yml

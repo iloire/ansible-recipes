@@ -1,0 +1,14 @@
+- name: config neovim
+  hosts: localhost
+  become: no
+  tasks:
+    - name: checkout packer
+      ansible.builtin.git:
+        repo: "https://github.com/wbthomason/packer.nvim"
+        dest: "~/.local/share/nvim/site/pack/packer/start/packer.nvim"
+        depth: 1
+    - name: Creating hardlink
+      ansible.builtin.file:
+        src: "~/dotfiles/nvim"
+        dest: "~/.config/nvim"
+        state: link
