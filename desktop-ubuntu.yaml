@@ -12,8 +12,8 @@
   import_playbook: playbooks/dotfiles.yml
 - name: git
   import_playbook: playbooks/git.yml
-- name: nvim
-  import_playbook: playbooks/nvim.yml
+- name: neovim
+  import_playbook: playbooks/linux/neovim.yml
 - name: apt
   import_playbook: playbooks/apt.yml
 - name: google-chrome
