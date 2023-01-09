@@ -17,6 +17,10 @@
         repo: "https://github.com/wbthomason/packer.nvim"
         dest: "~/.local/share/nvim/site/pack/packer/start/packer.nvim"
         depth: 1
+    - name: create directory if it does not exist
+      ansible.builtin.file:
+        path: "~/.config"
+        state: directory
     - name: Creating hardlink
       ansible.builtin.file:
         src: "~/dotfiles/nvim"
