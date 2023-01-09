@@ -6,6 +6,8 @@
   import_playbook: playbooks/npm-packages.yml
 - name: dotfiles
   import_playbook: playbooks/dotfiles.yml
+- name: git
+  import_playbook: playbooks/git.yml
 - name: neovim
   import_playbook: playbooks/osx/neovim.yml
 - name: crontab
