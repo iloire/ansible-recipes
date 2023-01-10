@@ -26,10 +26,13 @@
       - consul
       - docker-compose
       - docker-machine
+      - fish
       - git
       - git-lfs
+      - glow
       - go
       - jq
+      - mc
       - nmap
       - openssl
       - packer
