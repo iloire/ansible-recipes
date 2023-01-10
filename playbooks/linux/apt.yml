@@ -24,6 +24,7 @@
           - tmux
           - vim
           - mc
+          - fzf
           - terminator
           - python3.10
           - flameshot
@@ -47,6 +48,7 @@
           - virtualbox
           - gnome-shell-extension-manager
           - barrier
+          - zsh
         state: present
         update_cache: true
     - name: adding existing user "{{ lookup('env', 'USER') }}" to group mail

@@ -4,17 +4,7 @@
   vars:
     the_user: "{{ ansible_user_id }}"
   tasks:
-    - name: install zsh 
-      become: yes
-      apt:
-        name: zsh
-        state: latest
-    - name: install fzf
-      become: yes
-      apt:
-        name: fzf
-        state: latest
-    - name: change user shell to zsh 
+    - name: change user shell to zsh
       become: yes
       user:
         name: "{{ the_user }}"
