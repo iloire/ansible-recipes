@@ -25,6 +25,8 @@
           - vim
           - mc
           - fzf
+          - fish
+          - alacritty
           - terminator
           - python3.10
           - flameshot
