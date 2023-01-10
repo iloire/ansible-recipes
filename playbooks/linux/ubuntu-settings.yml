@@ -29,3 +29,15 @@
       community.general.dconf:
         key: '/org/gnome/desktop/peripherals/keyboard/repeat-interval'
         value: 'uint32 25'
+    - name: Enable night-light
+      community.general.dconf:
+        key: '/org/gnome/settings-daemon/plugins/color/night-light-enabled'
+        value: 'true'
+    - name: Enable night-light automatic shedule
+      community.general.dconf:
+        key: '/org/gnome/settings-daemon/plugins/color/night-light-schedule-automatic'
+        value: 'true'
+    - name: Set night-light temperature
+      community.general.dconf:
+        key: '/org/gnome/settings-daemon/plugins/color/night-light-temperature'
+        value: 'uint32 2700'
