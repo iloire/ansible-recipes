@@ -4,6 +4,7 @@
   vars:
     brew_cask_packages:
       - atom
+      - barrier
       - docker
       - dropbox
       - firefox
