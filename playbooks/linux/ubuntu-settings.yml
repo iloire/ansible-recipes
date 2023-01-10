@@ -17,3 +17,15 @@
       dconf:
         key: "/org/gnome/desktop/input-sources/xkb-options"
         value: "['caps:escape']"
+    - name: blank screen delay
+      dconf:
+        key: "/org/gnome/desktop/session/idle-delay"
+        value: "uint32 900"
+    - name: Keyboard delay
+      community.general.dconf:
+        key: '/org/gnome/desktop/peripherals/keyboard/delay'
+        value: 'uint32 230'
+    - name: Keyboard repeat interval
+      community.general.dconf:
+        key: '/org/gnome/desktop/peripherals/keyboard/repeat-interval'
+        value: 'uint32 25'
