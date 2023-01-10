@@ -4,7 +4,7 @@
   tasks:
     - name: dotfiles checkout
       ansible.builtin.git:
-        repo: "https://github.com/iloire/dotfiles.git"
+        repo: "git@github.com:iloire/dotfiles.git"
         dest: ~/dotfiles
     - name: oh my zsh checkout
       ansible.builtin.git:
