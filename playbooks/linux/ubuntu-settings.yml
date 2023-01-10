@@ -41,3 +41,8 @@
       community.general.dconf:
         key: '/org/gnome/settings-daemon/plugins/color/night-light-temperature'
         value: 'uint32 2700'
+    - name: Disable system sounds
+      community.general.dconf:
+        key: '/org/gnome/desktop/sound/event-sounds'
+        value: 'false'
+
