@@ -12,25 +12,28 @@
   import_playbook: playbooks/dotfiles.yml
 - name: git
   import_playbook: playbooks/git.yml
+- name: crontab
+  import_playbook: playbooks/crontab.yml
+- name: hosts
+  import_playbook: playbooks/hosts.yml
+- name: lazygit
+  import_playbook: playbooks/lazygit.yml
+
 - name: neovim
   import_playbook: playbooks/linux/neovim.yml
 - name: apt
-  import_playbook: playbooks/apt.yml
+  import_playbook: playbooks/linux/apt.yml
 - name: google-chrome
-  import_playbook: playbooks/google-chrome.yml
+  import_playbook: playbooks/linux/google-chrome.yml
 - name: brave browser
-  import_playbook: playbooks/brave.yml
-- name: crontab
-  import_playbook: playbooks/crontab.yml
+  import_playbook: playbooks/linux/brave.yml
 - name: snap
-  import_playbook: playbooks/snap.yml
-- name: hosts
-  import_playbook: playbooks/hosts.yml
+  import_playbook: playbooks/linux/snap.yml
 - name: build essentials
-  import_playbook: playbooks/build-essentials.yml
-- name: lazygit
-  import_playbook: playbooks/lazygit.yml
+  import_playbook: playbooks/linux/build-essentials.yml
 - name: geek fonts
-  import_playbook: playbooks/geek-fonts.yml
+  import_playbook: playbooks/linux/geek-fonts.yml
 - name: terminator config
-  import_playbook: playbooks/terminator.yml
+  import_playbook: playbooks/linux/terminator.yml
+- name: ubuntu settings
+  import_playbook: playbooks/linux/ubuntu-settings.yml
