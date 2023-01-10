@@ -16,6 +16,7 @@
   import_playbook: playbooks/crontab.yml
 - name: hosts
   import_playbook: playbooks/hosts.yml
+
 - name: lazygit
   import_playbook: playbooks/linux/lazygit.yml
 - name: vagrant
