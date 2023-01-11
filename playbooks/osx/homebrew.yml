@@ -5,14 +5,13 @@
     brew_cask_packages:
       - atom
       - barrier
-      - docker
+      - balenaetcher
       - dropbox
       - firefox
       - google-chrome
       - google-drive
       - iterm2
       - keepassx
-      - lazygit
       - slack
       - spotify
       - sublime-text
@@ -23,10 +22,9 @@
       - autoconf
       - bash-completion
       - boot2docker
-      - consul
-      - docker-compose
-      - docker-machine
+      - docker
       - fish
+      - lazygit
       - git
       - git-lfs
       - glow
