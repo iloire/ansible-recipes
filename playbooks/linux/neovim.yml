@@ -1,4 +1,4 @@
-- name: config nvim
+- name: config neovim
   hosts: localhost
   become: no
   tasks:
