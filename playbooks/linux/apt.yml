@@ -23,6 +23,7 @@
           - nvidia-driver-525
           - git
           - tmux
+          - nmap
           - vim
           - mc
           - fzf
@@ -31,6 +32,7 @@
           - terminator
           - python3.10
           - flameshot
+          - net-tools
           - telegram
           - vlc
           - libreoffice
