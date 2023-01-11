@@ -12,19 +12,16 @@
        name: "clean downloads"
        minute: "0"
        hour: "20"
-       weekday: "2"
        job: "find $HOME/Downloads/ -maxdepth 1 -mtime +4 -type f -delete"
    - name: clean cookies
      ansible.builtin.cron:
        name: "clean cookies"
        minute: "0"
-       hour: "20"
-       weekday: "1"
+       hour: "21"
        job: "python3 $HOME/dotfiles/bin/clean-cookies.py --clean"
    - name: purge docker files
      ansible.builtin.cron:
        name: "purge docker files"
        minute: "0"
-       hour: "20"
-       weekday: "2"
+       hour: "22"
        job: "docker system prune -f"
