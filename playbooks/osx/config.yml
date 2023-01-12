@@ -1,0 +1,30 @@
+- name: configure osx
+  hosts: localhost
+  become: false
+  tasks:
+    - name: Show ~/Library
+      shell: chflags nohidden ~/Library
+
+    - name: Show Drives on the Desktop
+      shell: defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+
+    - name: Show External Drives on the Desktop
+      shell: defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+
+    - name: Show Removable Media on the Desktop
+      shell: defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+    - name: Show Hidden Files
+      shell: defaults write com.apple.finder AppleShowAllFiles -bool true
+
+    - name: Show File Extensions
+      shell: defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+    - name: Show the Status Bar in Finder
+      shell: defaults write com.apple.finder ShowStatusBar -bool true
+
+    - name: Show the Path Bar in Finder
+      shell: defaults write com.apple.finder ShowPathbar -bool true
+
+    - name: Restart Finder
+      shell: killall Finder

@@ -23,6 +23,7 @@
       - bash-completion
       - boot2docker
       - docker
+      - hpedrorodrigues/tools/dockutil
       - fish
       - lazygit
       - git
