@@ -17,4 +17,8 @@
   import_playbook: playbooks/osx/homebrew.yml
 - name: map caps to escape
   import_playbook: playbooks/osx/mapcapsescape.yml
+- name: dock config
+  import_playbook: playbooks/osx/dock.yml
+- name: osx config
+  import_playbook: playbooks/osx/config.yml
 
