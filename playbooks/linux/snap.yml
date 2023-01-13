@@ -10,3 +10,9 @@
         - gimp
         - icloud-notes-linux-client
         - discord
+  - name: Install packages with snap classic
+    become: yes
+    snap:
+      name:
+        - code
+      classic: true
