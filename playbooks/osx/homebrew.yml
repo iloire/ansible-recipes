@@ -7,24 +7,35 @@
       - barrier
       - balenaetcher
       - dropbox
+      - dash
       - firefox
       - google-chrome
       - google-drive
+      - ngrok
+      - postman
       - iterm2
       - keepassx
       - slack
       - spotify
+      - sequel-pro
+      - sourcetree
       - sublime-text
+      - textmate
+      - tower
       - vagrant
       - vagrant-manager
       - virtualbox
+      - font-hack-nerd-font
+      - font-ubuntu-nerd-font
     brew_packages:
       - autoconf
+      - awscli
       - bash-completion
       - boot2docker
       - docker
-      - hpedrorodrigues/tools/dockutil
+      # - hpedrorodrigues/tools/dockutil
       - fish
+      - thefuck
       - lazygit
       - git
       - git-lfs
@@ -45,6 +56,9 @@
       - wget
       - zsh
       - zsh-syntax-highlighting
+      - zsh-completions
+      - zsh-autosuggestions
+
     install_homebrew_if_missing: false
     upgrade_homebrew_packages: false
 
