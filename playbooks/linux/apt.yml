@@ -28,6 +28,7 @@
           - mc
           - fzf
           - fish
+          - filezilla
           - alacritty
           - terminator
           - python3.10
