@@ -51,6 +51,7 @@
           - kazam
           - python3-pip
           - mailutils
+          - mysql-client
           - virtualbox
           - gnome-shell-extension-manager
           - barrier
