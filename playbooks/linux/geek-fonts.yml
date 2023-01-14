@@ -71,3 +71,20 @@
         src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/UbuntuMono.zip
         dest: "{{ fonts_path }}/UbuntuMono/"
         remote_src: yes
+
+    - name: ensure Ubuntu fonts directory
+      file:
+        path: "{{ fonts_path }}/Ubuntu"
+        state: directory
+
+    - name: ubuntu font exists
+      shell: "ls {{ fonts_path }}/Ubuntu/Jet*"
+      register: ubuntu_exists
+      ignore_errors: yes
+
+    - name: download Ubuntu
+      when: ubuntu_exists is failed
+      ansible.builtin.unarchive:
+        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Ubuntu.zip
+        dest: "{{ fonts_path }}/Ubuntu/"
+        remote_src: yes
