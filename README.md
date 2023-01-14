@@ -1,5 +1,8 @@
+![I, Robot](https://raw.githubusercontent.com/iloire/ansible-recipes/master/robot.png)
+
 # ansible-recipes
 My ansible recipes
+
 
 # Mac
 - install git
