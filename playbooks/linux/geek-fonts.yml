@@ -54,3 +54,20 @@
         src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/JetBrainsMono.zip
         dest: "{{ fonts_path }}/JetBrainsMono/"
         remote_src: yes
+
+    - name: ensure UbuntuMono fonts directory
+      file:
+        path: "{{ fonts_path }}/UbuntuMono"
+        state: directory
+
+    - name: ubuntumono font exists
+      shell: "ls {{ fonts_path }}/UbuntuMono/Jet*"
+      register: ubuntumono_exists
+      ignore_errors: yes
+
+    - name: download UbuntuMono
+      when: ubuntumono_exists is failed
+      ansible.builtin.unarchive:
+        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/UbuntuMono.zip
+        dest: "{{ fonts_path }}/UbuntuMono/"
+        remote_src: yes
