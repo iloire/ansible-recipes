@@ -21,3 +21,19 @@
         dest: "{{ fonts_path }}/hack/"
         remote_src: yes
 
+    - name: ensure fonts directory
+      file:
+        path: "{{ fonts_path }}/DroidSansMono"
+        state: directory
+
+    - name: droid font exists
+      shell: "ls {{ fonts_path }}/DroidSansMono/Droid*"
+      register: droid_exists
+      ignore_errors: yes
+
+    - name: download Droid
+      when: droid_exists is failed
+      ansible.builtin.unarchive:
+        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/DroidSansMono.zip
+        dest: "{{ fonts_path }}/DroidSansMono/"
+        remote_src: yes
