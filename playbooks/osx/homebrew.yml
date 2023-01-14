@@ -27,6 +27,7 @@
       - virtualbox
       - font-hack-nerd-font
       - font-ubuntu-nerd-font
+      - font-droid-sans-mono-nerd-font
     brew_packages:
       - autoconf
       - awscli
