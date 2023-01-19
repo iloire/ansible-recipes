@@ -17,4 +17,5 @@
     snap:
       name:
         - code
+        - blender
       classic: true
