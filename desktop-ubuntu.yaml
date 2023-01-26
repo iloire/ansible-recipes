@@ -39,3 +39,5 @@
   import_playbook: playbooks/linux/terminator.yml
 - name: ubuntu settings
   import_playbook: playbooks/linux/ubuntu-settings.yml
+- name: keychron keyboard settings
+  import_playbook: playbooks/linux/keychron.yml
