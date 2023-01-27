@@ -4,3 +4,5 @@
   tasks:
     - name: make fn keys work :shrug
       shell: "echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode"
+    - name: make sure fn keys change persists
+      shell: "echo \"options hid_apple fnmode=0\" | sudo tee -a /etc/modprobe.d/hid_apple.conf"
