@@ -1,5 +1,7 @@
 - name: dotfiles
   import_playbook: playbooks/dotfiles.yml
+- name: qmk
+  import_playbook: playbooks/qmk.yml
 - name: git
   import_playbook: playbooks/git.yml
 - name: zsh
@@ -41,3 +43,5 @@
   import_playbook: playbooks/linux/ubuntu-settings.yml
 - name: keychron keyboard settings
   import_playbook: playbooks/linux/keychron.yml
+- name: qmk
+  import_playbook: playbooks/linux/qmk.yml

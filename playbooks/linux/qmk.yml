@@ -1,0 +1,7 @@
+- name: install qmk
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: install command
+      shell:
+        cmd: python3 -m pip install --user qmk
