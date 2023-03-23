@@ -3,7 +3,15 @@
   become: no
   vars:
     the_user: "{{ ansible_user_id }}"
+  pre_tasks:
+    - name: update repositories
+      apt: update_cache=yes
   tasks:
+    - name: Install zsh
+      become: yes
+      apt:
+        name:
+          - zsh
     - name: change user shell to zsh
       become: yes
       user:
