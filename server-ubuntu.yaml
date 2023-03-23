@@ -1,0 +1,10 @@
+- name: dotfiles
+  import_playbook: playbooks/dotfiles.yml
+- name: zsh
+  import_playbook: playbooks/zsh.yml
+- name: hosts
+  import_playbook: playbooks/hosts.yml
+- name: lazygit
+  import_playbook: playbooks/linux/lazygit.yml
+- name: neovim
+  import_playbook: playbooks/linux/neovim.yml
