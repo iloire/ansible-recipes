@@ -1,5 +1,5 @@
 - name: apt minimum
-  import_playbook: playbooks/apt-minimum.yml
+  import_playbook: playbooks/linux/apt-minimum.yml
 - name: dotfiles
   import_playbook: playbooks/dotfiles.yml
 - name: zsh
