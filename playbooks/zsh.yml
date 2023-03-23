@@ -1,6 +1,6 @@
 - name: set up zsh for user
   hosts: localhost
-  become: no
+  become: yes
   vars:
     the_user: "{{ ansible_user_id }}"
   pre_tasks:
