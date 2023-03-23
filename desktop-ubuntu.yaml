@@ -10,8 +10,6 @@
   import_playbook: playbooks/node.yml
 - name: npm packages
   import_playbook: playbooks/npm-packages.yml
-- name: git
-  import_playbook: playbooks/git.yml
 - name: crontab
   import_playbook: playbooks/crontab.yml
 - name: hosts
