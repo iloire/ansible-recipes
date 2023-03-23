@@ -37,6 +37,8 @@
           - net-tools
           - telegram
           - vlc
+          - openssh-client
+          - openssh-server
           - libreoffice
           - curl
           - gnome-tweaks
