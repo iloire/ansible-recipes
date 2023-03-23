@@ -1,0 +1,37 @@
+- name: install minimum apt packages and apps
+  hosts: localhost
+  become: yes
+  pre_tasks:
+    - name: update repositories
+      apt: update_cache=yes
+  tasks:
+    - name: Install packages with apt
+      become: yes
+      apt:
+        name:
+          - arp-scan
+          - libfuse2*
+          - git
+          - tmux
+          - nmap
+          - vim
+          - mc
+          - fzf
+          - python3.10
+          - net-tools
+          - openssh-client
+          - openssh-server
+          - curl
+          - dconf-cli
+          - dconf-editor
+          - htop
+          - python3-pip
+          - mailutils
+          - zsh
+        state: present
+        update_cache: true
+    - name: adding existing user "{{ lookup('env', 'USER') }}" to group mail
+      user:
+        name: "{{ lookup('env', 'USER') }}"
+        groups: mail
+        append: yes
