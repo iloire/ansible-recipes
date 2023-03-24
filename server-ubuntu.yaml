@@ -8,6 +8,10 @@
   import_playbook: playbooks/zsh.yml
 - name: hosts
   import_playbook: playbooks/hosts.yml
+- name: node/nvm
+  import_playbook: playbooks/node.yml
+- name: npm packages
+  import_playbook: playbooks/npm-packages.yml
 - name: lazygit
   import_playbook: playbooks/linux/lazygit.yml
 - name: neovim
