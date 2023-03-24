@@ -28,6 +28,7 @@
           - python3-pip
           - mailutils
           - zsh
+          - x11-xkb-utils
         state: present
         update_cache: true
     - name: adding existing user "{{ lookup('env', 'USER') }}" to group mail
