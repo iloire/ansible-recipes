@@ -3,7 +3,7 @@
 - name: qmk
   import_playbook: playbooks/qmk.yml
 - name: git
-  import_playbook: playbooks/git.yml
+  import_playbook: playbooks/git-config.yml
 - name: zsh
   import_playbook: playbooks/zsh.yml
 - name: node/nvm
