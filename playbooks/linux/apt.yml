@@ -18,33 +18,17 @@
       become: yes
       apt:
         name:
-          - arp-scan
           - blueman
-          - libfuse2*
           - nvidia-driver-525
-          - git
-          - tmux
-          - nmap
-          - vim
-          - mc
-          - fzf
           - fish
           - filezilla
           - alacritty
           - terminator
-          - python3.10
           - flameshot
-          - net-tools
           - telegram
           - vlc
-          - openssh-client
-          - openssh-server
           - libreoffice
-          - curl
           - gnome-tweaks
-          - dconf-cli
-          - dconf-editor
-          - htop
           - torbrowser-launcher
           - awesome
           - ffmpeg
@@ -52,13 +36,10 @@
           - nautilus-image-converter
           - obs-studio
           - kazam
-          - python3-pip
-          - mailutils
           - mysql-client
           - virtualbox
           - gnome-shell-extension-manager
           - barrier
-          - zsh
           - yara
         state: present
         update_cache: true
