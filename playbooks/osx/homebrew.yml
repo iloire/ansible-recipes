@@ -59,6 +59,7 @@
       - zsh-syntax-highlighting
       - zsh-completions
       - zsh-autosuggestions
+      - ripgrep
 
     install_homebrew_if_missing: false
     upgrade_homebrew_packages: false
