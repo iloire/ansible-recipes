@@ -12,34 +12,38 @@
   import_playbook: playbooks/crontab.yml
 - name: hosts
   import_playbook: playbooks/hosts.yml
-
-- name: lazygit
-  import_playbook: playbooks/linux/lazygit.yml
-- name: vagrant
-  import_playbook: playbooks/linux/vagrant.yml
-- name: 1password
-  import_playbook: playbooks/linux/1password.yml
-- name: neovim
-  import_playbook: playbooks/linux/neovim.yml
+  
 - name: apt minimum
   import_playbook: playbooks/linux/apt-minimum.yml
 - name: apt
   import_playbook: playbooks/linux/apt.yml
+- name: build essentials
+  import_playbook: playbooks/linux/build-essentials.yml
+- name: ubuntu settings
+  import_playbook: playbooks/linux/ubuntu-settings.yml
+
+- name: neovim
+  import_playbook: playbooks/linux/neovim.yml
+- name: lazygit
+  import_playbook: playbooks/linux/lazygit.yml
+
 - name: google-chrome
   import_playbook: playbooks/linux/google-chrome.yml
 - name: brave browser
   import_playbook: playbooks/linux/brave.yml
+
 - name: snap
   import_playbook: playbooks/linux/snap.yml
-- name: build essentials
-  import_playbook: playbooks/linux/build-essentials.yml
 - name: geek fonts
   import_playbook: playbooks/linux/geek-fonts.yml
 - name: terminator config
   import_playbook: playbooks/linux/terminator.yml
-- name: ubuntu settings
-  import_playbook: playbooks/linux/ubuntu-settings.yml
-- name: keychron keyboard settings
-  import_playbook: playbooks/linux/keychron.yml
+- name: vagrant
+  import_playbook: playbooks/linux/vagrant.yml
+- name: 1password
+  import_playbook: playbooks/linux/1password.yml
 - name: qmk
   import_playbook: playbooks/linux/qmk.yml
+  
+- name: keychron keyboard settings
+  import_playbook: playbooks/linux/keychron.yml
