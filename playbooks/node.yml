@@ -1,20 +1,27 @@
-- name: setup node
+- name: Setup Node
   hosts: localhost
   become: no
-  vars:
-      node_version: "18.12.1"
   tasks:
-    - name: download nvm
-      get_url:
-        url: https://raw.githubusercontent.com/creationix/nvm/v0.38.0/install.sh
-        dest: /tmp/
-        mode: 0755
+    - name: Install nvm
+      ansible.builtin.shell: >
+        curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.38.0/install.sh | bash
+      args:
+        executable: /bin/bash
+        chdir: "$HOME"
+        creates: "$HOME/.nvm/nvm.sh"
 
-    - name: install nvm
-      shell: /tmp/install.sh
+    - name: Setup .profile
+      ansible.builtin.lineinfile:
+        path: ~/.profile
+        line: source ~/.nvm/nvm.sh # This will make sure Node is on the user's PATH
+        create: yes
 
-    - name: install node
-      shell: /bin/bash -c "source ~/.nvm/nvm.sh nvm install {{node_version}}"
-
-    - name: set default node
-      shell: /bin/bash -c "source ~/.nvm/nvm.sh nvm alias {{node_version}}"
+    - name: Install node
+      ansible.builtin.shell: |
+        source ~/.nvm/nvm.sh && nvm install {{item}} && nvm alias default {{item}}
+      args:
+        executable: /bin/bash
+        chdir: "$HOME"
+        creates: "$HOME/.nvm/versions/node/v{{item}}"
+      loop:
+        - 18.12.1
