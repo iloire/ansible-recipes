@@ -8,7 +8,7 @@ My ansible recipes
 - generate ssh key
 - install git
 - git clone repo
-- install ansible:
+- install ansible using `install-ansible-linux.sh` or:
 ```
 sudo apt update 
 sudo apt install software-properties-common
