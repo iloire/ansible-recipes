@@ -12,7 +12,7 @@
   import_playbook: playbooks/crontab.yml
 - name: hosts
   import_playbook: playbooks/hosts.yml
-  
+
 - name: apt minimum
   import_playbook: playbooks/linux/apt-minimum.yml
 - name: apt
@@ -21,6 +21,8 @@
   import_playbook: playbooks/linux/build-essentials.yml
 - name: ubuntu settings
   import_playbook: playbooks/linux/ubuntu-settings.yml
+- name: docker
+  import_playbook: playbooks/linux/docker.yml
 
 - name: neovim
   import_playbook: playbooks/linux/neovim.yml
@@ -44,6 +46,6 @@
   import_playbook: playbooks/linux/1password.yml
 - name: qmk
   import_playbook: playbooks/linux/qmk.yml
-  
+
 - name: keychron keyboard settings
   import_playbook: playbooks/linux/keychron.yml
