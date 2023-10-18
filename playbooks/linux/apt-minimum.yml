@@ -10,6 +10,7 @@
       apt:
         name:
           - arp-scan
+          - awscli
           - libfuse2*
           - git
           - tmux
