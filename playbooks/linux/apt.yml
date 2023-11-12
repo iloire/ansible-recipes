@@ -41,6 +41,8 @@
           - gnome-shell-extension-manager
           - barrier
           - yara
+          - flatpak
+          - gnome-software-plugin-flatpak
         state: present
         update_cache: true
     - name: adding existing user "{{ lookup('env', 'USER') }}" to group mail
