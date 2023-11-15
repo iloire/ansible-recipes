@@ -33,6 +33,7 @@
           - ripgrep
           - iperf
           - webp
+          - exiv2
         state: present
         update_cache: true
     - name: adding existing user "{{ lookup('env', 'USER') }}" to group mail
