@@ -12,3 +12,4 @@
         - diff-so-fancy
         - prettier
         - nodemon
+        - pyright
