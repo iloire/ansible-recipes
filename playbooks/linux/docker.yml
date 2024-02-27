@@ -35,3 +35,8 @@
         name: "{{ lookup('env', 'USER') }}"
         groups: docker
         append: yes
+      register: add_to_docker_group_result
+
+    - name: Include reset connection tasks
+      ansible.builtin.include_tasks: reset_connection.yaml
+      when: add_to_docker_group_result.changed == true

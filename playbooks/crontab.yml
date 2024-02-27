@@ -2,12 +2,16 @@
   hosts: localhost
   become: no
   tasks:
+   - name: Creates an entry like "PATH=/usr/local/bin"
+     ansible.builtin.cron:
+       name: PATH
+       env: yes
+       job: /usr/local/bin:/usr/bin
    - name: clean downloads folder
      ansible.builtin.cron:
        name: "clean downloads"
        minute: "0"
        hour: "20"
-       weekday: "2"
        job: "find $HOME/Downloads/ -maxdepth 1 -mtime +4 -type f -delete"
    - name: clean screenshots folder
      ansible.builtin.cron:
@@ -20,13 +24,11 @@
      ansible.builtin.cron:
        name: "clean cookies"
        minute: "0"
-       hour: "20"
-       weekday: "1"
-       job: "/usr/bin/python3 $HOME/dotfiles/bin/clean-cookies.py --clean"
+       hour: "21"
+       job: "python3 $HOME/dotfiles/bin/clean-cookies.py --clean"
    - name: purge docker files
      ansible.builtin.cron:
        name: "purge docker files"
        minute: "0"
-       hour: "20"
-       weekday: "2"
-       job: "/usr/bin/docker system prune -f"
+       hour: "22"
+       job: "docker system prune -f"

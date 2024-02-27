@@ -18,23 +18,17 @@
       become: yes
       apt:
         name:
-          - libfuse2*
+          - blueman
           - nvidia-driver-525
-          - git
-          - tmux
-          - vim
-          - mc
+          - fish
+          - filezilla
+          - alacritty
           - terminator
-          - python3.10
           - flameshot
           - telegram
           - vlc
           - libreoffice
-          - curl
           - gnome-tweaks
-          - dconf-cli
-          - dconf-editor
-          - htop
           - torbrowser-launcher
           - awesome
           - ffmpeg
@@ -42,11 +36,14 @@
           - nautilus-image-converter
           - obs-studio
           - kazam
-          - python3-pip
-          - mailutils
+          - mysql-client
           - virtualbox
           - gnome-shell-extension-manager
           - barrier
+          - yara
+          - flatpak
+          - gnome-software-plugin-flatpak
+          - aspell-es
         state: present
         update_cache: true
     - name: adding existing user "{{ lookup('env', 'USER') }}" to group mail

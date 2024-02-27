@@ -1,20 +1,15 @@
 - name: set up zsh for user
   hosts: localhost
-  become: no
+  become: no # to make sure we get the user_id for the current user, not root
   vars:
     the_user: "{{ ansible_user_id }}"
   tasks:
-    - name: install zsh 
+    - name: Install zsh
       become: yes
       apt:
-        name: zsh
-        state: latest
-    - name: install fzf
-      become: yes
-      apt:
-        name: fzf
-        state: latest
-    - name: change user shell to zsh 
+        name:
+          - zsh
+    - name: change user shell to zsh
       become: yes
       user:
         name: "{{ the_user }}"

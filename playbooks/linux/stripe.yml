@@ -1,0 +1,23 @@
+- name: bootstrap stripe
+  hosts: localhost
+  become: yes
+  pre_tasks:
+    - name: update repositories
+      apt: update_cache=yes
+  tasks:
+    - name: add stripe apt repository key.
+      apt_key:
+        url: "https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public"
+        state: present
+
+    - name: set the stable stripe repository
+      apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/stripe.gpg] https://packages.stripe.dev/stripe-cli-debian-local stable"
+        state: present
+
+    - name: install packages with apt
+      become: yes
+      apt:
+        name:
+          - stripe
+        state: present

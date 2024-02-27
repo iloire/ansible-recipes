@@ -1,18 +1,26 @@
 - name: dotfiles
   import_playbook: playbooks/dotfiles.yml
+- name: qmk
+  import_playbook: playbooks/qmk.yml
 - name: node/nvm
   import_playbook: playbooks/node.yml
 - name: npm packages
   import_playbook: playbooks/npm-packages.yml
-- name: dotfiles
-  import_playbook: playbooks/dotfiles.yml
 - name: git
-  import_playbook: playbooks/git.yml
-- name: neovim
-  import_playbook: playbooks/osx/neovim.yml
+  import_playbook: playbooks/git-config.yml
 - name: crontab
   import_playbook: playbooks/crontab.yml
 - name: hosts
   import_playbook: playbooks/hosts.yml
-- name: lazygit
-  import_playbook: playbooks/lazygit.yml
+
+- name: neovim
+  import_playbook: playbooks/osx/neovim.yml
+- name: homebrew
+  import_playbook: playbooks/osx/homebrew.yml
+- name: map caps to escape
+  import_playbook: playbooks/osx/mapcapsescape.yml
+- name: dock config
+  import_playbook: playbooks/osx/dock.yml
+- name: osx config
+  import_playbook: playbooks/osx/config.yml
+

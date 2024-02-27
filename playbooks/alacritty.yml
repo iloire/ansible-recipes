@@ -13,9 +13,3 @@
         src: "~/dotfiles/alacritty/alacritty.yml"
         dest: "~/.config/alacritty/alacritty.yml"
         state: link
-    - name: install packages with apt
-      become: yes
-      apt:
-        name:
-          - alacritty
-          - fish
