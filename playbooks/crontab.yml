@@ -9,7 +9,7 @@
        job: /usr/local/bin:/usr/bin
    - name: clean downloads folder
      ansible.builtin.cron:
-       name: "clean downloads"
+       name: "clean downloads. In OSX remember to give Full Disk ACcess to cron binary"
        minute: "0"
        hour: "20"
        job: "find $HOME/Downloads/ -maxdepth 1 -mtime +4 -type f -delete"
