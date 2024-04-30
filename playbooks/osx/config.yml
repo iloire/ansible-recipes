@@ -32,7 +32,10 @@
     - name: Increase keyboard repeat rate
       shell: defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
-    - name: Screenshots location
+    - name: Screenshots / create directory (needed)
+      shell: mkdir -p ~/Screenshots 
+
+    - name: Screenshots / location
       shell: defaults write com.apple.screencapture location -string ~/Screenshots
 
     - name: Tap to click touchbar
