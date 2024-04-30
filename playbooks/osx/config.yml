@@ -33,7 +33,7 @@
       shell: defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
     - name: Screenshots location
-      shell: defaults write com.apple.screencapture location -string "${HOME}/Screenshots"
+      shell: defaults write com.apple.screencapture location -string ~/Screenshots
 
     - name: Tap to click touchbar
       shell: defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
