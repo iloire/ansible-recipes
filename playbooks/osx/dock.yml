@@ -38,3 +38,6 @@
 
     - name: Reduce the size of the Dock
       shell: defaults write com.apple.dock tilesize -int 50
+
+    - name: Restart dock
+      shell: killall Dock
