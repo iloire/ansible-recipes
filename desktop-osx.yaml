@@ -13,10 +13,10 @@
 - name: hosts
   import_playbook: playbooks/hosts.yml
 
-- name: neovim
-  import_playbook: playbooks/osx/neovim.yml
 - name: homebrew
   import_playbook: playbooks/osx/homebrew.yml
+- name: neovim
+  import_playbook: playbooks/osx/neovim-config.yml
 - name: map caps to escape
   import_playbook: playbooks/osx/mapcapsescape.yml
 - name: dock config
