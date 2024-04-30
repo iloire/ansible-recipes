@@ -26,5 +26,11 @@
     - name: Show the Path Bar in Finder
       shell: defaults write com.apple.finder ShowPathbar -bool true
 
+    - name: Increase keyboard initial repeat
+      shell: defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
+
+    - name: Increase keyboard repeat rate
+      shell: defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
+
     - name: Restart Finder
       shell: killall Finder
