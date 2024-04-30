@@ -2,7 +2,7 @@
   hosts: localhost
   tasks:
     - name: set default node
-      shell: /bin/bash -c "source ~/.nvm/nvm.sh nvm use default"
+      shell: source ~/.nvm/nvm.sh nvm use default
     - name: Install node.js packages globally.
       npm:
         name: "{{item}}"
