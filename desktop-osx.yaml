@@ -1,7 +1,5 @@
 - name: dotfiles
   import_playbook: playbooks/dotfiles.yml
-- name: qmk
-  import_playbook: playbooks/qmk.yml
 - name: node/nvm
   import_playbook: playbooks/node.yml
 - name: npm packages
