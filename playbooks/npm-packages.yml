@@ -13,3 +13,4 @@
         - prettier
         - nodemon
         - pyright
+        - typescript-language-server # lsp for neovim
