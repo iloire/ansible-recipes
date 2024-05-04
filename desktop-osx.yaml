@@ -1,5 +1,7 @@
 - name: dotfiles
   import_playbook: playbooks/dotfiles.yml
+- name: tmux config
+  import_playbook: playbooks/tmux-config.yml
 - name: node/nvm
   import_playbook: playbooks/node.yml
 - name: npm packages
