@@ -6,3 +6,8 @@
       ansible.builtin.git:
         repo: "https://github.com/tmux-plugins/tpm"
         dest: ~/.tmux/plugins/tpm
+    - name: creating hardlink for tmux config
+      ansible.builtin.file:
+        src: "~/dotfiles/tmux/.tmux.conf"
+        dest: "~/.tmux.conf"
+        state: link
