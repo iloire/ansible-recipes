@@ -4,6 +4,8 @@
   import_playbook: playbooks/tmux-config.yml
 - name: git
   import_playbook: playbooks/git-config.yml
+- name: alacritty config
+  import_playbook: playbooks/alacritty-config.yml
 - name: zsh
   import_playbook: playbooks/zsh.yml
 - name: node/nvm
