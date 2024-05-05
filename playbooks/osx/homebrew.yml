@@ -18,10 +18,10 @@
       - sequel-pro
       - textmate
       - tower
+      - todoist
       - vagrant
       - vagrant-manager
-      #- virtualbox
-   brew_packages:
+    brew_packages:
       - autoconf
       - awscli
       - bash-completion
