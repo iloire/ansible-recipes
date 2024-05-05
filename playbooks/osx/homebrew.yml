@@ -3,6 +3,7 @@
   become: false
   vars:
     brew_cask_packages:
+      - alacritty
       - barrier
       - balenaetcher
       - docker
