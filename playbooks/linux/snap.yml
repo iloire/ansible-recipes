@@ -21,4 +21,5 @@
         - code
         - blender
         - google-cloud-sdk
+        - aws-cli
       classic: true
