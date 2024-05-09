@@ -30,7 +30,7 @@
        name: "disk space monitor"
        minute: "20"
        hour: "*/6"
-       job: "$HOME/dotfiles/bin/low-space-monitor.sh"
+       job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/low-space-monitor.sh"
    - name: purge docker files
      ansible.builtin.cron:
        name: "purge docker files"
