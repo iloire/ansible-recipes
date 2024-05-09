@@ -12,13 +12,13 @@
        name: "clean downloads. In OSX remember to give Full Disk Access to cron binary"
        minute: "0"
        hour: "*/6"
-       job: "find $HOME/Downloads/ -maxdepth 1 -mtime +4 -type f -delete"
+       job: "[ -d \"$HOME/Downloads/\" ] && find \"$HOME/Downloads/\" -maxdepth 1 -mtime +4 -type f -delete"
    - name: clean screenshots folder
      ansible.builtin.cron:
        name: "clean old screenshots"
        minute: "10"
        hour: "*/6"
-       job: "find $HOME/Screenshots/ -maxdepth 1 -mtime +15 -type f -delete"
+       job: "[ -d \"$HOME/Screenshots/\" ] && find \"$HOME/Screenshots/\" -maxdepth 1 -mtime +15 -type f -delete"
    - name: clean cookies
      ansible.builtin.cron:
        name: "clean cookies"
