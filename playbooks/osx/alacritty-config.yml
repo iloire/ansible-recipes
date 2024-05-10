@@ -10,6 +10,6 @@
     - name: Creating hardlink
       become: no
       ansible.builtin.file:
-        src: "~/dotfiles/alacritty/alacritty-osx.yml"
-        dest: "~/.config/alacritty/alacritty.yml"
+        src: "~/dotfiles/alacritty/alacritty-osx.toml"
+        dest: "~/.config/alacritty/alacritty.toml"
         state: link
