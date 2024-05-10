@@ -1,6 +1,6 @@
 - name: alacritty config
   hosts: localhost
-  become: yes
+  become: false
   tasks:
     - name: ensure fonts directory
       become: no
