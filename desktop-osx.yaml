@@ -2,8 +2,6 @@
   import_playbook: playbooks/dotfiles.yml
 - name: tmux config
   import_playbook: playbooks/tmux-config.yml
-- name: alacritty config
-  import_playbook: playbooks/alacritty-config.yml
 - name: node/nvm
   import_playbook: playbooks/node.yml
 - name: npm packages
@@ -27,3 +25,5 @@
   import_playbook: playbooks/osx/config.yml
 - name: install nerd fonts
   import_playbook: playbooks/osx/nerd-fonts.yml
+- name: alacritty config
+  import_playbook: playbooks/osx/alacritty-config.yml

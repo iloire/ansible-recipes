@@ -1,6 +1,6 @@
 - name: map caps -> escape
   hosts: localhost
-  become: no
+  become: false
   tasks:
     - name: map caps -> escape
       shell:

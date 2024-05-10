@@ -1,0 +1,15 @@
+- name: alacritty config
+  hosts: localhost
+  become: false
+  tasks:
+    - name: ensure directory
+      become: no
+      file:
+        path: "{{ lookup('env', 'HOME') }}/.config/alacritty"
+        state: directory
+    - name: Creating hardlink
+      become: no
+      ansible.builtin.file:
+        src: "~/dotfiles/alacritty/alacritty-osx.yml"
+        dest: "~/.config/alacritty/alacritty.yml"
+        state: link

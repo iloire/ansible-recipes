@@ -2,7 +2,7 @@
   hosts: localhost
   become: false
   tasks:
-    - name: ensure fonts directory
+    - name: ensure directory
       become: no
       file:
         path: "{{ lookup('env', 'HOME') }}/.config/alacritty"
@@ -10,6 +10,6 @@
     - name: Creating hardlink
       become: no
       ansible.builtin.file:
-        src: "~/dotfiles/alacritty/alacritty.yml"
+        src: "~/dotfiles/alacritty/alacritty-linux.yml"
         dest: "~/.config/alacritty/alacritty.yml"
         state: link
