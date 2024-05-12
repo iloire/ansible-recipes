@@ -1,0 +1,8 @@
+- name: my config
+  hosts: localhost
+  become: false
+  tasks:
+    - name: myconfig checkout
+      ansible.builtin.git:
+        repo: "git@github.com:iloire/myconfig.git"
+        dest: ~/myconfig
