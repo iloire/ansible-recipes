@@ -12,7 +12,7 @@
        name: "clean downloads. In OSX remember to give Full Disk Access to cron binary"
        minute: "0"
        hour: "*/6"
-       job: "[ -d \"$HOME/Downloads/\" ] && find \"$HOME/Downloads/\" -maxdepth 1 -mtime +4 -type f -delete"
+       job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/clean-downloads.sh"
    - name: clean screenshots folder
      ansible.builtin.cron:
        name: "clean old screenshots"
