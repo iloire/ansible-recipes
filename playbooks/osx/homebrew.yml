@@ -4,6 +4,7 @@
   vars:
     brew_cask_packages:
       - alacritty
+      - arduino-ide
       - barrier
       - balenaetcher
       - docker
