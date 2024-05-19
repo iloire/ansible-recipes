@@ -3,7 +3,7 @@
   become: yes
   tasks:
   - name: Install packages with snap
-    become: yes
+    become: true
     snap:
       name:
         - spotify
@@ -15,7 +15,7 @@
         - dart-sass
         - todoist
   - name: Install packages with snap classic
-    become: yes
+    become: true
     snap:
       name:
         - code
