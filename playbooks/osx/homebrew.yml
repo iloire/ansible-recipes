@@ -22,6 +22,7 @@
       - todoist
       - vagrant
       - vagrant-manager
+      - virtualbox@beta
     brew_packages:
       - autoconf
       - awscli
