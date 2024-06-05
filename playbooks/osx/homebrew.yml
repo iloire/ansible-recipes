@@ -7,6 +7,7 @@
       - arduino-ide
       - barrier
       - balenaetcher
+      - brave-browser
       - docker
       - dropbox
       - firefox
@@ -48,6 +49,7 @@
       - terraform
       - terraform-inventory
       - tmux
+      - tmuxinator
       - tree
       - vault
       - wget
