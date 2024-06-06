@@ -9,6 +9,7 @@
       - balenaetcher
       - brave-browser
       - docker
+      - docker-compose
       - dropbox
       - firefox
       - google-chrome
