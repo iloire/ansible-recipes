@@ -11,3 +11,8 @@
         src: "~/dotfiles/tmux/.tmux.conf"
         dest: "~/.tmux.conf"
         state: link
+    - name: creating hardlink for tmuxinator config
+      ansible.builtin.file:
+        src: "~/dotfiles/tmuxinator/"
+        dest: "~/.config/tmuxinator"
+        state: link
