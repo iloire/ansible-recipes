@@ -18,36 +18,36 @@
       become: yes
       apt:
         name:
-          - blueman
-          - nvidia-driver-525
-          - fish
-          - filezilla
           - alacritty
-          - terminator
-          - flameshot
-          - telegram
-          - vlc
-          - libreoffice
-          - gnome-tweaks
-          - torbrowser-launcher
-          - awesome
-          - ffmpeg
-          - imagemagick
-          - nautilus-image-converter
-          - obs-studio
-          - kazam
-          - mysql-client
-          - virtualbox
-          - gnome-shell-extension-manager
-          - barrier
-          - yara
-          - flatpak
-          - gnome-software-plugin-flatpak
           - aspell-es
-          - workrave
+          - awesome
+          - barrier
+          - blueman
           - cmatrix
+          - ffmpeg
+          - filezilla
+          - fish
+          - flameshot
+          - flatpak
+          - gnome-shell-extension-manager
+          - gnome-software-plugin-flatpak
+          - gnome-tweaks
           - hardinfo
+          - imagemagick
+          - kazam
+          - libreoffice
+          - mysql-client
+          - nautilus-image-converter
+          - nvidia-driver-525
+          - obs-studio
           - pavucontrol
+          - telegram
+          - terminator
+          - torbrowser-launcher
+          - virtualbox
+          - vlc
+          - workrave
+          - yara
         state: present
         update_cache: true
     - name: adding existing user "{{ lookup('env', 'USER') }}" to group mail

@@ -8,9 +8,9 @@
         name: "{{item}}"
         global: yes
       loop:
-        - yarn
         - diff-so-fancy
-        - prettier
         - nodemon
+        - prettier
         - pyright
         - typescript-language-server # lsp for neovim
+        - yarn

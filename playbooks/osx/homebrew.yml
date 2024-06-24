@@ -5,25 +5,25 @@
     brew_cask_packages:
       - alacritty
       - arduino-ide
-      - barrier
       - balenaetcher
+      - barrier
       - brave-browser
       - docker
       - docker-compose
       - dropbox
       - firefox
-      - google-chrome
-      - google-drive
-      - google-cloud-sdk
       - gimp
+      - google-chrome
+      - google-cloud-sdk
+      - google-drive
+      - keepassx
       - ngrok
       - postman
-      - keepassx
-      - spotify
       - sequel-pro
+      - spotify
       - textmate
-      - tower
       - todoist
+      - tower
       - vagrant
       - vagrant-manager
       - virtualbox@beta
@@ -33,35 +33,34 @@
       - bash-completion
       - dockutil
       - fish
-      - thefuck
-      - lazygit
       - fzf
       - git
       - git-lfs
       - glow
       - go
       - jq
+      - lazygit
       - mc
       - midnight-commander
-      - nmap
       - neovim
+      - nmap
       - openssl
       - packer
       - pyenv
       - python
+      - ripgrep
       - terraform
       - terraform-inventory
+      - thefuck
       - tmux
       - tmuxinator
       - tree
       - vault
       - wget
       - zsh
-      - zsh-syntax-highlighting
-      - zsh-completions
       - zsh-autosuggestions
-      - ripgrep
-
+      - zsh-completions
+      - zsh-syntax-highlighting
     install_homebrew_if_missing: false
     upgrade_homebrew_packages: false
 

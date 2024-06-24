@@ -6,14 +6,14 @@
     become: true
     snap:
       name:
-        - spotify
+        - dart-sass
+        - discord
         - gimp
         - icloud-notes-linux-client
-        - discord
-        - zoom-client
         - ngrok
-        - dart-sass
+        - spotify
         - todoist
+        - zoom-client
   - name: Install packages with snap classic
     become: true
     snap:
