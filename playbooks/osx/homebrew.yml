@@ -39,6 +39,7 @@
       - git-lfs
       - glow
       - go
+      - java
       - jq
       - lazygit
       - mc
