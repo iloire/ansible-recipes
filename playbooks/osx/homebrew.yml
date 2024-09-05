@@ -32,6 +32,7 @@
       - autoconf
       - awscli
       - bash-completion
+      - certbot
       - dockutil
       - fish
       - fzf
