@@ -55,3 +55,6 @@
   import_playbook: playbooks/linux/keychron.yml
 - name: alacritty config
   import_playbook: playbooks/linux/alacritty-config.yml
+
+- name: anaconda
+  import_playbook: playbooks/linux/anaconda.yml
