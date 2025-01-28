@@ -34,6 +34,7 @@
       - bash-completion
       - certbot
       - dockutil
+      - fastfetch
       - fish
       - fzf
       - git
