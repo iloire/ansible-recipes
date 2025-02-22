@@ -50,6 +50,7 @@
       - nmap
       - openssl
       - packer
+      - prettierd
       - pyenv
       - python
       - ripgrep
