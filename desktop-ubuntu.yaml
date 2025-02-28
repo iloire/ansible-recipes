@@ -16,6 +16,8 @@
   import_playbook: playbooks/crontab.yml
 - name: hosts
   import_playbook: playbooks/hosts.yml
+- name: github-desktop
+  import_playbook: playbooks/github-desktop.yml
 
 - name: apt minimum
   import_playbook: playbooks/linux/apt-minimum.yml
