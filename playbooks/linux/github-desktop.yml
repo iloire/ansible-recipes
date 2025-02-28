@@ -1,0 +1,28 @@
+# https://github.com/staticdev/ansible-role-brave/blob/main/tasks/main.yml
+- name: install github desktop
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Get keyring file
+      ansible.builtin.shell:
+        cmd: wget -qO - https://apt.packages.shiftkey.dev/gpg.key | gpg --dearmor | tee /usr/share/keyrings/shiftkey-packages.gpg > /dev/null
+      become: true
+
+    - name: Add GitHub Desktop repository
+      become: true
+      ansible.builtin.copy:
+        dest: /etc/apt/sources.list.d/shiftkey-packages.list
+        content: |
+          deb [arch=amd64 signed-by=/usr/share/keyrings/shiftkey-packages.gpg] https://apt.packages.shiftkey.dev/ubuntu/ any main
+        mode: "0644"
+
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+      become: true
+
+    - name: Install GitHub Desktop
+      ansible.builtin.apt:
+        name: github-desktop
+        state: present
+      become: true
