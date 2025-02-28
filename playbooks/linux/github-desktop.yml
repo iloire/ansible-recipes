@@ -1,3 +1,4 @@
+# https://github.com/shiftkey/desktop?tab=readme-ov-file#installation-via-package-manager
 - name: Install GitHub Desktop
   hosts: localhost
   become: yes
