@@ -11,5 +11,5 @@
       become: no
       ansible.builtin.file:
         src: "~/dotfiles/cursor/settings.json"
-        dest: "~/.config/Cursor/settings.json"
+        dest: "~/Library/Application Support/Cursor/User/settings.json"
         state: link
