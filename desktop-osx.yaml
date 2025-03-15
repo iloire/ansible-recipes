@@ -14,6 +14,8 @@
   import_playbook: playbooks/crontab.yml
 - name: hosts
   import_playbook: playbooks/hosts.yml
+- name: cursor config
+  import_playbook: playbooks/cursor-config.yml
 
 - name: homebrew
   import_playbook: playbooks/osx/homebrew.yml
