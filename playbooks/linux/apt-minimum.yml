@@ -19,6 +19,7 @@
           - git
           - htop
           - iperf
+          - iostat
           - libfuse2*
           - mailutils
           - mc
