@@ -20,6 +20,8 @@
   import_playbook: playbooks/github-desktop.yml
 - name: cursor config
   import_playbook: playbooks/cursor-config.yml
+- name: xdg desktop config
+  import_playbook: playbooks/xdg-desktop.yml
 
 - name: apt minimum
   import_playbook: playbooks/linux/apt-minimum.yml
