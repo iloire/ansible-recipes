@@ -8,6 +8,7 @@
         name:
           - dart-sass
           - discord
+          - fbreader
           - foliate
           - gimp
           - icloud-notes-linux-client
