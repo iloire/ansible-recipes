@@ -2,24 +2,25 @@
   hosts: localhost
   become: yes
   tasks:
-  - name: Install packages with snap
-    become: true
-    snap:
-      name:
-        - dart-sass
-        - discord
-        - gimp
-        - icloud-notes-linux-client
-        - ngrok
-        - spotify
-        - todoist
-        - zoom-client
-  - name: Install packages with snap classic
-    become: true
-    snap:
-      name:
-        - code
-        - blender
-        - google-cloud-sdk
-        - aws-cli
-      classic: true
+    - name: Install packages with snap
+      become: true
+      snap:
+        name:
+          - dart-sass
+          - discord
+          - foliate
+          - gimp
+          - icloud-notes-linux-client
+          - ngrok
+          - spotify
+          - todoist
+          - zoom-client
+    - name: Install packages with snap classic
+      become: true
+      snap:
+        name:
+          - code
+          - blender
+          - google-cloud-sdk
+          - aws-cli
+        classic: true
