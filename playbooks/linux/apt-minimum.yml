@@ -19,7 +19,6 @@
           - git
           - htop
           - iperf
-          - iostat
           - libfuse2*
           - mailutils
           - mc
@@ -32,6 +31,7 @@
           - python3.10
           - ripgrep
           - smartmontools
+          - sysstat
           - tmux
           - tmuxinator
           - vim
