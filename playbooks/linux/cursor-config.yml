@@ -2,10 +2,15 @@
   hosts: localhost
   become: false
   tasks:
-    - name: ensure directory
+    - name: ensure directory config Cursor
       become: no
       file:
         path: "{{ lookup('env', 'HOME') }}/.config/Cursor"
+        state: directory
+    - name: ensure directory config Cursor User
+      become: no
+      file:
+        path: "{{ lookup('env', 'HOME') }}/.config/Cursor/User"
         state: directory
     - name: Creating hardlink
       become: no
