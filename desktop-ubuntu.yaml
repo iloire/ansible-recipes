@@ -58,8 +58,8 @@
 - name: qmk
   import_playbook: playbooks/linux/qmk.yml
 
-- name: keychron keyboard settings
-  import_playbook: playbooks/linux/keychron.yml
+# - name: keychron keyboard settings
+#   import_playbook: playbooks/linux/keychron.yml
 - name: alacritty config
   import_playbook: playbooks/linux/alacritty-config.yml
 
