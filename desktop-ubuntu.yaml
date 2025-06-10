@@ -16,13 +16,8 @@
   import_playbook: playbooks/crontab.yml
 - name: hosts
   import_playbook: playbooks/hosts.yml
-- name: github-desktop
-  import_playbook: playbooks/github-desktop.yml
-- name: cursor config
-  import_playbook: playbooks/cursor-config.yml
-- name: xdg desktop config
-  import_playbook: playbooks/xdg-desktop.yml
 
+# linux
 - name: apt minimum
   import_playbook: playbooks/linux/apt-minimum.yml
 - name: apt
@@ -33,11 +28,17 @@
   import_playbook: playbooks/linux/ubuntu-settings.yml
 - name: docker
   import_playbook: playbooks/linux/docker.yml
+- name: xdg desktop config
+  import_playbook: playbooks/linux/xdg-desktop.yml
 
 - name: neovim
   import_playbook: playbooks/linux/neovim.yml
 - name: lazygit
   import_playbook: playbooks/linux/lazygit.yml
+- name: github-desktop
+  import_playbook: playbooks/linux/github-desktop.yml
+- name: cursor config
+  import_playbook: playbooks/linux/cursor-config.yml
 
 - name: google-chrome
   import_playbook: playbooks/linux/google-chrome.yml
