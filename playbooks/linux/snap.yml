@@ -20,8 +20,9 @@
       become: true
       snap:
         name:
-          - code
-          - blender
-          - google-cloud-sdk
           - aws-cli
+          - blender
+          - code
+          - google-cloud-sdk
+          - obsidian
         classic: true
