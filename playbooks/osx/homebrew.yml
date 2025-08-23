@@ -6,7 +6,6 @@
       - alacritty
       - arduino-ide
       - balenaetcher
-      - barrier
       - brave-browser
       - docker
       - docker-compose
@@ -33,6 +32,7 @@
       - awscli
       - bash-completion
       - certbot
+      - deskflow
       - dockutil
       - fastfetch
       - fish
@@ -90,6 +90,12 @@
         - install_homebrew_if_missing
 
   tasks:
+    - name: Add Deskflow tap
+      homebrew_tap:
+        name: deskflow/homebrew-tap
+        state: present
+      when: homebrew_check.stat.exists
+
     - name: Updating Homebrew
       homebrew:
         update_homebrew: true
