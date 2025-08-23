@@ -1,0 +1,55 @@
+- name: Manage Flatpak apps
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Ensure Flatpak is installed
+      apt:
+        name: flatpak
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Add Flathub remote if not exists
+      command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+      args:
+        creates: /var/lib/flatpak/repo/flathub
+
+    - name: Ensure desired Flatpak apps are installed
+      flatpak:
+        name: "{{ item }}"
+        state: present
+        remote: flathub
+      loop:
+        - org.deskflow.deskflow
+
+    - name: Create systemd user service for Deskflow
+      copy:
+        content: |
+          [Unit]
+          Description=Deskflow Flatpak
+          After=graphical.target
+
+          [Service]
+          ExecStart=/usr/bin/flatpak run org.deskflow.deskflow
+          Restart=always
+          RestartSec=10
+
+          [Install]
+          WantedBy=default.target
+        dest: "{{ ansible_user_dir }}/.config/systemd/user/deskflow.service"
+        mode: '0644'
+      become: no
+
+    - name: Ensure systemd user directory exists
+      file:
+        path: "{{ ansible_user_dir }}/.config/systemd/user"
+        state: directory
+        mode: '0755'
+      become: no
+
+    - name: Enable and start Deskflow user service
+      systemd:
+        name: deskflow.service
+        enabled: yes
+        state: started
+        scope: user
+      become: no

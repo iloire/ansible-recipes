@@ -53,6 +53,9 @@
 
 - name: snap
   import_playbook: playbooks/linux/snap.yml
+- name: flatpak
+  import_playbook: playbooks/linux/flatpak.yml
+
 - name: geek fonts
   import_playbook: playbooks/linux/geek-fonts.yml
 - name: terminator config
