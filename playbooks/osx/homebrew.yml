@@ -35,6 +35,7 @@
       - deskflow
       - dockutil
       - fastfetch
+      - ffmpeg
       - fish
       - fzf
       - git
