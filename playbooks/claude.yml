@@ -13,3 +13,9 @@
         src: "~/dotfiles/claude/CLAUDE.md"
         dest: "~/.claude/CLAUDE.md"
         state: link
+
+    - name: Creating symlink for settings.json
+      ansible.builtin.file:
+        src: "~/dotfiles/claude/settings.json"
+        dest: "~/.claude/settings.json"
+        state: link
