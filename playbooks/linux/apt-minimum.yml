@@ -17,6 +17,7 @@
           - exiv2
           - fzf
           - git
+          - git-crypt
           - htop
           - iperf
           - libfuse2*

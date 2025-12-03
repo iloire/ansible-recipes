@@ -39,6 +39,7 @@
       - fish
       - fzf
       - git
+      - git-crypt
       - git-lfs
       - glow
       - go
