@@ -31,3 +31,5 @@
   import_playbook: playbooks/osx/nerd-fonts.yml
 - name: alacritty config
   import_playbook: playbooks/osx/alacritty-config.yml
+- name: vscode config
+  import_playbook: playbooks/osx/vscode.yml

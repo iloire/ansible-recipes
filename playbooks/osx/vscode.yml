@@ -1,0 +1,10 @@
+- name: vscode config
+  hosts: localhost
+  become: false
+  tasks:
+    - name: creating symlink for vscode settings
+      ansible.builtin.file:
+        src: "~/dotfiles/vscode/settings.json"
+        dest: "~/Library/Application Support/Code/User/settings.json"
+        state: link
+        force: true

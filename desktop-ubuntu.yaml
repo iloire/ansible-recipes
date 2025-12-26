@@ -74,3 +74,5 @@
 
 - name: anaconda
   import_playbook: playbooks/linux/anaconda.yml
+- name: vscode config
+  import_playbook: playbooks/linux/vscode.yml
