@@ -1,3 +1,4 @@
 *.swp
 node_modules
 wget-log*
+.claude/settings.local.json
