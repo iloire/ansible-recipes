@@ -52,6 +52,7 @@
       - nmap
       - openssl
       - packer
+      - postgresql
       - prettierd
       - pyenv
       - python
