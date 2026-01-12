@@ -44,3 +44,10 @@
         hour: "*/6"
         month: "1"
         job: "docker system prune -f > /dev/null 2>&1"
+    - name: clean caches
+      ansible.builtin.cron:
+        name: "clean package manager caches"
+        minute: "30"
+        hour: "12"
+        weekday: "6"
+        job: "$HOME/dotfiles/bin/clean-caches.sh > /dev/null 2>&1"
