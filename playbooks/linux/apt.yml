@@ -37,6 +37,7 @@
           - gnome-tweaks
           - hardinfo
           - imagemagick
+          - jq
           - kazam
           - libreoffice
           - mysql-client
@@ -50,6 +51,7 @@
           - torbrowser-launcher
           - virtualbox
           - vlc
+          - wmctrl
           - workrave
           - yara
         state: present
