@@ -11,11 +11,11 @@
         path: "{{ dest_dir }}"
         state: directory
 
-    - name: copy all desktop files
+    - name: symlink all desktop files
       become: no
-      ansible.builtin.copy:
+      ansible.builtin.file:
         src: "{{ item }}"
-        dest: "{{ dest_dir }}/"
-        mode: preserve
+        dest: "{{ dest_dir }}/{{ item | basename }}"
+        state: link
       with_fileglob:
         - "{{ source_dir }}/*.desktop"
