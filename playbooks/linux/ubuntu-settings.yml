@@ -45,4 +45,20 @@
       community.general.dconf:
         key: '/org/gnome/desktop/sound/event-sounds'
         value: 'false'
+    - name: Register custom keybindings
+      community.general.dconf:
+        key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings'
+        value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+    - name: Screenshot to clipboard - name
+      community.general.dconf:
+        key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name'
+        value: "'Screenshot to clipboard'"
+    - name: Screenshot to clipboard - command
+      community.general.dconf:
+        key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command'
+        value: "'flameshot gui --clipboard'"
+    - name: Screenshot to clipboard - binding
+      community.general.dconf:
+        key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding'
+        value: "'<Super><Shift>4'"
 

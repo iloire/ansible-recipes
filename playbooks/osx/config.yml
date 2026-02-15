@@ -38,6 +38,16 @@
     - name: Screenshots / location
       shell: defaults write com.apple.screencapture location -string ~/Screenshots
 
+    - name: Screenshots / Cmd+Shift+4 copies area to clipboard (swapped)
+      shell: >
+        defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 31
+        '<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>52</integer><integer>21</integer><integer>1179648</integer></array><key>type</key><string>standard</string></dict></dict>'
+
+    - name: Screenshots / Cmd+Ctrl+Shift+4 saves area to file (swapped)
+      shell: >
+        defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 30
+        '<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>52</integer><integer>21</integer><integer>1441792</integer></array><key>type</key><string>standard</string></dict></dict>'
+
     - name: Tap to click touchbar
       shell: defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 
