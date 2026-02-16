@@ -5,7 +5,7 @@
 - name: git
   import_playbook: playbooks/git-config.yml
 - name: zsh
-  import_playbook: playbooks/zsh.yml
+  import_playbook: playbooks/linux/zsh.yml
 - name: hosts
   import_playbook: playbooks/hosts.yml
 - name: node/nvm
