@@ -37,6 +37,6 @@
         append: yes
       register: add_to_docker_group_result
 
-    - name: Include reset connection tasks
-      ansible.builtin.include_tasks: reset_connection.yaml
-      when: add_to_docker_group_result.changed == true
+    - name: Reset connection to pick up new group membership
+      meta: reset_connection
+      when: add_to_docker_group_result.changed
