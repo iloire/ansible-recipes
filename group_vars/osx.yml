@@ -17,6 +17,7 @@ brew_cask_packages:
   - postman
   - sequel-pro
   - spotify
+  - telegram
   - textmate
   - todoist
   - tower
