@@ -1,0 +1,28 @@
+# Apps to remove from /Applications (non-SIP protected)
+macos_remove_apps:
+  - GarageBand
+  - iMovie
+  - Keynote
+  - Numbers
+  - Pages
+
+# Apps to remove from the Dock (works for SIP-protected apps too)
+macos_dock_remove_items:
+  - Music
+  - TV
+  - Podcasts
+  - News
+  - Keynote
+  - Numbers
+  - Pages
+  - GarageBand
+  - iMovie
+  - Freeform
+  - Photos
+  - Books
+  - Chess
+
+# Disable options (set to true to enable)
+# macos_disable_spotlight: false
+# macos_disable_siri: false
+# macos_disable_game_center: false
