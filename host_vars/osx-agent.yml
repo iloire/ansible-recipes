@@ -31,6 +31,7 @@ brew_cask_packages:
   - keepassxc
   - mysides
   - tailscale
+  - telegram
 
 brew_packages:
   - atuin
