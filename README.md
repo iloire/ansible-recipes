@@ -9,7 +9,8 @@ Ansible roles for automating development environment setup across Ubuntu Linux a
 ### Cross-platform (shared)
 
 - **Shell**: zsh + oh-my-zsh, tmux + tmuxinator, dotfiles symlinks
-- **Dev tools**: Node.js (via nvm), npm global packages (prettier, pyright, typescript-language-server, yarn, nodemon, diff-so-fancy)
+- **Modern CLI**: eza (ls), bat (cat), fd (find), dust (du), btop (top), tldr (man), delta (diff), atuin (shell history)
+- **Dev tools**: Node.js (via nvm), npm global packages (prettier, pyright, typescript-language-server, yarn, nodemon)
 - **Editors**: Neovim, VS Code, Cursor (all configured via dotfiles symlinks)
 - **Git**: git-crypt, git-lfs, lazygit, custom `.gitconfig`
 - **System**: ad-blocking hosts file (StevenBlack/hosts), cron jobs for cleanup and maintenance
@@ -140,10 +141,11 @@ To provision macOS machines remotely from your Linux dev machine:
 │   ├── git_config/              # Shared: gitconfig symlink
 │   ├── hosts_file/              # Shared: ad-blocking hosts file
 │   ├── crontab/                 # Shared: maintenance cron jobs
+│   ├── modern_cli_tools/        # Shared: eza, bat, fd, dust, btop, tldr, delta, atuin
 │   ├── claude/                  # Shared: Claude CLI config
 │   ├── docker/                  # Linux: Docker CE
 │   ├── homebrew/                # macOS: Homebrew packages + casks
-│   └── ...                      # 35 roles total
+│   └── ...                      # 36 roles total
 ├── desktop-ubuntu.yml           # Profile: Ubuntu desktop (all roles)
 ├── desktop-osx.yml              # Profile: macOS desktop (all roles)
 ├── desktop-osx-agent.yml        # Profile: macOS agent (minimal roles)

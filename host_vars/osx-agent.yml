@@ -4,17 +4,25 @@ brew_cask_packages:
   - tailscale
 
 brew_packages:
+  - atuin
+  - bat
+  - btop
+  - dust
+  - eza
+  - fastfetch
+  - fd
+  - fzf
   - git
   - git-crypt
+  - git-delta
   - git-lfs
   - jq
-  - wget
-  - tree
   - ripgrep
-  - fzf
+  - tealdeer
   - tmux
   - tmuxinator
-  - fastfetch
+  - tree
+  - wget
   - zsh
   - zsh-autosuggestions
   - zsh-completions

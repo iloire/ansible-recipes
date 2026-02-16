@@ -25,18 +25,25 @@ brew_cask_packages:
   - virtualbox@beta
 
 brew_packages:
+  - atuin
   - autoconf
   - awscli
   - bash-completion
+  - bat
+  - btop
   - certbot
   - deskflow
   - dockutil
+  - dust
+  - eza
   - fastfetch
+  - fd
   - ffmpeg
   - fish
   - fzf
   - git
   - git-crypt
+  - git-delta
   - git-lfs
   - glow
   - go
@@ -54,6 +61,7 @@ brew_packages:
   - pyenv
   - python
   - ripgrep
+  - tealdeer
   - terraform
   - terraform-inventory
   - thefuck

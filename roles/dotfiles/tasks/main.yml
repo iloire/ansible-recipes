@@ -2,6 +2,8 @@
   ansible.builtin.git:
     repo: "{{ dotfiles_repo }}"
     dest: ~/dotfiles
+    accept_hostkey: true
+    ssh_opts: "-o ForwardAgent=yes"
 
 - name: oh my zsh checkout
   ansible.builtin.git:

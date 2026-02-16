@@ -13,6 +13,7 @@
     - hosts_file
     - apt_minimum
     - apt
+    - modern_cli_tools
     - build_essentials
     - ubuntu_settings
     - docker

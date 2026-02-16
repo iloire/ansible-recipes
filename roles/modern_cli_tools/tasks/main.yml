@@ -1,0 +1,93 @@
+# Modern CLI replacements:
+#   ls → eza, cat → bat, find → fd, du → dust,
+#   top → btop, man → tldr (tealdeer), diff → delta
+#   shell history → atuin
+#
+# On macOS these are installed via Homebrew (see group_vars/osx.yml).
+
+- name: install bat, fd-find, and btop via apt
+  ansible.builtin.apt:
+    name:
+      - bat
+      - fd-find
+      - btop
+    state: present
+  become: true
+
+- name: symlink batcat to bat
+  ansible.builtin.file:
+    src: /usr/bin/batcat
+    dest: /usr/local/bin/bat
+    state: link
+  become: true
+
+- name: symlink fdfind to fd
+  ansible.builtin.file:
+    src: /usr/bin/fdfind
+    dest: /usr/local/bin/fd
+    state: link
+  become: true
+
+- name: download eza
+  ansible.builtin.unarchive:
+    src: https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes
+    include: eza
+    creates: /usr/local/bin/eza
+  become: true
+
+- name: check if dust is installed
+  ansible.builtin.stat:
+    path: /usr/bin/dust
+  register: dust_bin
+
+- name: install dust
+  when: not dust_bin.stat.exists
+  block:
+    - name: get latest dust version
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/bootandy/dust/releases/latest
+        return_content: yes
+      register: dust_release
+
+    - name: install dust from deb
+      ansible.builtin.apt:
+        deb: "https://github.com/bootandy/dust/releases/download/{{ dust_release.json.tag_name }}/du-dust_{{ dust_release.json.tag_name | regex_replace('^v', '') }}-1_amd64.deb"
+      become: true
+
+- name: check if delta is installed
+  ansible.builtin.stat:
+    path: /usr/bin/delta
+  register: delta_bin
+
+- name: install delta
+  when: not delta_bin.stat.exists
+  block:
+    - name: get latest delta version
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/dandavison/delta/releases/latest
+        return_content: yes
+      register: delta_release
+
+    - name: install delta from deb
+      ansible.builtin.apt:
+        deb: "https://github.com/dandavison/delta/releases/download/{{ delta_release.json.tag_name }}/git-delta_{{ delta_release.json.tag_name | regex_replace('^v', '') }}_amd64.deb"
+      become: true
+
+- name: download tealdeer as tldr
+  ansible.builtin.get_url:
+    url: https://github.com/tealdeer-rs/tealdeer/releases/latest/download/tealdeer-linux-x86_64-musl
+    dest: /usr/local/bin/tldr
+    mode: "0755"
+  become: true
+  register: tldr_download
+  changed_when: tldr_download.status_code == 200
+
+- name: install atuin
+  ansible.builtin.shell: >
+    curl -sL https://github.com/atuinsh/atuin/releases/latest/download/atuin-x86_64-unknown-linux-gnu.tar.gz
+    | tar xz -C /usr/local/bin --strip-components=1 --wildcards '*/atuin'
+  args:
+    creates: /usr/local/bin/atuin
+  become: true

@@ -9,5 +9,6 @@
     - hosts_file
     - node
     - npm_packages
+    - modern_cli_tools
     - lazygit
     - neovim

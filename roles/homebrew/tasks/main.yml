@@ -1,7 +1,18 @@
-- name: Ensuring Homebrew Is Installed
+- name: Check Homebrew (Apple Silicon)
   stat:
     path: /opt/homebrew/bin/brew
-  register: homebrew_check
+  register: homebrew_apple_silicon
+
+- name: Check Homebrew (Intel)
+  stat:
+    path: /usr/local/bin/brew
+  register: homebrew_intel
+
+- name: Set homebrew_check fact
+  set_fact:
+    homebrew_check:
+      stat:
+        exists: "{{ homebrew_apple_silicon.stat.exists or homebrew_intel.stat.exists }}"
 
 - name: Fail If Homebrew Is Not Installed and install_homebrew_if_missing Is False
   fail:
