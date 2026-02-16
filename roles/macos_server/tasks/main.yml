@@ -83,22 +83,32 @@
 
 # --- Maintenance ---
 
-- name: Enable daily periodic maintenance scripts
-  ansible.builtin.cron:
-    name: "macOS daily maintenance"
-    job: "/usr/libexec/periodic daily"
-    minute: "0"
-    hour: "3"
-    user: root
+- name: Install daily periodic maintenance launchd plist
+  ansible.builtin.template:
+    src: com.local.periodic-daily.plist.j2
+    dest: /Library/LaunchDaemons/com.local.periodic-daily.plist
+    owner: root
+    group: wheel
+    mode: "0644"
   become: true
 
-- name: Schedule weekly restart
-  ansible.builtin.cron:
-    name: "weekly restart"
-    job: "/sbin/shutdown -r now"
-    minute: "0"
-    hour: "4"
-    weekday: "0"
-    user: root
+- name: Load daily periodic maintenance daemon
+  ansible.builtin.command: launchctl load -w /Library/LaunchDaemons/com.local.periodic-daily.plist
   become: true
+  changed_when: false
+
+- name: Install weekly restart launchd plist
+  ansible.builtin.template:
+    src: com.local.weekly-restart.plist.j2
+    dest: /Library/LaunchDaemons/com.local.weekly-restart.plist
+    owner: root
+    group: wheel
+    mode: "0644"
+  become: true
+  when: macos_server_weekly_restart | default(false)
+
+- name: Load weekly restart daemon
+  ansible.builtin.command: launchctl load -w /Library/LaunchDaemons/com.local.weekly-restart.plist
+  become: true
+  changed_when: false
   when: macos_server_weekly_restart | default(false)
