@@ -21,6 +21,11 @@ macos_disable_spotlight: true
 macos_disable_siri: true
 macos_disable_game_center: true
 
+# Server hardening
+macos_server_hostname: osx-agent
+macos_server_disable_bluetooth: true
+macos_server_weekly_restart: true
+
 brew_cask_packages:
   - google-chrome
   - keepassx

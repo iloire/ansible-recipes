@@ -1,0 +1,103 @@
+# macOS server/agent hardening: energy, security, networking, maintenance
+
+# --- Energy & Reliability ---
+
+- name: Prevent system sleep
+  ansible.builtin.command: pmset -a sleep 0
+  become: true
+
+- name: Prevent display sleep
+  ansible.builtin.command: pmset -a displaysleep 0
+  become: true
+
+- name: Prevent disk sleep
+  ansible.builtin.command: pmset -a disksleep 0
+  become: true
+
+- name: Restart automatically after power failure
+  ansible.builtin.command: pmset -a autorestart 1
+  become: true
+
+- name: Restart automatically if system freezes
+  ansible.builtin.command: systemsetup -setrestartfreeze on
+  become: true
+
+- name: Disable screen saver
+  ansible.builtin.shell: defaults -currentHost write com.apple.screensaver idleTime -int 0
+
+# --- Firewall ---
+
+- name: Enable firewall
+  ansible.builtin.command: /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+  become: true
+
+- name: Enable firewall stealth mode
+  ansible.builtin.command: /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on
+  become: true
+
+# --- Disable unused services ---
+
+- name: Disable Bluetooth
+  ansible.builtin.shell: defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 0
+  become: true
+  when: macos_server_disable_bluetooth | default(true)
+
+- name: Disable AirDrop
+  ansible.builtin.shell: defaults write com.apple.NetworkBrowser DisableAirDrop -bool true
+
+- name: Disable Handoff
+  ansible.builtin.shell: defaults -currentHost write com.apple.coreservices.useractivityd ActivityReceivingAllowed -bool false
+
+- name: Disable remote Apple events
+  ansible.builtin.command: systemsetup -setremoteappleevents off
+  become: true
+
+# --- Security ---
+
+- name: Require password immediately after sleep or screen saver
+  ansible.builtin.shell: defaults write com.apple.screensaver askForPassword -int 1
+
+- name: Set password delay to 0 seconds
+  ansible.builtin.shell: defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+- name: Disable guest account
+  ansible.builtin.shell: defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false
+  become: true
+
+# --- Networking ---
+
+- name: Enable Remote Login (SSH)
+  ansible.builtin.command: systemsetup -setremotelogin on
+  become: true
+
+- name: Set hostname
+  ansible.builtin.command: "scutil --set ComputerName {{ macos_server_hostname }}"
+  become: true
+  when: macos_server_hostname is defined
+
+- name: Set local hostname
+  ansible.builtin.command: "scutil --set LocalHostName {{ macos_server_hostname }}"
+  become: true
+  when: macos_server_hostname is defined
+
+# --- Maintenance ---
+
+- name: Enable daily periodic maintenance scripts
+  ansible.builtin.cron:
+    name: "macOS daily maintenance"
+    job: "/usr/libexec/periodic daily"
+    minute: "0"
+    hour: "3"
+    user: root
+  become: true
+
+- name: Schedule weekly restart
+  ansible.builtin.cron:
+    name: "weekly restart"
+    job: "/sbin/shutdown -r now"
+    minute: "0"
+    hour: "4"
+    weekday: "0"
+    user: root
+  become: true
+  when: macos_server_weekly_restart | default(false)
