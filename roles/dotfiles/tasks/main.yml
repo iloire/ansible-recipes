@@ -15,3 +15,15 @@
     src: "~/dotfiles/shell/zshrc"
     dest: "~/.zshrc"
     state: link
+
+- name: ensure ~/.ssh/sockets directory exists
+  ansible.builtin.file:
+    path: "~/.ssh/sockets"
+    state: directory
+    mode: "0700"
+
+- name: creating symlink for ssh config
+  ansible.builtin.file:
+    src: "~/dotfiles/ssh/config"
+    dest: "~/.ssh/config"
+    state: link
