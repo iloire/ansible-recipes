@@ -1,35 +1,21 @@
-- name: dotfiles
-  import_playbook: playbooks/dotfiles.yml
-- name: myconfig
-  import_playbook: playbooks/myconfig.yml
-- name: tmux config
-  import_playbook: playbooks/tmux-config.yml
-- name: node/nvm
-  import_playbook: playbooks/node.yml
-- name: npm packages
-  import_playbook: playbooks/npm-packages.yml
-- name: git
-  import_playbook: playbooks/git-config.yml
-- name: crontab
-  import_playbook: playbooks/crontab.yml
-- name: hosts
-  import_playbook: playbooks/hosts.yml
-- name: cursor config
-  import_playbook: playbooks/cursor-config.yml
-
-- name: homebrew
-  import_playbook: playbooks/osx/homebrew.yml
-- name: neovim
-  import_playbook: playbooks/osx/neovim-config.yml
-- name: map caps to escape
-  import_playbook: playbooks/osx/mapcapsescape.yml
-- name: dock config
-  import_playbook: playbooks/osx/dock.yml
-- name: osx config
-  import_playbook: playbooks/osx/config.yml
-- name: install nerd fonts
-  import_playbook: playbooks/osx/nerd-fonts.yml
-- name: alacritty config
-  import_playbook: playbooks/alacritty-config.yml
-- name: vscode config
-  import_playbook: playbooks/vscode-config.yml
+- name: macOS Desktop Setup
+  hosts: osx_desktop
+  gather_facts: true
+  roles:
+    - dotfiles
+    - myconfig
+    - tmux
+    - node
+    - npm_packages
+    - git_config
+    - crontab
+    - hosts_file
+    - cursor_config
+    - homebrew
+    - neovim
+    - mapcapsescape
+    - dock
+    - osx_config
+    - nerd_fonts
+    - alacritty_config
+    - vscode_config

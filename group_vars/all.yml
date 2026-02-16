@@ -1,0 +1,11 @@
+nvm_version: "0.40.4"
+dotfiles_repo: "git@github.com:iloire/dotfiles.git"
+myconfig_repo: "git@github.com:iloire/myconfig.git"
+
+npm_packages:
+  - diff-so-fancy
+  - nodemon
+  - prettier
+  - pyright
+  - typescript-language-server
+  - yarn

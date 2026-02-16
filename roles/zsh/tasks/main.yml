@@ -1,0 +1,11 @@
+- name: Install zsh
+  become: true
+  apt:
+    name:
+      - zsh
+
+- name: change user shell to zsh
+  become: true
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /bin/zsh

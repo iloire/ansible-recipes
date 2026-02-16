@@ -2,7 +2,7 @@
 
 # ansible-recipes
 
-Ansible playbooks for automating development environment setup across Ubuntu Linux and macOS. One command to go from a fresh install to a fully configured workstation.
+Ansible roles for automating development environment setup across Ubuntu Linux and macOS. Provision local or remote machines with a single command.
 
 ## What gets installed
 
@@ -41,20 +41,41 @@ Lightweight setup for a machine running LLM agents — no heavy dev tools:
 - **Homebrew packages**: git, git-crypt, git-lfs, jq, wget, tree, ripgrep, fzf, tmux, tmuxinator, fastfetch, zsh + plugins
 - **Config**: dotfiles, tmux, node, npm, git, hosts file, Claude CLI
 
-## Configurations
+## Machines
 
-There are four setup profiles:
+Three machines are defined in `inventory/hosts.yml`:
 
-| Profile | Target | Script |
-|---------|--------|--------|
-| **Ubuntu Desktop** | Full dev workstation | `./run-desktop-ubuntu.sh` |
-| **Ubuntu Server** | Minimal CLI environment | `ansible-playbook server-ubuntu.yml -K` |
-| **macOS Desktop** | Full dev workstation | `./run-desktop-osx.sh` |
-| **macOS Agent** | Minimal LLM agent machine | `./run-desktop-osx-agent.sh` |
+| Machine | Profile | Connection |
+|---------|---------|------------|
+| `dev-machine` | Ubuntu Desktop | local |
+| `macbook` | macOS Desktop | SSH (remote) |
+| `osx-agent` | macOS Agent | SSH (remote) |
+
+Edit `inventory/hosts.yml` to set the IP addresses for your remote machines.
+
+## Usage
+
+```bash
+# Provision your linux dev machine
+./run.sh --limit dev-machine
+
+# Provision your macOS laptop (remote)
+./run.sh --limit macbook
+
+# Provision the macOS agent (remote)
+./run.sh --limit osx-agent
+
+# Provision all machines
+./run.sh
+
+# Run a single role on a specific machine
+./run.sh --tags docker --limit dev-machine
+./run.sh --tags homebrew --limit macbook
+```
 
 ## Getting started
 
-### Ubuntu
+### Ubuntu (local machine)
 
 ```bash
 # 1. Generate SSH key
@@ -69,12 +90,12 @@ sudo apt install -y ansible
 # 3. Clone and run
 git clone git@github.com:iloire/ansible-recipes.git
 cd ansible-recipes
-./run-desktop-ubuntu.sh
+./run.sh --limit dev-machine
 ```
 
 Or use the install script: `./install-ansible-linux.sh`
 
-### macOS
+### macOS (local or remote)
 
 ```bash
 # 1. Generate SSH key
@@ -84,52 +105,57 @@ ssh-keygen -t ed25519
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install git ansible
 
-# 3. Clone and run
+# 3. Clone and run locally, or configure for remote provisioning
 git clone git@github.com:iloire/ansible-recipes.git
 cd ansible-recipes
-./run-desktop-osx.sh
+./run.sh --limit macbook
 ```
 
-## Running individual playbooks
+### Remote provisioning
 
-You don't have to run the full setup. Run a single playbook with the helper scripts:
+To provision macOS machines remotely from your Linux dev machine:
 
-```bash
-# List available playbooks
-./run-playbook-ubuntu.sh
-./run-playbook-osx.sh
-
-# Run a specific one
-./run-playbook-ubuntu.sh docker
-./run-playbook-osx.sh homebrew
-```
+1. Edit `inventory/hosts.yml` and set the IPs for `macbook` and `osx-agent`
+2. Ensure SSH key auth is set up: `ssh-copy-id ivan@<MACBOOK_IP>`
+3. Enable Remote Login on macOS: System Settings → General → Sharing → Remote Login
+4. Run: `./run.sh --limit macbook`
 
 ## Project structure
 
 ```
-├── desktop-ubuntu.yml           # Main Ubuntu desktop orchestrator
-├── desktop-osx.yml              # Main macOS desktop orchestrator
-├── desktop-osx-agent.yml        # Minimal macOS agent setup
-├── server-ubuntu.yml            # Ubuntu server orchestrator
-├── playbooks/
-│   ├── linux/                   # Ubuntu-specific playbooks
-│   ├── osx/                     # macOS-specific playbooks
-│   ├── dotfiles.yml             # Shared: dotfiles + oh-my-zsh
-│   ├── node.yml                 # Shared: nvm + Node.js
-│   ├── npm-packages.yml         # Shared: global npm packages
-│   ├── tmux-config.yml          # Shared: tmux + tmuxinator
-│   ├── git-config.yml           # Shared: gitconfig symlink
-│   ├── hosts.yml                # Shared: ad-blocking hosts file
-│   ├── crontab.yml              # Shared: maintenance cron jobs
-│   ├── claude.yml               # Shared: Claude CLI config
-│   └── ...
-├── run-*.sh                     # Convenience runner scripts
+├── ansible.cfg                  # Ansible config (inventory path, roles path)
+├── inventory/
+│   └── hosts.yml                # All machines defined here
+├── group_vars/
+│   ├── all.yml                  # Shared variables (nvm version, repos, npm packages)
+│   ├── linux.yml                # Linux package lists and settings
+│   └── osx.yml                  # macOS homebrew packages, dock config
+├── host_vars/
+│   └── osx-agent.yml            # Agent-specific homebrew overrides (minimal)
+├── roles/
+│   ├── dotfiles/                # Shared: dotfiles + oh-my-zsh
+│   ├── node/                    # Shared: nvm + Node.js
+│   ├── npm_packages/            # Shared: global npm packages
+│   ├── tmux/                    # Shared: tmux + tmuxinator
+│   ├── git_config/              # Shared: gitconfig symlink
+│   ├── hosts_file/              # Shared: ad-blocking hosts file
+│   ├── crontab/                 # Shared: maintenance cron jobs
+│   ├── claude/                  # Shared: Claude CLI config
+│   ├── docker/                  # Linux: Docker CE
+│   ├── homebrew/                # macOS: Homebrew packages + casks
+│   └── ...                      # 35 roles total
+├── desktop-ubuntu.yml           # Profile: Ubuntu desktop (all roles)
+├── desktop-osx.yml              # Profile: macOS desktop (all roles)
+├── desktop-osx-agent.yml        # Profile: macOS agent (minimal roles)
+├── server-ubuntu.yml            # Profile: Ubuntu server (CLI only)
+├── site.yml                     # Master playbook (imports all profiles)
+├── run.sh                       # Single runner script
 └── install-ansible-*.sh         # Ansible installation helpers
 ```
 
 ## Dependencies
 
-The playbooks expect these external repositories (cloned automatically):
+The roles expect these external repositories (cloned automatically):
 
 - [iloire/dotfiles](https://github.com/iloire/dotfiles) — shell configs, editor settings, tmux config
 - [iloire/myconfig](https://github.com/iloire/myconfig) — personal configuration

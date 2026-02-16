@@ -1,0 +1,10 @@
+- name: ensure alacritty config directory
+  file:
+    path: "~/.config/alacritty"
+    state: directory
+
+- name: creating symlink for alacritty config
+  ansible.builtin.file:
+    src: "{{ '~/dotfiles/alacritty/alacritty-linux.toml' if ansible_system == 'Linux' else '~/dotfiles/alacritty/alacritty-osx.toml' }}"
+    dest: "~/.config/alacritty/alacritty.toml"
+    state: link

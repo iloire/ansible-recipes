@@ -1,0 +1,30 @@
+- name: update repositories
+  apt:
+    update_cache: yes
+  become: true
+
+- name: add PPAs
+  apt_repository:
+    repo: "{{ item }}"
+  loop: "{{ apt_ppas }}"
+  become: true
+
+- name: Install packages with apt
+  apt:
+    name: "{{ apt_packages }}"
+    state: present
+    update_cache: true
+  become: true
+
+- name: adding existing user to group mail
+  user:
+    name: "{{ ansible_user_id }}"
+    groups: mail
+    append: yes
+  become: true
+
+- name: Remove packages
+  apt:
+    name: "{{ apt_remove_packages }}"
+    state: absent
+  become: true

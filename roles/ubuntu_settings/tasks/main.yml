@@ -1,0 +1,75 @@
+- name: Gnome theme
+  shell: gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-bark-dark'
+
+- name: dark theme
+  shell: gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
+- name: fav apps
+  dconf:
+    key: "/org/gnome/shell/favorite-apps"
+    value: "['org.gnome.Nautilus.desktop', 'firefox_firefox.desktop', 'google-chrome.desktop', 'libreoffice-writer.desktop', 'terminator.desktop', 'brave-browser.desktop', '1password.desktop', 'spotify_spotify.desktop', 'telegram.desktop']"
+
+- name: set US int keyboard
+  dconf:
+    key: "/org/gnome/desktop/input-sources/sources"
+    value: "[('xkb', 'us+altgr-intl')]"
+
+- name: switch caps -> escape (nvim)
+  dconf:
+    key: "/org/gnome/desktop/input-sources/xkb-options"
+    value: "['caps:escape']"
+
+- name: blank screen delay
+  dconf:
+    key: "/org/gnome/desktop/session/idle-delay"
+    value: "uint32 900"
+
+- name: Keyboard delay
+  community.general.dconf:
+    key: '/org/gnome/desktop/peripherals/keyboard/delay'
+    value: 'uint32 230'
+
+- name: Keyboard repeat interval
+  community.general.dconf:
+    key: '/org/gnome/desktop/peripherals/keyboard/repeat-interval'
+    value: 'uint32 25'
+
+- name: Enable night-light
+  community.general.dconf:
+    key: '/org/gnome/settings-daemon/plugins/color/night-light-enabled'
+    value: 'true'
+
+- name: Enable night-light automatic shedule
+  community.general.dconf:
+    key: '/org/gnome/settings-daemon/plugins/color/night-light-schedule-automatic'
+    value: 'true'
+
+- name: Set night-light temperature
+  community.general.dconf:
+    key: '/org/gnome/settings-daemon/plugins/color/night-light-temperature'
+    value: 'uint32 2700'
+
+- name: Disable system sounds
+  community.general.dconf:
+    key: '/org/gnome/desktop/sound/event-sounds'
+    value: 'false'
+
+- name: Register custom keybindings
+  community.general.dconf:
+    key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings'
+    value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+
+- name: Screenshot to clipboard - name
+  community.general.dconf:
+    key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name'
+    value: "'Screenshot to clipboard'"
+
+- name: Screenshot to clipboard - command
+  community.general.dconf:
+    key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command'
+    value: "'flameshot gui --clipboard'"
+
+- name: Screenshot to clipboard - binding
+  community.general.dconf:
+    key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding'
+    value: "'<Super><Shift>4'"

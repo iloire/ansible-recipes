@@ -1,0 +1,15 @@
+- name: create miniconda directory
+  shell:
+    cmd: mkdir -p ~/miniconda3
+
+- name: download miniconda
+  shell:
+    cmd: wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+
+- name: install miniconda
+  shell:
+    cmd: bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+
+- name: clean up installer
+  shell:
+    cmd: rm -rf ~/miniconda3/miniconda.sh

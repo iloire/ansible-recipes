@@ -1,0 +1,30 @@
+- name: Download Hosts file
+  get_url:
+    url: "{{ hosts_url }}"
+    dest: "{{ tmp_path }}"
+  become: true
+
+- name: check if temp hosts file exists
+  stat:
+    path: "{{ tmp_path }}"
+  register: temp_hosts
+  changed_when: not temp_hosts.stat.exists
+
+- meta: flush_handlers
+
+- name: Make sure hostname resolves to localhost
+  lineinfile:
+    path: "{{ tmp_path }}"
+    regexp: "^({{ local_ip }} {{ ansible_facts.nodename }})$"
+    line: "{{ local_ip }} {{ ansible_facts.nodename }}"
+    insertafter: "127.0.0.1 localhost"
+  become: true
+
+- name: Copy the hosts file to /etc/hosts
+  copy:
+    src: "{{ tmp_path }}"
+    dest: "/etc/hosts"
+    mode: 0644
+    owner: root
+    remote_src: true
+  become: true

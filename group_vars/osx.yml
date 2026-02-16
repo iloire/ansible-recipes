@@ -1,0 +1,94 @@
+brew_cask_packages:
+  - alacritty
+  - arduino-ide
+  - balenaetcher
+  - brave-browser
+  - docker
+  - docker-compose
+  - dropbox
+  - firefox
+  - gimp
+  - google-chrome
+  - google-cloud-sdk
+  - google-drive
+  - keepassx
+  - ngrok
+  - postman
+  - sequel-pro
+  - spotify
+  - textmate
+  - todoist
+  - tower
+  - transmission
+  - vagrant
+  - vagrant-manager
+  - virtualbox@beta
+
+brew_packages:
+  - autoconf
+  - awscli
+  - bash-completion
+  - certbot
+  - deskflow
+  - dockutil
+  - fastfetch
+  - ffmpeg
+  - fish
+  - fzf
+  - git
+  - git-crypt
+  - git-lfs
+  - glow
+  - go
+  - java
+  - jq
+  - lazygit
+  - mc
+  - midnight-commander
+  - neovim
+  - nmap
+  - openssl
+  - packer
+  - postgresql
+  - prettierd
+  - pyenv
+  - python
+  - ripgrep
+  - terraform
+  - terraform-inventory
+  - thefuck
+  - tmux
+  - tmuxinator
+  - tree
+  - vault
+  - wget
+  - zsh
+  - zsh-autosuggestions
+  - zsh-completions
+  - zsh-syntax-highlighting
+
+install_homebrew_if_missing: false
+upgrade_homebrew_packages: false
+
+dock_remove:
+  - Contacts
+  - Maps
+  - Photos
+  - FaceTime
+  - Keynote
+  - Calendar
+  - Preview
+  - Reminders
+  - TV
+  - Music
+  - Podcasts
+  - Safari
+  - Messages
+  - Mail
+  - Freeform
+  - Launchpad
+
+dock_add:
+  - "/Applications/Google Chrome.app"
+  - "/Applications/Spotify.app"
+  - "/Applications/Google Drive.app"

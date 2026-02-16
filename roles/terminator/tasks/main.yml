@@ -1,0 +1,17 @@
+- name: create terminator config directory
+  ansible.builtin.file:
+    path: "~/.config/terminator"
+    state: directory
+
+- name: report if the file exists
+  shell: "ls ~/.config/terminator/config"
+  register: config_exists
+  ignore_errors: yes
+  changed_when: false
+
+- name: creating symlink for terminator config
+  when: config_exists is failed
+  ansible.builtin.file:
+    src: "~/dotfiles/terminator/config"
+    dest: "~/.config/terminator/config"
+    state: link

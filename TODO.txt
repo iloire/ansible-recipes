@@ -1,3 +1,0 @@
-- check for items added or removed to dock to avoid errors
-- install nerd fonts
-- nvim installs plugins automaticall on first run

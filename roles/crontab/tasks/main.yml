@@ -1,0 +1,56 @@
+- name: Creates an entry like "PATH=/usr/local/bin"
+  ansible.builtin.cron:
+    name: PATH
+    env: yes
+    job: /usr/local/bin:/usr/bin
+
+- name: clean downloads folder
+  ansible.builtin.cron:
+    name: "clean downloads. In OSX remember to give Full Disk Access to cron binary"
+    minute: "0"
+    hour: "*/6"
+    job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/clean-downloads.sh"
+
+- name: clean screenshots folder
+  ansible.builtin.cron:
+    name: "clean old screenshots"
+    minute: "10"
+    hour: "*/6"
+    job: '[ -d "$HOME/Screenshots/" ] && find "$HOME/Screenshots/" -maxdepth 1 -mtime +15 -type f -delete'
+
+- name: clean cookies
+  ansible.builtin.cron:
+    name: "clean cookies"
+    minute: "20"
+    hour: "*/6"
+    job: "python3 $HOME/dotfiles/bin/clean-cookies.py --clean"
+
+- name: monitor low space in disk
+  ansible.builtin.cron:
+    name: "disk space monitor"
+    minute: "20"
+    hour: "*/6"
+    job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/low-space-monitor.sh"
+
+- name: github sync
+  ansible.builtin.cron:
+    name: "github sync"
+    minute: "*/20"
+    hour: "*"
+    job: "$HOME/dotfiles/bin/sync-github.sh"
+
+- name: purge docker files
+  ansible.builtin.cron:
+    name: "purge docker files"
+    minute: "0"
+    hour: "*/6"
+    month: "1"
+    job: "docker system prune -f > /dev/null 2>&1"
+
+- name: clean caches
+  ansible.builtin.cron:
+    name: "clean package manager caches"
+    minute: "30"
+    hour: "12"
+    weekday: "6"
+    job: "$HOME/dotfiles/bin/clean-caches.sh > /dev/null 2>&1"

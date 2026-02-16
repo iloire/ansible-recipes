@@ -1,0 +1,10 @@
+- name: Install packages with snap
+  snap:
+    name: "{{ snap_packages }}"
+  become: true
+
+- name: Install packages with snap classic
+  snap:
+    name: "{{ snap_classic_packages }}"
+    classic: true
+  become: true

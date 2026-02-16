@@ -1,0 +1,19 @@
+- name: Remove applications from dock
+  shell: "dockutil --remove '{{ item }}' --no-restart"
+  ignore_errors: true
+  with_items: "{{ dock_remove }}"
+  when: dock_remove
+  changed_when: false
+
+- name: Add applications to dock
+  shell: "dockutil --add '{{ item }}' --no-restart"
+  ignore_errors: true
+  with_items: "{{ dock_add }}"
+  when: dock_add
+  changed_when: false
+
+- name: Reduce the size of the Dock
+  shell: defaults write com.apple.dock tilesize -int 50
+
+- name: Restart dock
+  shell: killall Dock

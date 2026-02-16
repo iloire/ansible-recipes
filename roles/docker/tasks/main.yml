@@ -1,0 +1,44 @@
+- name: update repositories
+  apt:
+    update_cache: yes
+  become: true
+
+- name: add Docker apt repository key
+  apt_key:
+    url: "https://download.docker.com/linux/ubuntu/gpg"
+    state: present
+  become: true
+
+- name: set the stable docker repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable"
+    state: present
+  become: true
+
+- name: install docker packages
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
+    state: present
+  become: true
+
+- name: Ensure group "docker" exists
+  ansible.builtin.group:
+    name: docker
+    state: present
+  become: true
+
+- name: adding existing user to group docker
+  user:
+    name: "{{ ansible_user_id }}"
+    groups: docker
+    append: yes
+  register: add_to_docker_group_result
+  become: true
+
+- name: Reset connection to pick up new group membership
+  meta: reset_connection
+  when: add_to_docker_group_result.changed

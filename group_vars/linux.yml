@@ -1,0 +1,108 @@
+apt_minimum_packages:
+  - arp-scan
+  - awscli
+  - curl
+  - dconf-cli
+  - dconf-editor
+  - exiv2
+  - fzf
+  - git
+  - git-crypt
+  - htop
+  - iperf
+  - libfuse2*
+  - mailutils
+  - mc
+  - net-tools
+  - nmap
+  - openssh-client
+  - openssh-server
+  - pv
+  - python3-pip
+  - python3.10
+  - ripgrep
+  - smartmontools
+  - sysstat
+  - tmux
+  - tmuxinator
+  - tree
+  - vim
+  - webp
+  - x11-xkb-utils
+  - zsh
+
+apt_packages:
+  - alacritty
+  - aspell-es
+  - awesome
+  - blueman
+  - caffeine
+  - cmatrix
+  - cmus
+  - ffmpeg
+  - filezilla
+  - fish
+  - flameshot
+  - flatpak
+  - gh
+  - gparted
+  - gnome-shell-extension-manager
+  - gnome-software-plugin-flatpak
+  - gnome-tweaks
+  - hardinfo
+  - imagemagick
+  - jq
+  - kazam
+  - libreoffice
+  - mysql-client
+  - nautilus-image-converter
+  - nvidia-driver-525
+  - obs-studio
+  - pavucontrol
+  - postgresql-client
+  - telegram
+  - terminator
+  - torbrowser-launcher
+  - virtualbox
+  - vlc
+  - wmctrl
+  - workrave
+  - yara
+
+apt_remove_packages:
+  - thunderbird
+
+apt_ppas:
+  - "ppa:atareao/telegram"
+  - "ppa:aslatter/ppa"
+  - "ppa:obsproject/obs-studio"
+
+snap_packages:
+  - dart-sass
+  - discord
+  - fbreader
+  - foliate
+  - gimp
+  - icloud-notes-linux-client
+  - ngrok
+  - spotify
+  - todoist
+  - zoom-client
+
+snap_classic_packages:
+  - aws-cli
+  - blender
+  - code
+  - google-cloud-sdk
+  - obsidian
+
+flatpak_packages:
+  - org.deskflow.deskflow
+
+nerd_fonts_version: "v3.4.0"
+nerd_fonts:
+  - { name: Hack, check: "Hack*" }
+  - { name: DroidSansMono, check: "Droid*" }
+  - { name: JetBrainsMono, check: "JetBrains*" }
+  - { name: UbuntuMono, check: "Ubuntu*" }
+  - { name: Ubuntu, check: "Ubuntu*" }

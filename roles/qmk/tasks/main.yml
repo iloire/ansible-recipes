@@ -1,0 +1,3 @@
+- name: install qmk
+  shell:
+    cmd: python3 -m pip install --user qmk

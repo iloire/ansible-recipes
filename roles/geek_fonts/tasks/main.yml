@@ -1,0 +1,24 @@
+- name: ensure font directories
+  file:
+    path: "/usr/share/fonts/truetype/{{ item.name }}"
+    state: directory
+  loop: "{{ nerd_fonts }}"
+  become: true
+
+- name: check if fonts exist
+  shell: "ls /usr/share/fonts/truetype/{{ item.name }}/{{ item.check }}"
+  register: font_check
+  ignore_errors: yes
+  changed_when: false
+  loop: "{{ nerd_fonts }}"
+
+- name: download fonts
+  ansible.builtin.unarchive:
+    src: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_fonts_version }}/{{ item.item.name }}.zip"
+    dest: "/usr/share/fonts/truetype/{{ item.item.name }}/"
+    remote_src: yes
+  when: item is failed
+  loop: "{{ font_check.results }}"
+  loop_control:
+    label: "{{ item.item.name }}"
+  become: true

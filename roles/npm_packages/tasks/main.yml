@@ -1,0 +1,8 @@
+- name: set default node
+  shell: . ~/.nvm/nvm.sh nvm use default
+
+- name: Install node.js packages globally
+  npm:
+    name: "{{ item }}"
+    global: yes
+  loop: "{{ npm_packages }}"

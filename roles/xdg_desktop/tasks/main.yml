@@ -1,0 +1,12 @@
+- name: ensure destination directory exists
+  file:
+    path: "{{ ansible_user_dir }}/.local/share/applications"
+    state: directory
+
+- name: symlink all desktop files
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/share/applications/{{ item | basename }}"
+    state: link
+  with_fileglob:
+    - "~/dotfiles/xdg/applications/*.desktop"

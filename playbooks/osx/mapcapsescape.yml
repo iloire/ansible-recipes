@@ -1,8 +1,0 @@
-- name: map caps -> escape
-  hosts: localhost
-  become: false
-  tasks:
-    - name: map caps -> escape
-      shell:
-        cmd: |
-          hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x700000029}]}'

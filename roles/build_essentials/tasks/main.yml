@@ -1,0 +1,12 @@
+- name: update repositories
+  apt:
+    update_cache: yes
+  become: true
+
+- name: install build-essential
+  apt:
+    name:
+      - build-essential
+    state: present
+    update_cache: true
+  become: true

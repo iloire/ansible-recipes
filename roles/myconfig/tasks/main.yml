@@ -1,0 +1,4 @@
+- name: myconfig checkout
+  ansible.builtin.git:
+    repo: "{{ myconfig_repo }}"
+    dest: ~/myconfig

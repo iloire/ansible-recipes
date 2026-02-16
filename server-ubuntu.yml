@@ -1,18 +1,13 @@
-- name: apt minimum
-  import_playbook: playbooks/linux/apt-minimum.yml
-- name: dotfiles
-  import_playbook: playbooks/dotfiles.yml
-- name: git
-  import_playbook: playbooks/git-config.yml
-- name: zsh
-  import_playbook: playbooks/linux/zsh.yml
-- name: hosts
-  import_playbook: playbooks/hosts.yml
-- name: node/nvm
-  import_playbook: playbooks/node.yml
-- name: npm packages
-  import_playbook: playbooks/npm-packages.yml
-- name: lazygit
-  import_playbook: playbooks/linux/lazygit.yml
-- name: neovim
-  import_playbook: playbooks/linux/neovim.yml
+- name: Ubuntu Server Setup
+  hosts: linux
+  gather_facts: true
+  roles:
+    - apt_minimum
+    - dotfiles
+    - git_config
+    - zsh
+    - hosts_file
+    - node
+    - npm_packages
+    - lazygit
+    - neovim

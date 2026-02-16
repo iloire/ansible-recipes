@@ -1,0 +1,21 @@
+brew_cask_packages:
+  - google-chrome
+  - keepassx
+  - tailscale
+
+brew_packages:
+  - git
+  - git-crypt
+  - git-lfs
+  - jq
+  - wget
+  - tree
+  - ripgrep
+  - fzf
+  - tmux
+  - tmuxinator
+  - fastfetch
+  - zsh
+  - zsh-autosuggestions
+  - zsh-completions
+  - zsh-syntax-highlighting

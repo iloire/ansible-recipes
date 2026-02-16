@@ -1,0 +1,23 @@
+- name: Get keyring file
+  ansible.builtin.shell:
+    cmd: wget -qO - https://mirror.mwt.me/shiftkey-desktop/gpgkey | gpg --dearmor | tee /usr/share/keyrings/mwt-desktop.gpg > /dev/null
+  become: true
+
+- name: Add GitHub Desktop repository
+  ansible.builtin.copy:
+    dest: /etc/apt/sources.list.d/mwt-desktop.list
+    content: |
+      deb [arch=amd64 signed-by=/usr/share/keyrings/mwt-desktop.gpg] https://mirror.mwt.me/shiftkey-desktop/deb/ any main
+    mode: "0644"
+  become: true
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+  become: true
+
+- name: Install GitHub Desktop
+  ansible.builtin.apt:
+    name: github-desktop
+    state: present
+  become: true

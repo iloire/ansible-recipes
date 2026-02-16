@@ -1,0 +1,15 @@
+- name: dotfiles checkout
+  ansible.builtin.git:
+    repo: "{{ dotfiles_repo }}"
+    dest: ~/dotfiles
+
+- name: oh my zsh checkout
+  ansible.builtin.git:
+    repo: "https://github.com/ohmyzsh/ohmyzsh.git"
+    dest: ~/.oh-my-zsh
+
+- name: creating symlink for zshrc
+  ansible.builtin.file:
+    src: "~/dotfiles/shell/zshrc"
+    dest: "~/.zshrc"
+    state: link

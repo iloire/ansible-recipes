@@ -1,0 +1,5 @@
+- name: creating symlink for git config
+  ansible.builtin.file:
+    src: "~/dotfiles/git/.gitconfig"
+    dest: "~/.gitconfig"
+    state: link

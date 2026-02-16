@@ -1,0 +1,16 @@
+- name: git checkout tpm
+  ansible.builtin.git:
+    repo: "https://github.com/tmux-plugins/tpm"
+    dest: ~/.tmux/plugins/tpm
+
+- name: creating symlink for tmux config
+  ansible.builtin.file:
+    src: "~/dotfiles/tmux/.tmux.conf"
+    dest: "~/.tmux.conf"
+    state: link
+
+- name: creating symlink for tmuxinator config
+  ansible.builtin.file:
+    src: "~/dotfiles/tmuxinator/"
+    dest: "~/.config/tmuxinator"
+    state: link
