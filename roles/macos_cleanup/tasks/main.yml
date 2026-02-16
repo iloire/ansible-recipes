@@ -50,15 +50,9 @@
     - dockutil_check.rc != 0
 
 - name: Remove unwanted Dock items
-  ansible.builtin.command: "dockutil --remove '{{ item }}' --no-restart"
+  ansible.builtin.command: "dockutil --remove '{{ item }}'"
   loop: "{{ macos_dock_remove_items }}"
   register: dock_remove
-  changed_when: "'was removed' in dock_remove.stdout"
+  changed_when: dock_remove.rc == 0
   failed_when: false
   when: macos_dock_remove_items is defined
-
-- name: Restart Dock to apply changes
-  ansible.builtin.command: killall Dock
-  when:
-    - macos_dock_remove_items is defined
-    - dock_remove.results | selectattr('changed') | list | length > 0
