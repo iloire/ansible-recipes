@@ -65,6 +65,11 @@
   ansible.builtin.shell: defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false
   become: true
 
+# --- Finder ---
+
+- name: Show hidden files and folders in Finder
+  ansible.builtin.shell: defaults write com.apple.finder AppleShowAllFiles -bool true
+
 # --- Networking ---
 
 - name: Enable Remote Login (SSH)
