@@ -11,7 +11,7 @@ brew_cask_packages:
   - google-chrome
   - google-cloud-sdk
   - google-drive
-  - keepassx
+  - keepassxc
   - ngrok
   - postman
   - sequel-pro
