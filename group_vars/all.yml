@@ -7,4 +7,5 @@ npm_packages:
   - prettier
   - pyright
   - typescript-language-server
+  - vercel
   - yarn
