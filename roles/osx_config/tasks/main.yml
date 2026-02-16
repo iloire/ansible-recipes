@@ -47,5 +47,11 @@
 - name: Tap to click touchbar
   shell: defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 
+- name: Show startup disk in Finder sidebar
+  shell: mysides list | grep -q "Macintosh HD" || mysides add "Macintosh HD" file:///
+
+- name: Show home folder in Finder sidebar
+  shell: mysides list | grep -q "{{ ansible_user_id }}" || mysides add "{{ ansible_user_id }}" file:///Users/{{ ansible_user_id }}/
+
 - name: Restart Finder
   shell: killall Finder

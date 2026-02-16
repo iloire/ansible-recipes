@@ -29,6 +29,7 @@ macos_server_weekly_restart: true
 brew_cask_packages:
   - google-chrome
   - keepassxc
+  - mysides
   - tailscale
 
 brew_packages:

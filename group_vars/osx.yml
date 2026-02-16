@@ -1,6 +1,7 @@
 brew_cask_packages:
   - alacritty
   - arduino-ide
+  - mysides
   - balenaetcher
   - brave-browser
   - docker
