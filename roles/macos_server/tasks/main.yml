@@ -21,6 +21,7 @@
 - name: Restart automatically if system freezes
   ansible.builtin.command: pmset -a restartfreeze 1
   become: true
+  failed_when: false  # not supported on Apple Silicon; hardware watchdog handles this natively
 
 - name: Disable screen saver
   ansible.builtin.shell: defaults -currentHost write com.apple.screensaver idleTime -int 0
