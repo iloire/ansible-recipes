@@ -43,6 +43,7 @@ brew_packages:
   - ffmpeg
   - fish
   - fzf
+  - gh
   - git
   - git-crypt
   - git-delta
