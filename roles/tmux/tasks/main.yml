@@ -9,8 +9,20 @@
     dest: "~/.tmux.conf"
     state: link
 
+- name: check if dotfiles tmuxinator dir exists
+  ansible.builtin.stat:
+    path: "~/dotfiles/tmuxinator"
+  register: dotfiles_tmuxinator
+
+- name: ensure ~/.config directory exists
+  ansible.builtin.file:
+    path: "~/.config"
+    state: directory
+  when: dotfiles_tmuxinator.stat.exists and dotfiles_tmuxinator.stat.isdir
+
 - name: creating symlink for tmuxinator config
   ansible.builtin.file:
-    src: "~/dotfiles/tmuxinator/"
+    src: "~/dotfiles/tmuxinator"
     dest: "~/.config/tmuxinator"
     state: link
+  when: dotfiles_tmuxinator.stat.exists and dotfiles_tmuxinator.stat.isdir

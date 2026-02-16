@@ -1,5 +1,11 @@
+- name: check if dotfiles git config exists
+  ansible.builtin.stat:
+    path: "~/dotfiles/git/.gitconfig"
+  register: dotfiles_gitconfig
+
 - name: creating symlink for git config
   ansible.builtin.file:
     src: "~/dotfiles/git/.gitconfig"
     dest: "~/.gitconfig"
     state: link
+  when: dotfiles_gitconfig.stat.exists

@@ -16,14 +16,21 @@
     dest: "~/.zshrc"
     state: link
 
+- name: check if dotfiles ssh config exists
+  ansible.builtin.stat:
+    path: "~/dotfiles/ssh/config"
+  register: dotfiles_ssh_config
+
 - name: ensure ~/.ssh/sockets directory exists
   ansible.builtin.file:
     path: "~/.ssh/sockets"
     state: directory
     mode: "0700"
+  when: dotfiles_ssh_config.stat.exists and (dotfiles_link_ssh_config | default(true))
 
 - name: creating symlink for ssh config
   ansible.builtin.file:
     src: "~/dotfiles/ssh/config"
     dest: "~/.ssh/config"
     state: link
+  when: dotfiles_ssh_config.stat.exists and (dotfiles_link_ssh_config | default(true))

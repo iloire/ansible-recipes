@@ -4,14 +4,21 @@
     state: directory
     mode: '0755'
 
+- name: check if dotfiles claude dir exists
+  ansible.builtin.stat:
+    path: "~/dotfiles/claude"
+  register: dotfiles_claude
+
 - name: Creating symlink for CLAUDE.md
   ansible.builtin.file:
     src: "~/dotfiles/claude/CLAUDE.md"
     dest: "~/.claude/CLAUDE.md"
     state: link
+  when: dotfiles_claude.stat.exists
 
 - name: Creating symlink for settings.json
   ansible.builtin.file:
     src: "~/dotfiles/claude/settings.json"
     dest: "~/.claude/settings.json"
     state: link
+  when: dotfiles_claude.stat.exists

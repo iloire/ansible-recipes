@@ -1,8 +1,12 @@
-- name: set default node
-  shell: . ~/.nvm/nvm.sh nvm use default
+- name: get nvm node path
+  shell: . ~/.nvm/nvm.sh && dirname $(which npm)
+  register: nvm_bin_path
+  changed_when: false
 
 - name: Install node.js packages globally
   npm:
     name: "{{ item }}"
     global: yes
   loop: "{{ npm_packages }}"
+  environment:
+    PATH: "{{ nvm_bin_path.stdout }}:{{ ansible_env.PATH }}"
