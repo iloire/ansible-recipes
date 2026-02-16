@@ -16,14 +16,6 @@
   import_playbook: playbooks/crontab.yml
 - name: hosts
   import_playbook: playbooks/hosts.yml
-- name: github-desktop
-  import_playbook: playbooks/github-desktop.yml
-- name: cursor config
-  import_playbook: playbooks/cursor-config.yml
-- name: xdg desktop config
-  import_playbook: playbooks/xdg-desktop.yml
-# - name: nautilus open terminal
-#   import_playbook: playbooks/linux/nautilus-open-terminal.yml
 - name: apt minimum
   import_playbook: playbooks/linux/apt-minimum.yml
 - name: apt
