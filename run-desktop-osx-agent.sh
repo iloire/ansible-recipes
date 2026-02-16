@@ -1,2 +1,2 @@
 #!/bin/bash
-ansible-playbook desktop-osx-agent.yaml --ask-become-pass
+ansible-playbook desktop-osx-agent.yml --ask-become-pass

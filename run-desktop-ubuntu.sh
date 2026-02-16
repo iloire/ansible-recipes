@@ -1,2 +1,2 @@
 #!/bin/bash
-ansible-playbook desktop-ubuntu.yaml --ask-become-pass
+ansible-playbook desktop-ubuntu.yml --ask-become-pass

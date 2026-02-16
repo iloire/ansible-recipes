@@ -48,7 +48,7 @@ There are four setup profiles:
 | Profile | Target | Script |
 |---------|--------|--------|
 | **Ubuntu Desktop** | Full dev workstation | `./run-desktop-ubuntu.sh` |
-| **Ubuntu Server** | Minimal CLI environment | `ansible-playbook server-ubuntu.yaml -K` |
+| **Ubuntu Server** | Minimal CLI environment | `ansible-playbook server-ubuntu.yml -K` |
 | **macOS Desktop** | Full dev workstation | `./run-desktop-osx.sh` |
 | **macOS Agent** | Minimal LLM agent machine | `./run-desktop-osx-agent.sh` |
 
@@ -107,10 +107,10 @@ You don't have to run the full setup. Run a single playbook with the helper scri
 ## Project structure
 
 ```
-├── desktop-ubuntu.yaml          # Main Ubuntu desktop orchestrator
-├── desktop-osx.yaml             # Main macOS desktop orchestrator
-├── desktop-osx-agent.yaml       # Minimal macOS agent setup
-├── server-ubuntu.yaml           # Ubuntu server orchestrator
+├── desktop-ubuntu.yml           # Main Ubuntu desktop orchestrator
+├── desktop-osx.yml              # Main macOS desktop orchestrator
+├── desktop-osx-agent.yml        # Minimal macOS agent setup
+├── server-ubuntu.yml            # Ubuntu server orchestrator
 ├── playbooks/
 │   ├── linux/                   # Ubuntu-specific playbooks
 │   ├── osx/                     # macOS-specific playbooks
