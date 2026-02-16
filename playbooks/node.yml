@@ -4,7 +4,7 @@
   tasks:
     - name: Install nvm
       ansible.builtin.shell: >
-        curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.38.0/install.sh | bash
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
       args:
         executable: /bin/bash
         chdir: "$HOME"
@@ -18,10 +18,7 @@
 
     - name: Install node
       ansible.builtin.shell: |
-        source ~/.nvm/nvm.sh && nvm install {{item}} && nvm alias default {{item}}
+        source ~/.nvm/nvm.sh && nvm install --lts && nvm alias default lts/*
       args:
         executable: /bin/bash
         chdir: "$HOME"
-        creates: "$HOME/.nvm/versions/node/v{{item}}"
-      loop:
-        - 20.12.2 

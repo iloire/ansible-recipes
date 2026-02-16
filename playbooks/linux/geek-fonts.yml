@@ -2,89 +2,34 @@
   hosts: localhost
   become: yes
   vars:
-    - fonts_path: '/usr/share/fonts/truetype'
+    fonts_path: '/usr/share/fonts/truetype'
+    nerd_fonts_version: 'v3.4.0'
+    fonts:
+      - { name: Hack, check: "Hack*" }
+      - { name: DroidSansMono, check: "Droid*" }
+      - { name: JetBrainsMono, check: "JetBrains*" }
+      - { name: UbuntuMono, check: "Ubuntu*" }
+      - { name: Ubuntu, check: "Ubuntu*" }
   tasks:
-    - name: ensure fonts directory
+    - name: ensure font directories
       file:
-        path: "{{ fonts_path }}/hack"
+        path: "{{ fonts_path }}/{{ item.name }}"
         state: directory
+      loop: "{{ fonts }}"
 
-    - name: hack font exists
-      shell: "ls {{ fonts_path }}/hack/Hack*"
-      register: hack_exists
+    - name: check if fonts exist
+      shell: "ls {{ fonts_path }}/{{ item.name }}/{{ item.check }}"
+      register: font_check
       ignore_errors: yes
+      changed_when: false
+      loop: "{{ fonts }}"
 
-    - name: download Hack
-      when: hack_exists is failed
+    - name: download fonts
       ansible.builtin.unarchive:
-        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.zip
-        dest: "{{ fonts_path }}/hack/"
+        src: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_fonts_version }}/{{ item.item.name }}.zip"
+        dest: "{{ fonts_path }}/{{ item.item.name }}/"
         remote_src: yes
-
-    - name: ensure DroidSansMono fonts directory
-      file:
-        path: "{{ fonts_path }}/DroidSansMono"
-        state: directory
-
-    - name: droid font exists
-      shell: "ls {{ fonts_path }}/DroidSansMono/Droid*"
-      register: droid_exists
-      ignore_errors: yes
-
-    - name: download Droid
-      when: droid_exists is failed
-      ansible.builtin.unarchive:
-        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/DroidSansMono.zip
-        dest: "{{ fonts_path }}/DroidSansMono/"
-        remote_src: yes
-
-    - name: ensure JetBrainsMono fonts directory
-      file:
-        path: "{{ fonts_path }}/JetBrainsMono"
-        state: directory
-
-    - name: jetbrains font exists
-      shell: "ls {{ fonts_path }}/JetBrainsMono/Jet*"
-      register: jetbrains_exists
-      ignore_errors: yes
-
-    - name: download JetBrainsMono
-      when: jetbrains_exists is failed
-      ansible.builtin.unarchive:
-        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/JetBrainsMono.zip
-        dest: "{{ fonts_path }}/JetBrainsMono/"
-        remote_src: yes
-
-    - name: ensure UbuntuMono fonts directory
-      file:
-        path: "{{ fonts_path }}/UbuntuMono"
-        state: directory
-
-    - name: ubuntumono font exists
-      shell: "ls {{ fonts_path }}/UbuntuMono/Jet*"
-      register: ubuntumono_exists
-      ignore_errors: yes
-
-    - name: download UbuntuMono
-      when: ubuntumono_exists is failed
-      ansible.builtin.unarchive:
-        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/UbuntuMono.zip
-        dest: "{{ fonts_path }}/UbuntuMono/"
-        remote_src: yes
-
-    - name: ensure Ubuntu fonts directory
-      file:
-        path: "{{ fonts_path }}/Ubuntu"
-        state: directory
-
-    - name: ubuntu font exists
-      shell: "ls {{ fonts_path }}/Ubuntu/Jet*"
-      register: ubuntu_exists
-      ignore_errors: yes
-
-    - name: download Ubuntu
-      when: ubuntu_exists is failed
-      ansible.builtin.unarchive:
-        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Ubuntu.zip
-        dest: "{{ fonts_path }}/Ubuntu/"
-        remote_src: yes
+      when: item is failed
+      loop: "{{ font_check.results }}"
+      loop_control:
+        label: "{{ item.item.name }}"
