@@ -51,6 +51,7 @@
   homebrew_cask:
     name: "{{ brew_cask_packages }}"
     state: present
+    accept_external_apps: true
   register: result
   until: result is successful
   when: homebrew_check.stat.exists
