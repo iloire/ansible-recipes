@@ -1,0 +1,16 @@
+- name: cursor config
+  hosts: localhost
+  become: false
+  vars:
+    cursor_settings_path: "{{ '~/.config/Cursor/User/settings.json' if ansible_system == 'Linux' else '~/Library/Application Support/Cursor/User/settings.json' }}"
+  tasks:
+    - name: ensure cursor config directory
+      file:
+        path: "{{ cursor_settings_path | dirname }}"
+        state: directory
+
+    - name: creating symlink for cursor settings
+      ansible.builtin.file:
+        src: "~/dotfiles/cursor/settings.json"
+        dest: "{{ cursor_settings_path }}"
+        state: link

@@ -1,22 +1,24 @@
 - name: vscode config
   hosts: localhost
   become: false
+  vars:
+    vscode_settings_path: "{{ '~/.config/Code/User/settings.json' if ansible_system == 'Linux' else '~/Library/Application Support/Code/User/settings.json' }}"
   tasks:
     - name: check if vscode settings file exists
       ansible.builtin.stat:
-        path: "~/.config/Code/User/settings.json"
+        path: "{{ vscode_settings_path }}"
       register: vscode_settings
 
     - name: backup existing vscode settings if it's a regular file
       ansible.builtin.copy:
-        src: "~/.config/Code/User/settings.json"
-        dest: "~/.config/Code/User/settings.json.backup.{{ ansible_date_time.iso8601_basic_short }}"
+        src: "{{ vscode_settings_path }}"
+        dest: "{{ vscode_settings_path }}.backup.{{ ansible_date_time.iso8601_basic_short }}"
         remote_src: true
       when: vscode_settings.stat.exists and not vscode_settings.stat.islnk
 
     - name: creating symlink for vscode settings
       ansible.builtin.file:
         src: "~/dotfiles/vscode/settings.json"
-        dest: "~/.config/Code/User/settings.json"
+        dest: "{{ vscode_settings_path }}"
         state: link
         force: true

@@ -36,7 +36,7 @@
 - name: github-desktop
   import_playbook: playbooks/linux/github-desktop.yml
 - name: cursor config
-  import_playbook: playbooks/linux/cursor-config.yml
+  import_playbook: playbooks/cursor-config.yml
 
 - name: google-chrome
   import_playbook: playbooks/linux/google-chrome.yml
@@ -62,9 +62,9 @@
 # - name: keychron keyboard settings
 #   import_playbook: playbooks/linux/keychron.yml
 - name: alacritty config
-  import_playbook: playbooks/linux/alacritty-config.yml
+  import_playbook: playbooks/alacritty-config.yml
 
 - name: anaconda
   import_playbook: playbooks/linux/anaconda.yml
 - name: vscode config
-  import_playbook: playbooks/linux/vscode.yml
+  import_playbook: playbooks/vscode-config.yml
