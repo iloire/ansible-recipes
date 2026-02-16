@@ -49,7 +49,7 @@
   ansible.builtin.shell: defaults -currentHost write com.apple.coreservices.useractivityd ActivityReceivingAllowed -bool false
 
 - name: Disable remote Apple events
-  ansible.builtin.command: systemsetup -setremoteappleevents off
+  ansible.builtin.command: launchctl disable system/com.apple.AEServer
   become: true
 
 # --- Security ---

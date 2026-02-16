@@ -29,5 +29,36 @@
   when: macos_disable_siri | default(false)
 
 - name: Disable Game Center daemon
-  ansible.builtin.command: launchctl disable gui/{{ ansible_user_id }}/com.apple.gamed
+  ansible.builtin.shell: launchctl disable gui/$(id -u {{ ansible_user_id }})/com.apple.gamed
   when: macos_disable_game_center | default(false)
+
+# --- Dock cleanup ---
+
+- name: Check if dockutil is installed
+  ansible.builtin.command: which dockutil
+  register: dockutil_check
+  changed_when: false
+  failed_when: false
+  when: macos_dock_remove_items is defined
+
+- name: Install dockutil via Homebrew
+  community.general.homebrew:
+    name: dockutil
+    state: present
+  when:
+    - macos_dock_remove_items is defined
+    - dockutil_check.rc != 0
+
+- name: Remove unwanted Dock items
+  ansible.builtin.command: "dockutil --remove '{{ item }}' --no-restart"
+  loop: "{{ macos_dock_remove_items }}"
+  register: dock_remove
+  changed_when: "'was removed' in dock_remove.stdout"
+  failed_when: false
+  when: macos_dock_remove_items is defined
+
+- name: Restart Dock to apply changes
+  ansible.builtin.command: killall Dock
+  when:
+    - macos_dock_remove_items is defined
+    - dock_remove.results | selectattr('changed') | list | length > 0
