@@ -1,3 +1,26 @@
+dotfiles_link_ssh_config: false
+
+# Apps to remove from /Applications (non-SIP protected)
+macos_remove_apps:
+  - GarageBand
+  - iMovie
+  - Keynote
+  - Numbers
+  - Pages
+  - "Photo Booth"
+  - Chess
+
+# Launch daemons to disable
+macos_disable_daemons:
+  - com.apple.rapport
+  - com.apple.mediaanalysisd
+  - com.apple.cloudphotod
+  - com.apple.photolibraryd
+
+macos_disable_spotlight: true
+macos_disable_siri: true
+macos_disable_game_center: true
+
 brew_cask_packages:
   - google-chrome
   - keepassx

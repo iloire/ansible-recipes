@@ -6,6 +6,7 @@
   hosts: osx_agent
   gather_facts: true
   roles:
+    - macos_cleanup
     - dotfiles
     - tmux
     - node

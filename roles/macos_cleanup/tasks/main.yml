@@ -1,0 +1,33 @@
+# Remove unwanted macOS apps and disable unnecessary services
+# Note: System-protected apps in /System/Applications require SIP disabled
+
+- name: Remove unwanted apps from /Applications
+  ansible.builtin.file:
+    path: "/Applications/{{ item }}.app"
+    state: absent
+  loop: "{{ macos_remove_apps }}"
+  become: true
+  when: macos_remove_apps is defined
+
+- name: Disable unnecessary launch daemons
+  community.general.launchd:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  loop: "{{ macos_disable_daemons }}"
+  become: true
+  when: macos_disable_daemons is defined
+  ignore_errors: true
+
+- name: Disable Spotlight indexing
+  ansible.builtin.command: mdutil -a -i off
+  become: true
+  when: macos_disable_spotlight | default(false)
+
+- name: Disable Siri
+  ansible.builtin.shell: defaults write com.apple.assistant.support "Assistant Enabled" -bool false
+  when: macos_disable_siri | default(false)
+
+- name: Disable Game Center daemon
+  ansible.builtin.command: launchctl disable gui/{{ ansible_user_id }}/com.apple.gamed
+  when: macos_disable_game_center | default(false)
