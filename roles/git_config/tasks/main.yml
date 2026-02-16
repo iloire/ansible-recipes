@@ -9,3 +9,16 @@
     dest: "~/.gitconfig"
     state: link
   when: dotfiles_gitconfig.stat.exists
+
+- name: install gitleaks (apt)
+  become: true
+  ansible.builtin.apt:
+    name: gitleaks
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: install gitleaks (brew)
+  community.general.homebrew:
+    name: gitleaks
+    state: present
+  when: ansible_os_family == "Darwin"
