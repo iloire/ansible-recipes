@@ -19,7 +19,7 @@
   become: true
 
 - name: Restart automatically if system freezes
-  ansible.builtin.command: systemsetup -setrestartfreeze on
+  ansible.builtin.command: pmset -a restartfreeze 1
   become: true
 
 - name: Disable screen saver
