@@ -6,7 +6,6 @@
       apt: update_cache=yes
   tasks:
     - name: Install packages with apt
-      become: yes
       apt:
         name:
           - arp-scan

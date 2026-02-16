@@ -16,7 +16,6 @@
         state: present
 
     - name: install packages with apt
-      become: yes
       apt:
         name:
           - docker-ce

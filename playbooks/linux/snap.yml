@@ -3,7 +3,6 @@
   become: yes
   tasks:
     - name: Install packages with snap
-      become: true
       snap:
         name:
           - dart-sass
@@ -17,7 +16,6 @@
           - todoist
           - zoom-client
     - name: Install packages with snap classic
-      become: true
       snap:
         name:
           - aws-cli

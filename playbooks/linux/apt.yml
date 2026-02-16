@@ -15,7 +15,6 @@
       apt_repository:
         repo: "ppa:obsproject/obs-studio"
     - name: Install packages with apt
-      become: yes
       apt:
         name:
           - alacritty
@@ -62,7 +61,6 @@
         groups: mail
         append: yes
     - name: Remove packages
-      become: yes
       apt:
         name:
           - thunderbird

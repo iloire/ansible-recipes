@@ -6,13 +6,11 @@
     dest_dir: "{{ lookup('env', 'HOME') }}/.local/share/applications"
   tasks:
     - name: ensure destination directory exists
-      become: no
       file:
         path: "{{ dest_dir }}"
         state: directory
 
     - name: symlink all desktop files
-      become: no
       ansible.builtin.file:
         src: "{{ item }}"
         dest: "{{ dest_dir }}/{{ item | basename }}"
