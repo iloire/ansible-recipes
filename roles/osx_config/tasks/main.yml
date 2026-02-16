@@ -1,3 +1,13 @@
+- name: Disable system sleep
+  shell: pmset -a sleep 0
+  become: true
+  when: "'osx_agent' in group_names"
+
+- name: Disable display sleep
+  shell: pmset -a displaysleep 0
+  become: true
+  when: "'osx_agent' in group_names"
+
 - name: Show ~/Library
   shell: chflags nohidden ~/Library
 
