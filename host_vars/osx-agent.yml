@@ -42,6 +42,7 @@ brew_packages:
   - eza
   - fastfetch
   - fd
+  - ffmpeg
   - fzf
   - git
   - git-crypt
@@ -57,4 +58,5 @@ brew_packages:
   - zsh
   - zsh-autosuggestions
   - zsh-completions
+  - yt-dlp
   - zsh-syntax-highlighting

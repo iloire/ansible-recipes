@@ -5,6 +5,7 @@ apt_minimum_packages:
   - dconf-cli
   - dconf-editor
   - exiv2
+  - ffmpeg
   - fzf
   - git
   - git-crypt
@@ -68,6 +69,7 @@ apt_packages:
   - wmctrl
   - workrave
   - yara
+  - yt-dlp
 
 apt_remove_packages:
   - thunderbird
