@@ -1,0 +1,26 @@
+# Installs whisper.cpp from GitHub releases (Linux only).
+# On macOS this is installed via Homebrew (see group_vars/osx.yml).
+
+- name: check if whisper-cpp is installed
+  ansible.builtin.stat:
+    path: /usr/local/bin/whisper-cli
+  register: whisper_bin
+
+- name: install whisper-cpp
+  when: not whisper_bin.stat.exists
+  block:
+    - name: get latest whisper.cpp version
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/ggerganov/whisper.cpp/releases/latest
+        return_content: yes
+      register: whisper_release
+
+    - name: download and install whisper-cpp
+      ansible.builtin.unarchive:
+        src: "https://github.com/ggerganov/whisper.cpp/releases/download/{{ whisper_release.json.tag_name }}/whisper-{{ whisper_release.json.tag_name }}-bin-linux-x64.zip"
+        dest: /usr/local/bin
+        remote_src: yes
+        extra_opts:
+          - -j
+        creates: /usr/local/bin/whisper-cli
+      become: true

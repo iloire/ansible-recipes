@@ -34,3 +34,4 @@
     - alacritty_config
     - anaconda
     - vscode_config
+    - whisper_cpp

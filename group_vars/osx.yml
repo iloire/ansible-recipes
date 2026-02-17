@@ -77,6 +77,7 @@ brew_packages:
   - zsh
   - zsh-autosuggestions
   - zsh-completions
+  - whisper-cpp
   - yt-dlp
   - zsh-syntax-highlighting
 
