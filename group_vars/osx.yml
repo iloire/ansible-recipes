@@ -25,6 +25,7 @@ brew_cask_packages:
   - vagrant
   - vagrant-manager
   - virtualbox@beta
+  - vlc
 
 brew_packages:
   - atuin

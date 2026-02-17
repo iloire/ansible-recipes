@@ -32,6 +32,7 @@ brew_cask_packages:
   - mysides
   - tailscale
   - telegram
+  - vlc
 
 brew_packages:
   - atuin
