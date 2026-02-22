@@ -39,13 +39,12 @@
     hour: "*"
     job: "$HOME/dotfiles/bin/sync-github.sh"
 
-- name: purge docker files
+- name: docker cleanup
   ansible.builtin.cron:
-    name: "purge docker files"
+    name: "docker cleanup"
     minute: "0"
-    hour: "*/6"
-    month: "1"
-    job: "docker system prune -f > /dev/null 2>&1"
+    hour: "4"
+    job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/docker-cleanup.sh"
 
 - name: clean caches
   ansible.builtin.cron:
