@@ -42,3 +42,13 @@
 - name: Reset connection to pick up new group membership
   meta: reset_connection
   when: add_to_docker_group_result.changed
+
+- name: configure Docker daemon (log rotation, storage driver)
+  copy:
+    content: "{{ docker_daemon_config | to_nice_json }}\n"
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: "0644"
+  become: true
+  notify: restart docker
