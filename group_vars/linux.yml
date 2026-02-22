@@ -82,6 +82,7 @@ apt_ppas:
 snap_packages:
   - dart-sass
   - discord
+  - dust
   - fbreader
   - foliate
   - gimp
