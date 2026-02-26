@@ -19,6 +19,7 @@
         path: /data/.bash_profile
         block: |
           export SHELL_DIR=~/dotfiles/shell
+          export GIT_PAGER=less
           source $SHELL_DIR/config
 
     - name: Sync backups to peque
