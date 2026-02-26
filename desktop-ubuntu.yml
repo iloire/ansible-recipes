@@ -16,6 +16,7 @@
     - modern_cli_tools
     - build_essentials
     - ubuntu_settings
+    - autostart
     - docker
     - xdg_desktop
     - neovim

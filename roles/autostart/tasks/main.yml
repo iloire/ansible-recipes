@@ -1,0 +1,15 @@
+- name: Ensure autostart directory exists
+  file:
+    path: "{{ ansible_user_dir }}/.config/autostart"
+    state: directory
+
+- name: Add Flameshot to startup applications
+  copy:
+    dest: "{{ ansible_user_dir }}/.config/autostart/flameshot.desktop"
+    content: |
+      [Desktop Entry]
+      Name=Flameshot
+      Type=Application
+      Exec=flameshot
+      Comment=Screenshot tool
+      X-GNOME-Autostart-enabled=true
