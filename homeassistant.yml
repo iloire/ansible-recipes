@@ -3,8 +3,8 @@
   gather_facts: false
   tasks:
     - name: Install Python
-      ansible.builtin.raw: apk add --no-cache python3
-      changed_when: "'Installing python3' in result.stdout"
+      ansible.builtin.raw: apk add --no-cache python3 rsync curl
+      changed_when: "'Installing' in result.stdout"
       register: result
 
 - name: Home Assistant Setup
