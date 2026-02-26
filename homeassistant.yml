@@ -19,4 +19,4 @@
         name: "sync home assistant backups to peque"
         minute: "0"
         hour: "*/12"
-        job: "rsync -az --delete /backup/ {{ peque_user }}@{{ peque_host }}:{{ peque_backup_path }}/homeassistant/"
+        job: "rsync -az --delete /backup/ {{ peque_user }}@{{ peque_host }}:{{ peque_backup_path }}/homeassistant/ && curl -fsS -m 10 --retry 5 https://hc-ping.com/{{ healthchecks_ping_key }}/home-assistant-backups"
