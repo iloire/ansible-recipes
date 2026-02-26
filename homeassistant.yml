@@ -13,3 +13,10 @@
   roles:
     - dotfiles
     - git_config
+  tasks:
+    - name: Sync backups to peque
+      ansible.builtin.cron:
+        name: "sync home assistant backups to peque"
+        minute: "0"
+        hour: "*/12"
+        job: "rsync -az --delete /backup/ {{ peque_user }}@{{ peque_host }}:{{ peque_backup_path }}/homeassistant/"
