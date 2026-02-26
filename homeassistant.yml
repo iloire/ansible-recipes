@@ -14,6 +14,13 @@
     - dotfiles
     - git_config
   tasks:
+    - name: Source dotfiles shell config from bash_profile
+      ansible.builtin.blockinfile:
+        path: /data/.bash_profile
+        block: |
+          export SHELL_DIR=~/dotfiles/shell
+          source $SHELL_DIR/config
+
     - name: Sync backups to peque
       ansible.builtin.cron:
         name: "sync home assistant backups to peque"
