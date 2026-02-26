@@ -1,0 +1,15 @@
+- name: Home Assistant Bootstrap
+  hosts: homeassistant
+  gather_facts: false
+  tasks:
+    - name: Install Python
+      ansible.builtin.raw: apk add --no-cache python3
+      changed_when: "'Installing python3' in result.stdout"
+      register: result
+
+- name: Home Assistant Setup
+  hosts: homeassistant
+  gather_facts: true
+  roles:
+    - dotfiles
+    - git_config
