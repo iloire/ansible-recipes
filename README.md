@@ -42,15 +42,24 @@ Lightweight setup for a machine running LLM agents — no heavy dev tools:
 - **Homebrew packages**: git, git-crypt, git-lfs, jq, wget, tree, ripgrep, fzf, tmux, tmuxinator, fastfetch, zsh + plugins
 - **Config**: dotfiles, tmux, node, npm, git, hosts file, Claude CLI
 
+### Home Assistant (Raspberry Pi)
+
+Manages a Raspberry Pi running Home Assistant OS (Alpine-based):
+
+- **Bootstrap**: Python 3, rsync, curl (via apk)
+- **Config**: dotfiles, git config
+- **Backup**: cron job syncing `/backup/` to NAS (peque) every 12 hours via rsync, with [healthchecks.io](https://healthchecks.io) monitoring
+
 ## Machines
 
-Three machines are defined in `inventory/hosts.yml`:
+Four machines are defined in `inventory/hosts.yml`:
 
 | Machine | Profile | Connection |
 |---------|---------|------------|
 | `dev-machine` | Ubuntu Desktop | local |
 | `macbook` | macOS Desktop | SSH (remote) |
 | `osx-agent` | macOS Agent | SSH (remote) |
+| `hassio` | Home Assistant | SSH (remote) |
 
 Edit `inventory/hosts.yml` to set the IP addresses for your remote machines.
 
@@ -65,6 +74,9 @@ Edit `inventory/hosts.yml` to set the IP addresses for your remote machines.
 
 # Provision the macOS agent (remote)
 ./run.sh --limit osx-agent
+
+# Provision Home Assistant (remote)
+./run.sh --limit hassio
 
 # Provision all machines
 ./run.sh
@@ -128,7 +140,9 @@ To provision macOS machines remotely from your Linux dev machine:
 ├── inventory/
 │   └── hosts.yml                # All machines defined here
 ├── group_vars/
-│   ├── all.yml                  # Shared variables (nvm version, repos, npm packages)
+│   ├── all/
+│   │   ├── vars.yml             # Shared variables (nvm version, repos, npm packages)
+│   │   └── secrets.yml          # Encrypted secrets (git-crypt)
 │   ├── linux.yml                # Linux package lists and settings
 │   └── osx.yml                  # macOS homebrew packages, dock config
 ├── host_vars/
@@ -149,6 +163,7 @@ To provision macOS machines remotely from your Linux dev machine:
 ├── desktop-ubuntu.yml           # Profile: Ubuntu desktop (all roles)
 ├── desktop-osx.yml              # Profile: macOS desktop (all roles)
 ├── desktop-osx-agent.yml        # Profile: macOS agent (minimal roles)
+├── homeassistant.yml            # Profile: Home Assistant (dotfiles + backup sync)
 ├── server-ubuntu.yml            # Profile: Ubuntu server (CLI only)
 ├── site.yml                     # Master playbook (imports all profiles)
 ├── run.sh                       # Single runner script
