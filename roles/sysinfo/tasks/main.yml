@@ -1,0 +1,22 @@
+- name: Install landscape-common
+  apt:
+    name: landscape-common
+    state: present
+  become: true
+  when: ansible_os_family == "Debian"
+
+- name: Add landscape-sysinfo to login shell
+  copy:
+    dest: /etc/profile.d/sysinfo.sh
+    content: |
+      landscape-sysinfo
+    mode: "0644"
+  become: true
+  when: ansible_os_family == "Debian"
+
+- name: Add fastfetch to login shell
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.zprofile"
+    line: "fastfetch"
+    create: yes
+  when: ansible_os_family == "Darwin"

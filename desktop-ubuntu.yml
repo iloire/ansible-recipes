@@ -36,3 +36,4 @@
     - anaconda
     - vscode_config
     - whisper_cpp
+    - sysinfo
