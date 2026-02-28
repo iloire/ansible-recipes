@@ -106,7 +106,7 @@ cd ansible-recipes
 ./run.sh --limit dev-machine
 ```
 
-Or use the install script: `./install-ansible-linux.sh`
+Or use the install script: `./scripts/install-ansible-linux.sh`
 
 ### macOS (local or remote)
 
@@ -167,7 +167,26 @@ To provision macOS machines remotely from your Linux dev machine:
 ├── server-ubuntu.yml            # Profile: Ubuntu server (CLI only)
 ├── site.yml                     # Master playbook (imports all profiles)
 ├── run.sh                       # Single runner script
-└── install-ansible-*.sh         # Ansible installation helpers
+└── scripts/
+    ├── install-ansible-linux.sh # Bootstrap Ansible on Ubuntu/Debian
+    └── install-ansible-mac.sh   # Bootstrap Ansible on macOS
+```
+
+## Bootstrap scripts
+
+Before running the playbooks, Ansible must be installed on the control machine. The [scripts/](scripts/) directory contains bootstrap scripts for a fresh install:
+
+| Script | Platform | What it does |
+|--------|----------|--------------|
+| `scripts/install-ansible-linux.sh` | Ubuntu/Debian | Adds the official Ansible PPA and installs via apt |
+| `scripts/install-ansible-mac.sh` | macOS | Installs Ansible via Homebrew |
+
+```bash
+# Ubuntu/Debian
+./scripts/install-ansible-linux.sh
+
+# macOS (requires Homebrew)
+./scripts/install-ansible-mac.sh
 ```
 
 ## Dependencies
