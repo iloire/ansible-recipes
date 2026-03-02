@@ -10,6 +10,16 @@
     state: link
   when: dotfiles_gitconfig.stat.exists
 
+- name: create git identity override
+  ansible.builtin.copy:
+    content: |
+      [user]
+        name = {{ git_user_name }}
+        email = {{ git_user_email }}
+    dest: "~/.gitconfig.local"
+    mode: "0644"
+  when: git_user_name | length > 0
+
 - name: install gitleaks (apt)
   become: true
   ansible.builtin.apt:

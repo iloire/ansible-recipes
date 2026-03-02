@@ -1,5 +1,8 @@
 dotfiles_link_ssh_config: false
 
+git_user_name: "Robby"
+git_user_email: "261944679+robbyassistant001@users.noreply.github.com"
+
 # Apps to remove from /Applications (non-SIP protected)
 macos_remove_apps:
   - GarageBand

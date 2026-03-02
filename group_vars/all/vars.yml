@@ -6,6 +6,9 @@ nvm_version: "0.40.4"
 dotfiles_repo: "git@github.com:iloire/dotfiles.git"
 myconfig_repo: "git@github.com:iloire/myconfig.git"
 
+git_user_name: "ivan l."
+git_user_email: "317868+iloire@users.noreply.github.com"
+
 npm_packages:
   - nodemon
   - prettier
