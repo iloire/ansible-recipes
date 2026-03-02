@@ -13,7 +13,6 @@ npm_packages:
   - nodemon
   - prettier
   - pyright
-  - supabase
   - typescript-language-server
   - vercel
   - yarn

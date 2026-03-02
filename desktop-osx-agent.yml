@@ -9,10 +9,10 @@
     - macos_cleanup
     - macos_server
     - dotfiles
+    - git_config
     - tmux
     - node
     - npm_packages
-    - git_config
     - hosts_file
     - claude
     - homebrew
