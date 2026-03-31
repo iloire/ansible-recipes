@@ -34,3 +34,9 @@
     dest: "~/.ssh/config"
     state: link
   when: dotfiles_ssh_config.stat.exists and (dotfiles_link_ssh_config | default(true))
+
+- name: creating symlink for npmrc
+  ansible.builtin.file:
+    src: "~/dotfiles/npm/npmrc"
+    dest: "~/.npmrc"
+    state: link
