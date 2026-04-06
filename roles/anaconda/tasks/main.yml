@@ -1,15 +1,27 @@
+- name: check if miniconda is already installed
+  stat:
+    path: "{{ ansible_env.HOME }}/miniconda3/bin/conda"
+  register: conda_binary
+
 - name: create miniconda directory
-  shell:
-    cmd: mkdir -p ~/miniconda3
+  file:
+    path: "{{ ansible_env.HOME }}/miniconda3"
+    state: directory
+  when: not conda_binary.stat.exists
 
 - name: download miniconda
-  shell:
-    cmd: wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+  get_url:
+    url: https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    dest: "{{ ansible_env.HOME }}/miniconda3/miniconda.sh"
+    mode: "0755"
+  when: not conda_binary.stat.exists
 
 - name: install miniconda
-  shell:
-    cmd: bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+  command:
+    cmd: "bash {{ ansible_env.HOME }}/miniconda3/miniconda.sh -b -u -p {{ ansible_env.HOME }}/miniconda3"
+  when: not conda_binary.stat.exists
 
 - name: clean up installer
-  shell:
-    cmd: rm -rf ~/miniconda3/miniconda.sh
+  file:
+    path: "{{ ansible_env.HOME }}/miniconda3/miniconda.sh"
+    state: absent
