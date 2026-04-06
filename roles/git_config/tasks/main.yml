@@ -8,6 +8,7 @@
     src: "~/dotfiles/git/.gitconfig"
     dest: "~/.gitconfig"
     state: link
+    force: true
   when: dotfiles_gitconfig.stat.exists
 
 - name: create git identity override

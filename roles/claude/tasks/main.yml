@@ -14,6 +14,7 @@
     src: "~/dotfiles/claude/CLAUDE.md"
     dest: "~/.claude/CLAUDE.md"
     state: link
+    force: true
   when: dotfiles_claude.stat.exists
 
 - name: Creating symlink for settings.json
@@ -21,4 +22,5 @@
     src: "~/dotfiles/claude/settings.json"
     dest: "~/.claude/settings.json"
     state: link
+    force: true
   when: dotfiles_claude.stat.exists

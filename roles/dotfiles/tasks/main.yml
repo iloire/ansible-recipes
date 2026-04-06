@@ -15,6 +15,7 @@
     src: "~/dotfiles/shell/zshrc"
     dest: "~/.zshrc"
     state: link
+    force: true
 
 - name: check if dotfiles ssh config exists
   ansible.builtin.stat:
@@ -33,6 +34,7 @@
     src: "~/dotfiles/ssh/config"
     dest: "~/.ssh/config"
     state: link
+    force: true
   when: dotfiles_ssh_config.stat.exists and (dotfiles_link_ssh_config | default(true))
 
 - name: creating symlink for npmrc
@@ -40,3 +42,4 @@
     src: "~/dotfiles/npm/npmrc"
     dest: "~/.npmrc"
     state: link
+    force: true

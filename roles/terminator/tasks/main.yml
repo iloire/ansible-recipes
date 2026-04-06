@@ -15,3 +15,4 @@
     src: "~/dotfiles/terminator/config"
     dest: "~/.config/terminator/config"
     state: link
+    force: true

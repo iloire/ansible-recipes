@@ -8,3 +8,4 @@
     src: "{{ '~/dotfiles/alacritty/alacritty-linux.toml' if ansible_system == 'Linux' else '~/dotfiles/alacritty/alacritty-osx.toml' }}"
     dest: "~/.config/alacritty/alacritty.toml"
     state: link
+    force: true

@@ -12,3 +12,4 @@
     src: "~/dotfiles/cursor/settings.json"
     dest: "{{ cursor_settings_path }}"
     state: link
+    force: true
