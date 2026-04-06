@@ -32,11 +32,15 @@
     gitleaks_version: "{{ gitleaks_release.json.tag_name | regex_replace('^v', '') }}"
   when: ansible_os_family == "Debian"
 
-- name: install gitleaks (github release)
+- name: download and install gitleaks (github release)
   become: true
-  ansible.builtin.apt:
-    deb: "https://github.com/gitleaks/gitleaks/releases/download/v{{ gitleaks_version }}/gitleaks_{{ gitleaks_version }}_linux_{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}.deb"
-    state: present
+  ansible.builtin.unarchive:
+    src: "https://github.com/gitleaks/gitleaks/releases/download/v{{ gitleaks_version }}/gitleaks_{{ gitleaks_version }}_linux_{{ 'arm64' if ansible_architecture == 'aarch64' else 'x64' }}.tar.gz"
+    dest: /usr/local/bin
+    remote_src: true
+    include:
+      - gitleaks
+    mode: "0755"
   when: ansible_os_family == "Debian"
 
 - name: install gitleaks (brew)
