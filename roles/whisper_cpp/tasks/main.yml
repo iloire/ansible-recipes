@@ -1,26 +1,53 @@
-# Installs whisper.cpp from GitHub releases (Linux only).
+# Installs whisper.cpp from source (Linux only).
 # On macOS this is installed via Homebrew (see group_vars/osx.yml).
 
-- name: check if whisper-cpp is installed
+- name: check if whisper-cli is installed
   ansible.builtin.stat:
     path: /usr/local/bin/whisper-cli
   register: whisper_bin
 
-- name: install whisper-cpp
+- name: install whisper-cpp from source
   when: not whisper_bin.stat.exists
   block:
-    - name: get latest whisper.cpp version
+    - name: install build dependencies
+      ansible.builtin.apt:
+        name:
+          - build-essential
+          - cmake
+          - git
+        state: present
+      become: true
+
+    - name: get latest whisper.cpp version tag
       ansible.builtin.uri:
         url: https://api.github.com/repos/ggerganov/whisper.cpp/releases/latest
         return_content: yes
+        follow_redirects: all
       register: whisper_release
 
-    - name: download and install whisper-cpp
-      ansible.builtin.unarchive:
-        src: "https://github.com/ggerganov/whisper.cpp/releases/download/{{ whisper_release.json.tag_name }}/whisper-{{ whisper_release.json.tag_name }}-bin-linux-x64.zip"
-        dest: /usr/local/bin
+    - name: clone whisper.cpp
+      ansible.builtin.git:
+        repo: https://github.com/ggerganov/whisper.cpp.git
+        dest: /tmp/whisper.cpp
+        version: "{{ whisper_release.json.tag_name }}"
+        depth: 1
+
+    - name: build whisper.cpp
+      ansible.builtin.shell: |
+        cmake -B build -DCMAKE_BUILD_TYPE=Release
+        cmake --build build -j{{ ansible_processor_vcpus }}
+      args:
+        chdir: /tmp/whisper.cpp
+
+    - name: install whisper-cli
+      ansible.builtin.copy:
+        src: /tmp/whisper.cpp/build/bin/whisper-cli
+        dest: /usr/local/bin/whisper-cli
+        mode: "0755"
         remote_src: yes
-        extra_opts:
-          - -j
-        creates: /usr/local/bin/whisper-cli
       become: true
+
+    - name: clean up build directory
+      ansible.builtin.file:
+        path: /tmp/whisper.cpp
+        state: absent
