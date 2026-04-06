@@ -8,5 +8,6 @@
     src: "{{ item }}"
     dest: "{{ ansible_user_dir }}/.local/share/applications/{{ item | basename }}"
     state: link
+    force: true
   with_fileglob:
     - "~/dotfiles/xdg/applications/*.desktop"
