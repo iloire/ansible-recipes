@@ -3,7 +3,7 @@
 
 - name: check if rtk is installed
   ansible.builtin.stat:
-    path: /usr/bin/rtk
+    path: /usr/local/bin/rtk
   register: rtk_bin
 
 - name: install rtk
@@ -15,7 +15,10 @@
         return_content: yes
       register: rtk_release
 
-    - name: install rtk from deb
-      ansible.builtin.apt:
-        deb: "https://github.com/rtk-ai/rtk/releases/download/{{ rtk_release.json.tag_name }}/rtk_{{ rtk_release.json.tag_name | regex_replace('^v', '') }}-1_amd64.deb"
+    - name: download and extract rtk
+      ansible.builtin.unarchive:
+        src: "https://github.com/rtk-ai/rtk/releases/download/{{ rtk_release.json.tag_name }}/rtk-x86_64-unknown-linux-musl.tar.gz"
+        dest: /usr/local/bin
+        remote_src: yes
+        include: rtk
       become: true
