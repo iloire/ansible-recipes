@@ -17,6 +17,16 @@
     path: "~/.config"
     state: directory
 
+- name: check existing neovim config
+  ansible.builtin.stat:
+    path: "~/.config/nvim"
+  register: existing_nvim_config
+
+- name: backup existing neovim config if it's not a symlink
+  ansible.builtin.command:
+    cmd: "cp -a ~/.config/nvim ~/.config/nvim.backup.{{ ansible_date_time.iso8601_basic_short }}"
+  when: existing_nvim_config.stat.exists and not existing_nvim_config.stat.islnk
+
 - name: creating symlink for neovim config
   ansible.builtin.file:
     src: "~/dotfiles/nvim"

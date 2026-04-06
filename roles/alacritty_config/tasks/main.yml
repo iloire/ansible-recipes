@@ -3,6 +3,18 @@
     path: "~/.config/alacritty"
     state: directory
 
+- name: check existing alacritty config
+  ansible.builtin.stat:
+    path: "~/.config/alacritty/alacritty.toml"
+  register: alacritty_config
+
+- name: backup existing alacritty config if it's a regular file
+  ansible.builtin.copy:
+    src: "~/.config/alacritty/alacritty.toml"
+    dest: "~/.config/alacritty/alacritty.toml.backup.{{ ansible_date_time.iso8601_basic_short }}"
+    remote_src: true
+  when: alacritty_config.stat.exists and not alacritty_config.stat.islnk
+
 - name: creating symlink for alacritty config
   ansible.builtin.file:
     src: "{{ '~/dotfiles/alacritty/alacritty-linux.toml' if ansible_system == 'Linux' else '~/dotfiles/alacritty/alacritty-osx.toml' }}"

@@ -7,6 +7,18 @@
     path: "{{ cursor_settings_path | dirname }}"
     state: directory
 
+- name: check existing cursor settings
+  ansible.builtin.stat:
+    path: "{{ cursor_settings_path }}"
+  register: existing_cursor_settings
+
+- name: backup existing cursor settings if it's a regular file
+  ansible.builtin.copy:
+    src: "{{ cursor_settings_path }}"
+    dest: "{{ cursor_settings_path }}.backup.{{ ansible_date_time.iso8601_basic_short }}"
+    remote_src: true
+  when: existing_cursor_settings.stat.exists and not existing_cursor_settings.stat.islnk
+
 - name: creating symlink for cursor settings
   ansible.builtin.file:
     src: "~/dotfiles/cursor/settings.json"

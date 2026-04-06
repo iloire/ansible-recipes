@@ -10,6 +10,18 @@
     repo: "https://github.com/ohmyzsh/ohmyzsh.git"
     dest: ~/.oh-my-zsh
 
+- name: check existing zshrc
+  ansible.builtin.stat:
+    path: "~/.zshrc"
+  register: existing_zshrc
+
+- name: backup existing zshrc if it's a regular file
+  ansible.builtin.copy:
+    src: "~/.zshrc"
+    dest: "~/.zshrc.backup.{{ ansible_date_time.iso8601_basic_short }}"
+    remote_src: true
+  when: existing_zshrc.stat.exists and not existing_zshrc.stat.islnk
+
 - name: creating symlink for zshrc
   ansible.builtin.file:
     src: "~/dotfiles/shell/zshrc"
@@ -29,6 +41,18 @@
     mode: "0700"
   when: dotfiles_ssh_config.stat.exists and (dotfiles_link_ssh_config | default(true))
 
+- name: check existing ssh config
+  ansible.builtin.stat:
+    path: "~/.ssh/config"
+  register: existing_ssh_config
+
+- name: backup existing ssh config if it's a regular file
+  ansible.builtin.copy:
+    src: "~/.ssh/config"
+    dest: "~/.ssh/config.backup.{{ ansible_date_time.iso8601_basic_short }}"
+    remote_src: true
+  when: existing_ssh_config.stat.exists and not existing_ssh_config.stat.islnk
+
 - name: creating symlink for ssh config
   ansible.builtin.file:
     src: "~/dotfiles/ssh/config"
@@ -36,6 +60,18 @@
     state: link
     force: true
   when: dotfiles_ssh_config.stat.exists and (dotfiles_link_ssh_config | default(true))
+
+- name: check existing npmrc
+  ansible.builtin.stat:
+    path: "~/.npmrc"
+  register: existing_npmrc
+
+- name: backup existing npmrc if it's a regular file
+  ansible.builtin.copy:
+    src: "~/.npmrc"
+    dest: "~/.npmrc.backup.{{ ansible_date_time.iso8601_basic_short }}"
+    remote_src: true
+  when: existing_npmrc.stat.exists and not existing_npmrc.stat.islnk
 
 - name: creating symlink for npmrc
   ansible.builtin.file:

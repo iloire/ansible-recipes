@@ -3,6 +3,18 @@
     path: "~/dotfiles/git/.gitconfig"
   register: dotfiles_gitconfig
 
+- name: check existing git config
+  ansible.builtin.stat:
+    path: "~/.gitconfig"
+  register: existing_gitconfig
+
+- name: backup existing git config if it's a regular file
+  ansible.builtin.copy:
+    src: "~/.gitconfig"
+    dest: "~/.gitconfig.backup.{{ ansible_date_time.iso8601_basic_short }}"
+    remote_src: true
+  when: existing_gitconfig.stat.exists and not existing_gitconfig.stat.islnk
+
 - name: creating symlink for git config
   ansible.builtin.file:
     src: "~/dotfiles/git/.gitconfig"

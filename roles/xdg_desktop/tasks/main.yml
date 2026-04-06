@@ -3,6 +3,21 @@
     path: "{{ ansible_user_dir }}/.local/share/applications"
     state: directory
 
+- name: find existing desktop files that are not symlinks
+  ansible.builtin.find:
+    paths: "{{ ansible_user_dir }}/.local/share/applications"
+    file_type: file
+    patterns: "*.desktop"
+  register: existing_desktop_files
+
+- name: backup existing desktop files that are not symlinks
+  ansible.builtin.copy:
+    src: "{{ item.path }}"
+    dest: "{{ item.path }}.backup.{{ ansible_date_time.iso8601_basic_short }}"
+    remote_src: true
+  loop: "{{ existing_desktop_files.files | selectattr('islnk', 'equalto', false) | list }}"
+  when: existing_desktop_files.files | length > 0
+
 - name: symlink all desktop files
   ansible.builtin.file:
     src: "{{ item }}"

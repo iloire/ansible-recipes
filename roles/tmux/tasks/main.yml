@@ -3,6 +3,18 @@
     repo: "https://github.com/tmux-plugins/tpm"
     dest: ~/.tmux/plugins/tpm
 
+- name: check existing tmux config
+  ansible.builtin.stat:
+    path: "~/.tmux.conf"
+  register: existing_tmux_conf
+
+- name: backup existing tmux config if it's a regular file
+  ansible.builtin.copy:
+    src: "~/.tmux.conf"
+    dest: "~/.tmux.conf.backup.{{ ansible_date_time.iso8601_basic_short }}"
+    remote_src: true
+  when: existing_tmux_conf.stat.exists and not existing_tmux_conf.stat.islnk
+
 - name: creating symlink for tmux config
   ansible.builtin.file:
     src: "~/dotfiles/tmux/.tmux.conf"
