@@ -2,38 +2,38 @@
   hosts: linux
   gather_facts: true
   roles:
-    - dotfiles
-    - myconfig
-    - tmux
-    - git_config
-    - zsh
-    - node
-    - npm_packages
-    - crontab
-    - hosts_file
-    - apt_minimum
-    - apt
-    - modern_cli_tools
-    - build_essentials
-    - ubuntu_settings
-    - autostart
-    - docker
-    - xdg_desktop
-    - neovim
-    - lazygit
-    - github_desktop
-    - cursor_config
-    - google_chrome
-    - brave
-    - snap
-    - flatpak
-    - geek_fonts
-    - terminator
-    - vagrant
-    - onepassword
-    - qmk
-    - alacritty_config
-    - anaconda
-    - vscode_config
-    - whisper_cpp
-    - sysinfo
+    - { role: dotfiles, tags: [dotfiles] }
+    - { role: myconfig, tags: [myconfig] }
+    - { role: tmux, tags: [tmux] }
+    - { role: git_config, tags: [git_config] }
+    - { role: zsh, tags: [zsh] }
+    - { role: node, tags: [node] }
+    - { role: npm_packages, tags: [npm_packages] }
+    - { role: crontab, tags: [crontab] }
+    - { role: hosts_file, tags: [hosts_file] }
+    - { role: apt_minimum, tags: [apt_minimum] }
+    - { role: apt, tags: [apt] }
+    - { role: modern_cli_tools, tags: [modern_cli_tools] }
+    - { role: build_essentials, tags: [build_essentials] }
+    - { role: ubuntu_settings, tags: [ubuntu_settings] }
+    - { role: autostart, tags: [autostart] }
+    - { role: docker, tags: [docker] }
+    - { role: xdg_desktop, tags: [xdg_desktop] }
+    - { role: neovim, tags: [neovim] }
+    - { role: lazygit, tags: [lazygit] }
+    - { role: github_desktop, tags: [github_desktop] }
+    - { role: cursor_config, tags: [cursor_config] }
+    - { role: google_chrome, tags: [google_chrome] }
+    - { role: brave, tags: [brave] }
+    - { role: snap, tags: [snap] }
+    - { role: flatpak, tags: [flatpak] }
+    - { role: geek_fonts, tags: [geek_fonts] }
+    - { role: terminator, tags: [terminator] }
+    - { role: vagrant, tags: [vagrant] }
+    - { role: onepassword, tags: [onepassword] }
+    - { role: qmk, tags: [qmk] }
+    - { role: alacritty_config, tags: [alacritty_config] }
+    - { role: anaconda, tags: [anaconda] }
+    - { role: vscode_config, tags: [vscode_config] }
+    - { role: whisper_cpp, tags: [whisper_cpp] }
+    - { role: sysinfo, tags: [sysinfo] }
