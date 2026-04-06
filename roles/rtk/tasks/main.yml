@@ -22,3 +22,8 @@
         remote_src: yes
         include: rtk
       become: true
+
+- name: initialize rtk for Claude Code
+  ansible.builtin.command: rtk init -g --auto-patch
+  args:
+    creates: ~/.claude/hooks/rtk-rewrite.sh
