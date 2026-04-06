@@ -2,6 +2,16 @@
 # Press a hotkey, speak, and text gets typed into the focused app.
 # https://github.com/cjams/whispertux
 
+- name: create whispertux launcher script
+  ansible.builtin.copy:
+    dest: /usr/local/bin/whispertux
+    content: |
+      #!/bin/bash
+      cd {{ ansible_user_dir }}/whispertux
+      exec ./venv/bin/python main.py "$@"
+    mode: "0755"
+  become: true
+
 - name: check if whispertux is installed
   ansible.builtin.stat:
     path: "{{ ansible_user_dir }}/whispertux/main.py"
@@ -71,13 +81,4 @@
         state: started
       become: true
 
-    - name: create whispertux launcher script
-      ansible.builtin.copy:
-        dest: /usr/local/bin/whispertux
-        content: |
-          #!/bin/bash
-          cd {{ ansible_user_dir }}/whispertux
-          exec ./venv/bin/python main.py "$@"
-        mode: "0755"
-      become: true
 
