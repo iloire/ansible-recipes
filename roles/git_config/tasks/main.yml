@@ -20,10 +20,22 @@
     mode: "0644"
   when: git_user_name | length > 0
 
-- name: install gitleaks (apt)
+- name: get latest gitleaks version
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/gitleaks/gitleaks/releases/latest
+    return_content: true
+  register: gitleaks_release
+  when: ansible_os_family == "Debian"
+
+- name: set gitleaks download url
+  ansible.builtin.set_fact:
+    gitleaks_version: "{{ gitleaks_release.json.tag_name | regex_replace('^v', '') }}"
+  when: ansible_os_family == "Debian"
+
+- name: install gitleaks (github release)
   become: true
   ansible.builtin.apt:
-    name: gitleaks
+    deb: "https://github.com/gitleaks/gitleaks/releases/download/v{{ gitleaks_version }}/gitleaks_{{ gitleaks_version }}_linux_{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}.deb"
     state: present
   when: ansible_os_family == "Debian"
 
