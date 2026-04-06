@@ -46,9 +46,27 @@
         append: yes
       become: true
 
+    - name: create ydotoold systemd service
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/ydotoold.service
+        content: |
+          [Unit]
+          Description=ydotool daemon
+          After=multi-user.target
+
+          [Service]
+          ExecStart=/usr/bin/ydotoold
+          Restart=on-failure
+
+          [Install]
+          WantedBy=multi-user.target
+        mode: "0644"
+      become: true
+
     - name: enable ydotoold service
       ansible.builtin.systemd:
         name: ydotoold
+        daemon_reload: yes
         enabled: yes
         state: started
       become: true
