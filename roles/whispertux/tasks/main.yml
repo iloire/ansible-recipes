@@ -70,3 +70,14 @@
         enabled: yes
         state: started
       become: true
+
+    - name: create whispertux launcher script
+      ansible.builtin.copy:
+        dest: /usr/local/bin/whispertux
+        content: |
+          #!/bin/bash
+          cd {{ ansible_user_dir }}/whispertux
+          exec ./venv/bin/python main.py "$@"
+        mode: "0755"
+      become: true
+
