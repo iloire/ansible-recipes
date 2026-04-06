@@ -1,0 +1,21 @@
+# RTK (Rust Token Killer) - reduces LLM token consumption by filtering verbose CLI output
+# https://github.com/rtk-ai/rtk
+
+- name: check if rtk is installed
+  ansible.builtin.stat:
+    path: /usr/bin/rtk
+  register: rtk_bin
+
+- name: install rtk
+  when: not rtk_bin.stat.exists
+  block:
+    - name: get latest rtk version
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/rtk-ai/rtk/releases/latest
+        return_content: yes
+      register: rtk_release
+
+    - name: install rtk from deb
+      ansible.builtin.apt:
+        deb: "https://github.com/rtk-ai/rtk/releases/download/{{ rtk_release.json.tag_name }}/rtk_{{ rtk_release.json.tag_name | regex_replace('^v', '') }}-1_amd64.deb"
+      become: true

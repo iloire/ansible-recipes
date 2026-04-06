@@ -37,3 +37,4 @@
     - { role: vscode_config, tags: [vscode_config] }
     - { role: whisper_cpp, tags: [whisper_cpp] }
     - { role: sysinfo, tags: [sysinfo] }
+    - { role: rtk, tags: [rtk] }
