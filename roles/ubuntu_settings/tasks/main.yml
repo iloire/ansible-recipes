@@ -3,6 +3,7 @@
 
 - name: dark theme
   shell: gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+  ignore_errors: true
 
 - name: fav apps
   dconf:
