@@ -33,7 +33,7 @@
     src: https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz
     dest: /usr/local/bin
     remote_src: yes
-    include: eza
+    include: ./eza
     creates: /usr/local/bin/eza
   become: true
 
