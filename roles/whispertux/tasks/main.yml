@@ -1,0 +1,54 @@
+# Installs WhisperTux - GUI voice-to-text using whisper.cpp (Linux only).
+# Press a hotkey, speak, and text gets typed into the focused app.
+# https://github.com/cjams/whispertux
+
+- name: check if whispertux is installed
+  ansible.builtin.stat:
+    path: "{{ ansible_user_dir }}/whispertux/main.py"
+  register: whispertux_dir
+
+- name: install whispertux
+  when: not whispertux_dir.stat.exists
+  block:
+    - name: install whispertux system dependencies
+      ansible.builtin.apt:
+        name:
+          - python3-pip
+          - python3-venv
+          - python3-tk
+          - python3-dev
+          - build-essential
+          - cmake
+          - git
+          - pkg-config
+          - portaudio19-dev
+          - libasound2-dev
+          - ydotool
+        state: present
+      become: true
+
+    - name: clone whispertux
+      ansible.builtin.git:
+        repo: https://github.com/cjams/whispertux.git
+        dest: "{{ ansible_user_dir }}/whispertux"
+        depth: 1
+
+    - name: create python venv and install dependencies
+      ansible.builtin.pip:
+        requirements: "{{ ansible_user_dir }}/whispertux/requirements.txt"
+        virtualenv: "{{ ansible_user_dir }}/whispertux/venv"
+        virtualenv_command: python3 -m venv
+
+    - name: add user to input group for keyboard hooks
+      ansible.builtin.user:
+        name: "{{ ansible_user_id }}"
+        groups: input
+        append: yes
+      become: true
+
+    - name: enable ydotoold service
+      ansible.builtin.systemd:
+        name: ydotoold
+        enabled: yes
+        state: started
+      become: true

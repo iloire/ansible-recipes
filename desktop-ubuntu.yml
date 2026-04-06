@@ -36,5 +36,6 @@
     - { role: anaconda, tags: [anaconda] }
     - { role: vscode_config, tags: [vscode_config] }
     - { role: whisper_cpp, tags: [whisper_cpp] }
+    - { role: whispertux, tags: [whispertux] }
     - { role: sysinfo, tags: [sysinfo] }
     - { role: rtk, tags: [rtk] }
