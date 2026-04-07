@@ -6,16 +6,17 @@
   hosts: osx_agent
   gather_facts: true
   roles:
-    - macos_cleanup
-    - macos_server
-    - dotfiles
-    - git_config
-    - tmux
-    - node
-    - npm_packages
-    - hosts_file
-    - claude
-    - homebrew
-    - mapcapsescape
-    - osx_config
-    - sysinfo
+    - { role: macos_cleanup, tags: [macos_cleanup] }
+    - { role: macos_server, tags: [macos_server] }
+    - { role: dotfiles, tags: [dotfiles] }
+    - { role: git_config, tags: [git_config] }
+    - { role: tmux, tags: [tmux] }
+    - { role: node, tags: [node] }
+    - { role: npm_packages, tags: [npm_packages] }
+    - { role: hosts_file, tags: [hosts_file] }
+    - { role: claude, tags: [claude] }
+    - { role: homebrew, tags: [homebrew] }
+    - { role: mapcapsescape, tags: [mapcapsescape] }
+    - { role: osx_config, tags: [osx_config] }
+    - { role: watchdog_report, tags: [watchdog_report] }
+    - { role: sysinfo, tags: [sysinfo] }
