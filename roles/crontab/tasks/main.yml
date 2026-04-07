@@ -2,7 +2,7 @@
   ansible.builtin.cron:
     name: PATH
     env: yes
-    job: /usr/local/bin:/usr/bin
+    job: /usr/local/bin:/usr/bin:/bin
 
 - name: clean downloads folder
   ansible.builtin.cron:
