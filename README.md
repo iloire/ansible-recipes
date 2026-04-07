@@ -54,12 +54,12 @@ Manages a Raspberry Pi running Home Assistant OS (Alpine-based):
 
 Four machines are defined in `inventory/hosts.yml`:
 
-| Machine | Profile | Connection |
-|---------|---------|------------|
-| `dev-machine` | Ubuntu Desktop | local |
-| `macbook` | macOS Desktop | SSH (remote) |
-| `osx-agent` | macOS Agent | SSH (remote) |
-| `hassio` | Home Assistant | SSH (remote) |
+| Machine       | Profile        | Connection   |
+| ------------- | -------------- | ------------ |
+| `dev-machine` | Ubuntu Desktop | local        |
+| `macbook`     | macOS Desktop  | SSH (remote) |
+| `osx-agent`   | macOS Agent    | SSH (remote) |
+| `hassio`      | Home Assistant | SSH (remote) |
 
 Edit `inventory/hosts.yml` to set the IP addresses for your remote machines.
 
@@ -176,10 +176,10 @@ To provision macOS machines remotely from your Linux dev machine:
 
 Before running the playbooks, Ansible must be installed on the control machine. The [scripts/](scripts/) directory contains bootstrap scripts for a fresh install:
 
-| Script | Platform | What it does |
-|--------|----------|--------------|
+| Script                             | Platform      | What it does                                       |
+| ---------------------------------- | ------------- | -------------------------------------------------- |
 | `scripts/install-ansible-linux.sh` | Ubuntu/Debian | Adds the official Ansible PPA and installs via apt |
-| `scripts/install-ansible-mac.sh` | macOS | Installs Ansible via Homebrew |
+| `scripts/install-ansible-mac.sh`   | macOS         | Installs Ansible via Homebrew                      |
 
 ```bash
 # Ubuntu/Debian
