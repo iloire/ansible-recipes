@@ -2,21 +2,21 @@
   hosts: osx_desktop
   gather_facts: true
   roles:
-    - dotfiles
-    - myconfig
-    - tmux
-    - node
-    - npm_packages
-    - git_config
-    - crontab
-    - hosts_file
-    - cursor_config
-    - homebrew
-    - neovim
-    - mapcapsescape
-    - dock
-    - osx_config
-    - nerd_fonts
-    - alacritty_config
-    - vscode_config
-    - sysinfo
+    - { role: dotfiles, tags: [dotfiles] }
+    - { role: myconfig, tags: [myconfig] }
+    - { role: tmux, tags: [tmux] }
+    - { role: node, tags: [node] }
+    - { role: npm_packages, tags: [npm_packages] }
+    - { role: git_config, tags: [git_config] }
+    - { role: crontab, tags: [crontab] }
+    - { role: hosts_file, tags: [hosts_file] }
+    - { role: cursor_config, tags: [cursor_config] }
+    - { role: homebrew, tags: [homebrew] }
+    - { role: neovim, tags: [neovim] }
+    - { role: mapcapsescape, tags: [mapcapsescape] }
+    - { role: dock, tags: [dock] }
+    - { role: osx_config, tags: [osx_config] }
+    - { role: nerd_fonts, tags: [nerd_fonts] }
+    - { role: alacritty_config, tags: [alacritty_config] }
+    - { role: vscode_config, tags: [vscode_config] }
+    - { role: sysinfo, tags: [sysinfo] }
