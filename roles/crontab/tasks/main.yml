@@ -53,3 +53,9 @@
     hour: "12"
     weekday: "6"
     job: "$HOME/dotfiles/bin/clean-caches.sh > /dev/null 2>&1"
+
+- name: send server health report to watchdog
+  ansible.builtin.cron:
+    name: "watchdog server health report"
+    minute: "*/5"
+    job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/send-watchdog-report"
