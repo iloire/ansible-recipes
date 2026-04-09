@@ -57,5 +57,5 @@
 - name: send server health report to watchdog
   ansible.builtin.cron:
     name: "watchdog server health report"
-    minute: "*/5"
+    minute: "0"
     job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/send-watchdog-report"
