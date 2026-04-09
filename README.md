@@ -56,7 +56,7 @@ Four machines are defined in `inventory/hosts.yml`:
 
 | Machine       | Profile        | Connection   |
 | ------------- | -------------- | ------------ |
-| `dev-machine` | Ubuntu Desktop | local        |
+| `pepinaco` | Ubuntu Desktop | local        |
 | `macbook`     | macOS Desktop  | SSH (remote) |
 | `osx-agent`   | macOS Agent    | SSH (remote) |
 | `hassio`      | Home Assistant | SSH (remote) |
@@ -67,7 +67,7 @@ Edit `inventory/hosts.yml` to set the IP addresses for your remote machines.
 
 ```bash
 # Provision your linux dev machine
-./run.sh --limit dev-machine
+./run.sh --limit pepinaco
 
 # Provision your macOS laptop (remote)
 ./run.sh --limit macbook
@@ -82,7 +82,7 @@ Edit `inventory/hosts.yml` to set the IP addresses for your remote machines.
 ./run.sh
 
 # Run a single role on a specific machine
-./run.sh --tags docker --limit dev-machine
+./run.sh --tags docker --limit pepinaco
 ./run.sh --tags homebrew --limit macbook
 ```
 
@@ -103,7 +103,7 @@ sudo apt install -y ansible
 # 3. Clone and run
 git clone git@github.com:iloire/ansible-recipes.git
 cd ansible-recipes
-./run.sh --limit dev-machine
+./run.sh --limit pepinaco
 ```
 
 Or use the install script: `./scripts/install-ansible-linux.sh`
