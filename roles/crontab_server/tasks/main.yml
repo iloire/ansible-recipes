@@ -1,0 +1,25 @@
+- name: Creates an entry like "PATH=/usr/local/bin"
+  ansible.builtin.cron:
+    name: PATH
+    env: yes
+    job: /usr/local/bin:/usr/bin:/bin:/usr/sbin
+
+- name: monitor low space in disk
+  ansible.builtin.cron:
+    name: "disk space monitor"
+    minute: "20"
+    hour: "*/6"
+    job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/low-space-monitor.sh"
+
+- name: docker cleanup
+  ansible.builtin.cron:
+    name: "docker cleanup"
+    minute: "0"
+    hour: "4"
+    job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/docker-cleanup.sh"
+
+- name: send server health report to watchdog
+  ansible.builtin.cron:
+    name: "watchdog server health report"
+    minute: "0"
+    job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/send-watchdog-report"

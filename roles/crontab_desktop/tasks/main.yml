@@ -1,9 +1,3 @@
-- name: Creates an entry like "PATH=/usr/local/bin"
-  ansible.builtin.cron:
-    name: PATH
-    env: yes
-    job: /usr/local/bin:/usr/bin:/bin:/usr/sbin
-
 - name: clean downloads folder
   ansible.builtin.cron:
     name: "clean downloads. In OSX remember to give Full Disk Access to cron binary"
@@ -25,26 +19,12 @@
     hour: "*/6"
     job: "python3 $HOME/dotfiles/bin/clean-cookies.py --clean"
 
-- name: monitor low space in disk
-  ansible.builtin.cron:
-    name: "disk space monitor"
-    minute: "20"
-    hour: "*/6"
-    job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/low-space-monitor.sh"
-
 - name: github sync
   ansible.builtin.cron:
     name: "github sync"
     minute: "*/20"
     hour: "*"
     job: "$HOME/dotfiles/bin/sync-github.sh"
-
-- name: docker cleanup
-  ansible.builtin.cron:
-    name: "docker cleanup"
-    minute: "0"
-    hour: "4"
-    job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/docker-cleanup.sh"
 
 - name: clean caches
   ansible.builtin.cron:
@@ -53,9 +33,3 @@
     hour: "12"
     weekday: "6"
     job: "$HOME/dotfiles/bin/clean-caches.sh > /dev/null 2>&1"
-
-- name: send server health report to watchdog
-  ansible.builtin.cron:
-    name: "watchdog server health report"
-    minute: "0"
-    job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/send-watchdog-report"

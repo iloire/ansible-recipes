@@ -9,7 +9,8 @@
     - { role: zsh, tags: [zsh] }
     - { role: node, tags: [node] }
     - { role: npm_packages, tags: [npm_packages] }
-    - { role: crontab, tags: [crontab] }
+    - { role: crontab_server, tags: [crontab_server] }
+    - { role: crontab_desktop, tags: [crontab_desktop] }
     - { role: hosts_file, tags: [hosts_file] }
     - { role: apt_minimum, tags: [apt_minimum] }
     - { role: apt, tags: [apt] }

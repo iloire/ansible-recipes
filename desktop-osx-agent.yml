@@ -1,6 +1,6 @@
 # MacBook Pro - LLM Agent Machine
 # Minimal setup: shared shell config, git, node, chrome, claude
-# No dev tools (neovim, vscode, cursor, docker) or personal config (myconfig, crontab)
+# No dev tools (neovim, vscode, cursor, docker) or personal config (myconfig)
 
 - name: macOS Agent Setup
   hosts: osx_agent
@@ -18,5 +18,5 @@
     - { role: homebrew, tags: [homebrew] }
     - { role: mapcapsescape, tags: [mapcapsescape] }
     - { role: osx_config, tags: [osx_config] }
-    - { role: watchdog_report, tags: [watchdog_report] }
+    - { role: launchd_server, tags: [launchd_server] }
     - { role: sysinfo, tags: [sysinfo] }

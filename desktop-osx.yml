@@ -8,7 +8,8 @@
     - { role: node, tags: [node] }
     - { role: npm_packages, tags: [npm_packages] }
     - { role: git_config, tags: [git_config] }
-    - { role: crontab, tags: [crontab] }
+    - { role: crontab_server, tags: [crontab_server] }
+    - { role: crontab_desktop, tags: [crontab_desktop] }
     - { role: hosts_file, tags: [hosts_file] }
     - { role: cursor_config, tags: [cursor_config] }
     - { role: homebrew, tags: [homebrew] }

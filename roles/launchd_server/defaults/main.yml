@@ -1,0 +1,10 @@
+launchd_user: "{{ ansible_user_id }}"
+launchd_user_home: "/Users/{{ launchd_user }}"
+
+# macOS equivalent of crontab_server for headless hosts where cron/LaunchAgents
+# don't work (no GUI session, TCC blocks crontab writes even via sudo).
+# Jobs run as launchd_user via the UserName key in the LaunchDaemon plist.
+launchd_server_jobs:
+  - label: com.watchdog.report
+    command: "$HOME/dotfiles/bin/send-watchdog-report"
+    interval: 3600 # every hour

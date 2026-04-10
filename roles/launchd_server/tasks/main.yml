@@ -1,0 +1,32 @@
+- name: Ensure launchd log directory exists
+  ansible.builtin.file:
+    path: "{{ launchd_user_home }}/.launchd-logs"
+    state: directory
+    owner: "{{ launchd_user }}"
+    mode: "0755"
+
+- name: Install LaunchDaemon plists
+  ansible.builtin.template:
+    src: launchd_job.plist.j2
+    dest: "/Library/LaunchDaemons/{{ item.label }}.plist"
+    owner: root
+    group: wheel
+    mode: "0644"
+  loop: "{{ launchd_server_jobs }}"
+  become: true
+  register: plist_files
+
+- name: Unload LaunchDaemons when plist changed
+  ansible.builtin.command: "launchctl bootout system/{{ item.item.label }}"
+  loop: "{{ plist_files.results }}"
+  when: item.changed
+  become: true
+  failed_when: false
+  changed_when: false
+
+- name: Bootstrap LaunchDaemons
+  ansible.builtin.command: "launchctl bootstrap system /Library/LaunchDaemons/{{ item.label }}.plist"
+  loop: "{{ launchd_server_jobs }}"
+  become: true
+  failed_when: false
+  changed_when: false
