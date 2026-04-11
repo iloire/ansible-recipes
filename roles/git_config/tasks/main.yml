@@ -33,28 +33,28 @@
     mode: "0644"
   when: git_user_name | length > 0
 
-- name: get latest gitleaks version
-  ansible.builtin.uri:
-    url: https://api.github.com/repos/gitleaks/gitleaks/releases/latest
-    return_content: true
-  register: gitleaks_release
+- name: install gitleaks on Debian-family hosts
   when: ansible_os_family == "Debian"
+  block:
+    - name: get latest gitleaks version
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/gitleaks/gitleaks/releases/latest
+        return_content: true
+      register: gitleaks_release
 
-- name: set gitleaks download url
-  ansible.builtin.set_fact:
-    gitleaks_version: "{{ gitleaks_release.json.tag_name | regex_replace('^v', '') }}"
-  when: ansible_os_family == "Debian"
+    - name: set gitleaks download url
+      ansible.builtin.set_fact:
+        gitleaks_version: "{{ gitleaks_release.json.tag_name | regex_replace('^v', '') }}"
 
-- name: download and install gitleaks (github release)
-  become: true
-  ansible.builtin.unarchive:
-    src: "https://github.com/gitleaks/gitleaks/releases/download/v{{ gitleaks_version }}/gitleaks_{{ gitleaks_version }}_linux_{{ 'arm64' if ansible_architecture == 'aarch64' else 'x64' }}.tar.gz"
-    dest: /usr/local/bin
-    remote_src: true
-    include:
-      - gitleaks
-    mode: "0755"
-  when: ansible_os_family == "Debian"
+    - name: download and install gitleaks (github release)
+      become: true
+      ansible.builtin.unarchive:
+        src: "https://github.com/gitleaks/gitleaks/releases/download/v{{ gitleaks_version }}/gitleaks_{{ gitleaks_version }}_linux_{{ 'arm64' if ansible_architecture == 'aarch64' else 'x64' }}.tar.gz"
+        dest: /usr/local/bin
+        remote_src: true
+        include:
+          - gitleaks
+        mode: "0755"
 
 - name: install gitleaks (brew)
   community.general.homebrew:
