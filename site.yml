@@ -2,3 +2,4 @@
 - import_playbook: desktop-osx.yml
 - import_playbook: desktop-osx-agent.yml
 - import_playbook: homeassistant.yml
+- import_playbook: nas-linux.yml

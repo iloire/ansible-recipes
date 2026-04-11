@@ -1,0 +1,8 @@
+- name: NAS Linux Setup (user-scope only)
+  hosts: nas
+  gather_facts: true
+  roles:
+    - { role: dotfiles, tags: [dotfiles] }
+    - { role: git_config, tags: [git_config] }
+    - { role: zsh, tags: [zsh] }
+    - { role: crontab_server, tags: [crontab_server] }

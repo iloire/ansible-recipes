@@ -52,14 +52,17 @@ Manages a Raspberry Pi running Home Assistant OS (Alpine-based):
 
 ## Machines
 
-Four machines are defined in `inventory/hosts.yml`:
+Five machines are defined in `inventory/hosts.yml`:
 
 | Machine       | Profile        | Connection   |
 | ------------- | -------------- | ------------ |
-| `pepinaco` | Ubuntu Desktop | local        |
+| `pepinaco`    | Ubuntu Desktop | local        |
 | `macbook`     | macOS Desktop  | SSH (remote) |
 | `osx-agent`   | macOS Agent    | SSH (remote) |
 | `hassio`      | Home Assistant | SSH (remote) |
+| `peque`       | NAS (Linux)    | SSH (remote) |
+
+> **peque** is the home NAS (ansible-nas based). This repo manages only the **user-scope** concerns on peque: dotfiles, user cron jobs (watchdog, low-space monitor, docker cleanup), shell config. Container stacks, storage, networking, and other system-level concerns are managed by the separate [`NAS-peque/ansible-nas`](../NAS-peque) repo. See [CLAUDE.md](CLAUDE.md) for the scope boundary.
 
 Edit `inventory/hosts.yml` to set the IP addresses for your remote machines.
 
