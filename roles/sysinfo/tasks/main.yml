@@ -1,22 +1,39 @@
-- name: Install landscape-common
+- name: Install figlet
   apt:
-    name: landscape-common
+    name: figlet
     state: present
   become: true
   when: ansible_os_family == "Debian"
 
-- name: Add landscape-sysinfo to login shell
+- name: Install figlet (macOS)
+  community.general.homebrew:
+    name: figlet
+    state: present
+  when: ansible_os_family == "Darwin"
+
+- name: Wire motd into login shell (Linux)
   copy:
-    dest: /etc/profile.d/sysinfo.sh
+    dest: /etc/profile.d/motd.sh
     content: |
-      landscape-sysinfo
+      [ -x "$HOME/dotfiles/bin/motd" ] && "$HOME/dotfiles/bin/motd"
     mode: "0644"
   become: true
   when: ansible_os_family == "Debian"
 
-- name: Add fastfetch to login shell
+- name: Wire motd into login shell (macOS)
   lineinfile:
     path: "{{ ansible_env.HOME }}/.zprofile"
-    line: "fastfetch"
+    line: '[ -x "$HOME/dotfiles/bin/motd" ] && "$HOME/dotfiles/bin/motd"'
     create: yes
   when: ansible_os_family == "Darwin"
+
+- name: Suppress default Ubuntu MOTD clutter
+  file:
+    path: "/etc/update-motd.d/{{ item }}"
+    mode: "0644"
+  loop:
+    - 10-help-text
+    - 50-motd-news
+  become: true
+  failed_when: false
+  when: ansible_os_family == "Debian"

@@ -5,4 +5,5 @@
     - { role: dotfiles, tags: [dotfiles] }
     - { role: git_config, tags: [git_config] }
     - { role: zsh, tags: [zsh] }
+    - { role: sysinfo, tags: [sysinfo] }
     - { role: crontab_server, tags: [crontab_server] }

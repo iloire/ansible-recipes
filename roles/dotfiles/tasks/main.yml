@@ -79,3 +79,16 @@
     dest: "~/.npmrc"
     state: link
     force: true
+
+- name: check if host-specific motd-local exists
+  ansible.builtin.stat:
+    path: "~/dotfiles/shell/motd-local.{{ inventory_hostname }}"
+  register: motd_local_file
+
+- name: symlink host-specific motd-local
+  ansible.builtin.file:
+    src: "~/dotfiles/shell/motd-local.{{ inventory_hostname }}"
+    dest: "~/dotfiles/shell/motd-local"
+    state: link
+    force: true
+  when: motd_local_file.stat.exists
