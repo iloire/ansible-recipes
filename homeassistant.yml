@@ -1,12 +1,18 @@
+# HAOS ships without Python, so we need a bootstrap play using `raw` (the only
+# module that works without Python) to apk-install it before gather_facts or any
+# other module can run. Regular hosts (e.g. desktop-osx.yml) skip this entirely.
 - name: Home Assistant Bootstrap
   hosts: homeassistant
   gather_facts: false
   tasks:
     - name: Install Python
-      ansible.builtin.raw: apk add --no-cache python3 rsync curl
+      ansible.builtin.raw: apk add --no-cache python3
       changed_when: "'Installing' in result.stdout"
       register: result
 
+# Inline blockinfile instead of a dedicated role because the HA SSH add-on opens
+# a non-login interactive bash shell (reads .bashrc, not .bash_profile) — HAOS
+# specific enough not to be worth abstracting.
 - name: Home Assistant Setup
   hosts: homeassistant
   gather_facts: true
@@ -14,17 +20,12 @@
     - dotfiles
     - git_config
   tasks:
-    - name: Source dotfiles shell config from bash_profile
+    - name: Source dotfiles shell config from bashrc
       ansible.builtin.blockinfile:
-        path: /data/.bash_profile
+        path: /root/.bashrc
+        create: true
+        mode: "0644"
         block: |
           export SHELL_DIR=~/dotfiles/shell
           export GIT_PAGER=less
           source $SHELL_DIR/config
-
-    - name: Sync backups to peque
-      ansible.builtin.cron:
-        name: "sync home assistant backups to peque"
-        minute: "0"
-        hour: "*/12"
-        job: "rsync -az --delete /backup/ {{ peque_user }}@{{ peque_host }}:{{ peque_backup_path }}/homeassistant/ && curl -fsS -m 10 --retry 5 https://hc-ping.com/{{ healthchecks_ping_key }}/home-assistant-backups"

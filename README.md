@@ -46,9 +46,8 @@ Lightweight setup for a machine running LLM agents — no heavy dev tools:
 
 Manages a Raspberry Pi running Home Assistant OS (Alpine-based):
 
-- **Bootstrap**: Python 3, rsync, curl (via apk)
+- **Bootstrap**: Python 3 (via apk)
 - **Config**: dotfiles, git config
-- **Backup**: cron job syncing `/backup/` to NAS (peque) every 12 hours via rsync, with [healthchecks.io](https://healthchecks.io) monitoring
 
 ## Machines
 
