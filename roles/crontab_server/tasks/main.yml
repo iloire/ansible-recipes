@@ -18,6 +18,17 @@
     hour: "4"
     job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/docker-cleanup.sh"
 
+- name: send watchdog event on reboot
+  ansible.builtin.cron:
+    name: "watchdog server reboot"
+    special_time: reboot
+    job: >-
+      sleep 30;
+      . $HOME/dotfiles/shell/local-overrides;
+      WATCHDOG_NOTIFY=true
+      WATCHDOG_ICON=🔄
+      $HOME/dotfiles/bin/send-watchdog "server" "server.reboot" "warning" "$(hostname) has restarted"
+
 - name: send server health report to watchdog
   ansible.builtin.cron:
     name: "watchdog server health report"
