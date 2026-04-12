@@ -34,3 +34,11 @@
     name: "watchdog server health report"
     minute: "*/15"
     job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/send-watchdog-report"
+
+- name: check external disk health
+  ansible.builtin.cron:
+    name: "watchdog external disk check"
+    minute: "0"
+    hour: "*/12"
+    job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/check-external-disk"
+  when: external_disk_monitor | default(false)
