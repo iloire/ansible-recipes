@@ -35,6 +35,12 @@
     minute: "*/15"
     job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/send-watchdog-report"
 
+- name: scan kernel logs and docker state for concerning events
+  ansible.builtin.cron:
+    name: "watchdog system health check"
+    minute: "5"
+    job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/check-system-health"
+
 - name: check external disk health
   ansible.builtin.cron:
     name: "watchdog external disk check"
