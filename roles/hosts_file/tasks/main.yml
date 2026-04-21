@@ -20,6 +20,14 @@
     insertafter: "127.0.0.1 localhost"
   become: true
 
+- name: Unblock whitelisted domains (and their subdomains)
+  lineinfile:
+    path: "{{ tmp_path }}"
+    regexp: '^0\.0\.0\.0\s+([a-zA-Z0-9-]+\.)*{{ item | regex_escape }}\s*$'
+    state: absent
+  loop: "{{ hosts_whitelist }}"
+  become: true
+
 - name: Copy the hosts file to /etc/hosts
   copy:
     src: "{{ tmp_path }}"

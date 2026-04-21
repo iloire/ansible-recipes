@@ -1,3 +1,5 @@
 local_ip: "127.0.0.1"
 hosts_url: "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
 tmp_path: "/tmp/hosts"
+hosts_whitelist:
+  - google-analytics.com
