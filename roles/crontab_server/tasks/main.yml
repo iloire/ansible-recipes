@@ -4,6 +4,12 @@
     env: yes
     job: /usr/local/bin:/usr/bin:/bin:/usr/sbin
 
+- name: pin watchdog hostname so reports stay stable across hostname drift
+  ansible.builtin.cron:
+    name: WATCHDOG_HOSTNAME
+    env: yes
+    job: "{{ inventory_hostname_short }}"
+
 - name: monitor low space in disk
   ansible.builtin.cron:
     name: "disk space monitor"
