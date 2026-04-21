@@ -27,4 +27,5 @@
     mode: 0644
     owner: root
     remote_src: true
+    backup: true
   become: true
