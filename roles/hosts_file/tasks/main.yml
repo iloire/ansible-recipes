@@ -28,11 +28,12 @@
   loop: "{{ hosts_whitelist }}"
   become: true
 
-- name: Append custom host records
+- name: Insert custom host records at top of file
   blockinfile:
     path: "{{ tmp_path }}"
     marker: "# {mark} ANSIBLE MANAGED CUSTOM HOSTS"
     block: "{{ hosts_custom | join('\n') }}"
+    insertbefore: BOF
   when: hosts_custom | length > 0
   become: true
 
