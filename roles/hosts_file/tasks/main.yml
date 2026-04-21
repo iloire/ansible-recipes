@@ -28,6 +28,14 @@
   loop: "{{ hosts_whitelist }}"
   become: true
 
+- name: Append custom host records
+  blockinfile:
+    path: "{{ tmp_path }}"
+    marker: "# {mark} ANSIBLE MANAGED CUSTOM HOSTS"
+    block: "{{ hosts_custom | join('\n') }}"
+  when: hosts_custom | length > 0
+  become: true
+
 - name: Copy the hosts file to /etc/hosts
   copy:
     src: "{{ tmp_path }}"
