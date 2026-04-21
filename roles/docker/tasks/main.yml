@@ -1,18 +1,32 @@
 - name: update repositories
-  apt:
-    update_cache: yes
+  ansible.builtin.apt:
+    update_cache: true
   become: true
 
-- name: add Docker apt repository key
-  apt_key:
+- name: ensure /etc/apt/keyrings exists
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  become: true
+
+- name: add Docker apt signing key
+  ansible.builtin.get_url:
     url: "https://download.docker.com/linux/ubuntu/gpg"
-    state: present
+    dest: /etc/apt/keyrings/docker.asc
+    owner: root
+    group: root
+    mode: "0644"
+    force: false
   become: true
 
 - name: set the stable docker repository
-  apt_repository:
-    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable"
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable"
     state: present
+    filename: docker
   become: true
 
 - name: install docker packages
