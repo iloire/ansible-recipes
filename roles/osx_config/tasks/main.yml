@@ -1,67 +1,89 @@
 - name: Disable system sleep
-  shell: pmset -a sleep 0
+  ansible.builtin.shell: pmset -a sleep 0
   become: true
   when: "'osx_agent' in group_names"
+  changed_when: false
 
 - name: Disable display sleep
-  shell: pmset -a displaysleep 0
+  ansible.builtin.shell: pmset -a displaysleep 0
   become: true
   when: "'osx_agent' in group_names"
+  changed_when: false
 
 - name: Show ~/Library
-  shell: chflags nohidden ~/Library
+  ansible.builtin.shell: chflags nohidden ~/Library
+  changed_when: false
 
 - name: Show Drives on the Desktop
-  shell: defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+  ansible.builtin.shell: defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+  changed_when: false
 
 - name: Show External Drives on the Desktop
-  shell: defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+  ansible.builtin.shell: defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+  changed_when: false
 
 - name: Show Removable Media on the Desktop
-  shell: defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+  ansible.builtin.shell: defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+  changed_when: false
 
 - name: Show Hidden Files
-  shell: defaults write com.apple.finder AppleShowAllFiles -bool true
+  ansible.builtin.shell: defaults write com.apple.finder AppleShowAllFiles -bool true
+  changed_when: false
 
 - name: Show File Extensions
-  shell: defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+  ansible.builtin.shell: defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+  changed_when: false
 
 - name: Show the Status Bar in Finder
-  shell: defaults write com.apple.finder ShowStatusBar -bool true
+  ansible.builtin.shell: defaults write com.apple.finder ShowStatusBar -bool true
+  changed_when: false
 
 - name: Show the Path Bar in Finder
-  shell: defaults write com.apple.finder ShowPathbar -bool true
+  ansible.builtin.shell: defaults write com.apple.finder ShowPathbar -bool true
+  changed_when: false
 
 - name: Increase keyboard initial repeat
-  shell: defaults write -g InitialKeyRepeat -int 10
+  ansible.builtin.shell: defaults write -g InitialKeyRepeat -int 10
+  changed_when: false
 
 - name: Increase keyboard repeat rate
-  shell: defaults write -g KeyRepeat -int 1
+  ansible.builtin.shell: defaults write -g KeyRepeat -int 1
+  changed_when: false
 
 - name: Screenshots / create directory
-  shell: mkdir -p ~/Screenshots
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/Screenshots"
+    state: directory
+    mode: "0755"
 
 - name: Screenshots / location
-  shell: defaults write com.apple.screencapture location -string ~/Screenshots
+  ansible.builtin.shell: defaults write com.apple.screencapture location -string ~/Screenshots
+  changed_when: false
 
 - name: Screenshots / Cmd+Shift+4 copies area to clipboard (swapped)
-  shell: >
+  ansible.builtin.shell: >
     defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 31
     '<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>52</integer><integer>21</integer><integer>1179648</integer></array><key>type</key><string>standard</string></dict></dict>'
+  changed_when: false
 
 - name: Screenshots / Cmd+Ctrl+Shift+4 saves area to file (swapped)
-  shell: >
+  ansible.builtin.shell: >
     defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 30
     '<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>52</integer><integer>21</integer><integer>1441792</integer></array><key>type</key><string>standard</string></dict></dict>'
+  changed_when: false
 
 - name: Tap to click touchbar
-  shell: defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+  ansible.builtin.shell: defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+  changed_when: false
 
 - name: Show startup disk in Finder sidebar
-  shell: mysides list | grep -q "Macintosh HD" || mysides add "Macintosh HD" file:///
+  ansible.builtin.shell: mysides list | grep -q "Macintosh HD" || mysides add "Macintosh HD" file:///
+  changed_when: false
 
 - name: Show home folder in Finder sidebar
-  shell: mysides list | grep -q "{{ ansible_user_id }}" || mysides add "{{ ansible_user_id }}" file:///Users/{{ ansible_user_id }}/
+  ansible.builtin.shell: mysides list | grep -q "{{ ansible_user_id }}" || mysides add "{{ ansible_user_id }}" file:///Users/{{ ansible_user_id }}/
+  changed_when: false
 
 - name: Restart Finder
-  shell: killall Finder
+  ansible.builtin.shell: killall Finder
+  changed_when: false

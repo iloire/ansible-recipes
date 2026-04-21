@@ -13,7 +13,9 @@
   changed_when: false
 
 - name: Reduce the size of the Dock
-  shell: defaults write com.apple.dock tilesize -int 50
+  ansible.builtin.shell: defaults write com.apple.dock tilesize -int 50
+  changed_when: false
 
 - name: Restart dock
-  shell: killall Dock
+  ansible.builtin.shell: killall Dock
+  changed_when: false
