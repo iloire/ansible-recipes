@@ -8,6 +8,9 @@ hosts_whitelist:
   - googletagmanager.com
   - ssl-google-analytics.l.google.com
   - www-google-analytics.l.google.com
+  - ads.google.com
+  - adservice.google.com
+  - googleadservices.com
 # Custom /etc/hosts entries appended between ansible markers.
 # Override per host in host_vars/<host>.yml or group_vars/ to add more.
 hosts_custom:
