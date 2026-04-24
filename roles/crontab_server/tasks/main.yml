@@ -22,7 +22,7 @@
     name: "docker cleanup"
     minute: "0"
     hour: "4"
-    job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/docker-cleanup.sh -q"
+    job: ". $HOME/dotfiles/shell/local-overrides; $HOME/dotfiles/bin/docker-cleanup.sh"
 
 - name: send watchdog event on reboot
   ansible.builtin.cron:
