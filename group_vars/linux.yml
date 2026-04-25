@@ -85,6 +85,36 @@ apt_ppas:
   - "ppa:atareao/telegram"
   - "ppa:aslatter/ppa"
 
+# Third-party APT repos that aren't on Launchpad. Each entry installs a
+# GPG key into /etc/apt/keyrings/<name>.gpg and adds a deb line in
+# /etc/apt/sources.list.d/<name>.list referencing it via signed-by=.
+# Add a new repo here and the apt role will set it up on next run.
+apt_third_party_repos:
+  - name: 1password
+    key_url: https://downloads.1password.com/linux/keys/1password.asc
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/1password.gpg] https://downloads.1password.com/linux/debian/amd64 stable main"
+  - name: brave
+    key_url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/brave.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"
+  - name: docker
+    key_url: https://download.docker.com/linux/ubuntu/gpg
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+  - name: github-desktop
+    key_url: https://mirror.mwt.me/shiftkey-desktop/gpgkey
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/github-desktop.gpg] https://mirror.mwt.me/shiftkey-desktop/deb/ any main"
+  - name: google-chrome
+    key_url: https://dl.google.com/linux/linux_signing_key.pub
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main"
+  - name: hashicorp
+    key_url: https://apt.releases.hashicorp.com/gpg
+    repo: "deb [signed-by=/etc/apt/keyrings/hashicorp.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+  - name: nvidia-container-toolkit
+    key_url: https://nvidia.github.io/libnvidia-container/gpgkey
+    repo: "deb [signed-by=/etc/apt/keyrings/nvidia-container-toolkit.gpg] https://nvidia.github.io/libnvidia-container/stable/deb/$(ARCH) /"
+  - name: virtualbox
+    key_url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/virtualbox.gpg] http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib"
+
 snap_packages:
   - dart-sass
   - discord

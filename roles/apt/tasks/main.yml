@@ -9,6 +9,44 @@
   loop: "{{ apt_ppas }}"
   become: true
 
+- name: ensure /etc/apt/keyrings exists
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0755"
+  become: true
+
+- name: download third-party repo signing keys
+  get_url:
+    url: "{{ item.key_url }}"
+    dest: "/tmp/{{ item.name }}.key"
+    mode: "0644"
+    force: true
+  loop: "{{ apt_third_party_repos | default([]) }}"
+  loop_control:
+    label: "{{ item.name }}"
+  become: true
+
+- name: dearmor third-party keys into /etc/apt/keyrings
+  shell: "gpg --batch --yes --dearmor < /tmp/{{ item.name }}.key > /etc/apt/keyrings/{{ item.name }}.gpg"
+  args:
+    creates: "/etc/apt/keyrings/{{ item.name }}.gpg"
+  loop: "{{ apt_third_party_repos | default([]) }}"
+  loop_control:
+    label: "{{ item.name }}"
+  become: true
+
+- name: add third-party repo deb lines
+  apt_repository:
+    repo: "{{ item.repo }}"
+    filename: "{{ item.name }}"
+    state: present
+    update_cache: false
+  loop: "{{ apt_third_party_repos | default([]) }}"
+  loop_control:
+    label: "{{ item.name }}"
+  become: true
+
 - name: Install packages with apt
   apt:
     name: "{{ apt_packages }}"
