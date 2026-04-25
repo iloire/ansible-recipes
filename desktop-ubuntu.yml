@@ -24,6 +24,7 @@
     - { role: lazygit, tags: [lazygit] }
     - { role: github_desktop, tags: [github_desktop] }
     - { role: cursor_config, tags: [cursor_config] }
+    - { role: vscode, tags: [vscode] }
     - { role: google_chrome, tags: [google_chrome] }
     - { role: brave, tags: [brave] }
     - { role: snap, tags: [snap] }

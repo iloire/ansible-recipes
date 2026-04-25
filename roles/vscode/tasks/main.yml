@@ -1,0 +1,43 @@
+# Install Microsoft VS Code via apt, but pre-write the sources.list.d
+# file with the EXACT content the `code` package's postinst would write
+# (signed-by=/usr/share/keyrings/microsoft.gpg). Postinst checks `[ -f
+# /etc/apt/sources.list.d/vscode.list ]` and skips if it exists, so we
+# avoid the dual-registration apt error:
+#
+#   E:Conflicting values set for option Signed-By regarding source
+#   https://packages.microsoft.com/repos/code/ stable: /etc/apt/keyrings/...
+#   != /usr/share/keyrings/microsoft.gpg
+#
+# That's what hit us when we added vscode to apt_third_party_repos
+# (which writes a deb822 .sources file using /etc/apt/keyrings/, then
+# code's postinst writes vscode.list using /usr/share/keyrings/).
+
+- name: download Microsoft signing key
+  ansible.builtin.get_url:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    dest: /tmp/microsoft.asc
+    mode: "0644"
+    force: true
+  become: true
+
+- name: dearmor key into /usr/share/keyrings/microsoft.gpg (the path code postinst expects)
+  ansible.builtin.shell: gpg --batch --yes --dearmor < /tmp/microsoft.asc > /usr/share/keyrings/microsoft.gpg
+  args:
+    creates: /usr/share/keyrings/microsoft.gpg
+  become: true
+
+- name: write vscode.list (matches code postinst output, prevents dual registration)
+  ansible.builtin.copy:
+    dest: /etc/apt/sources.list.d/vscode.list
+    content: "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/code stable main\n"
+    mode: "0644"
+    owner: root
+    group: root
+  become: true
+
+- name: install code
+  ansible.builtin.apt:
+    name: code
+    state: present
+    update_cache: true
+  become: true

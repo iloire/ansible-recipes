@@ -47,7 +47,6 @@ apt_packages:
   - calibre
   - cmatrix
   - cmus
-  - code
   - conky-std
   - fd-find
   - ffmpeg
@@ -113,9 +112,12 @@ apt_third_party_repos:
   - name: virtualbox
     key_url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
     repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/virtualbox.gpg] http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib"
-  - name: vscode
-    key_url: https://packages.microsoft.com/keys/microsoft.asc
-    repo: "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/vscode.gpg] https://packages.microsoft.com/repos/code stable main"
+# vscode is NOT here - it has a dedicated `vscode` role. Reason: the
+# `code` package's postinst writes its own /etc/apt/sources.list.d/vscode.list
+# referencing /usr/share/keyrings/microsoft.gpg. If we also register the
+# repo via apt_third_party_repos (which writes a deb822 .sources file
+# referencing /etc/apt/keyrings/vscode.gpg), apt sees a dual registration
+# with conflicting Signed-By values and breaks every future apt update.
 
 snap_packages:
   - dart-sass
