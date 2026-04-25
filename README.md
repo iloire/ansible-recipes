@@ -171,7 +171,8 @@ To provision macOS machines remotely from your Linux dev machine:
 ├── run.sh                       # Single runner script
 └── scripts/
     ├── install-ansible-linux.sh # Bootstrap Ansible on Ubuntu/Debian
-    └── install-ansible-mac.sh   # Bootstrap Ansible on macOS
+    ├── install-ansible-mac.sh   # Bootstrap Ansible on macOS
+    └── audit-drift.sh           # Find config drift on a live machine vs the playbook
 ```
 
 ## Bootstrap scripts
@@ -190,6 +191,50 @@ Before running the playbooks, Ansible must be installed on the control machine. 
 # macOS (requires Homebrew)
 ./scripts/install-ansible-mac.sh
 ```
+
+## Finding configuration drift
+
+Over time a working machine accumulates apps, tweaks, and settings that never make it back into the playbook — so a fresh install reproduces most-but-not-all of the daily setup. The `audit-drift.sh` script compares **current machine state** against **what's captured in ansible-recipes** and prints a gap report.
+
+**When to run it**
+
+- Before a planned reinstall / OS upgrade — close gaps now, so `./run.sh` is actually "everything".
+- Periodically (quarterly?) to catch drift early while you still remember what you installed and why.
+
+**How to run it** (Linux only — uses apt, snap, flatpak, dconf, systemctl):
+
+```bash
+# Prints the markdown report to stdout and saves a timestamped copy:
+./scripts/audit-drift.sh | tee /tmp/drift-$(hostname)-$(date +%Y-%m-%d).md
+```
+
+Read-only, no changes made. Also writes a full `dconf` dump to `/tmp/dconf-dump-<host>-<date>.ini` for deeper review.
+
+**What it checks**
+
+| Category | Source of truth in the repo |
+| --- | --- |
+| apt packages (manually installed) | `apt_packages` + `apt_minimum_packages` in `group_vars/linux.yml` |
+| snap packages | `snap_packages` + `snap_classic_packages` |
+| flatpak apps | `flatpak_packages` |
+| VS Code extensions | Currently unmanaged — all enabled extensions surface as drift |
+| GNOME shell extensions | Currently unmanaged — listed for review |
+| systemd user services (enabled) | Compare against the `autostart` role |
+| User crontab | Compare against `crontab_desktop` / `crontab_server` |
+| User groups (non-default) | Look for explicit `user: groups=` tasks |
+| `/etc/fstab` custom mounts | Flag for review |
+| `dconf` dump size vs coverage | Counts keys captured via `dconf:` tasks in roles |
+| Hardcoded gotchas | Flags version-pinned stuff like `nvidia-driver-525`, `python3.10` |
+
+**What to do with the output**
+
+For each listed item, decide:
+
+1. **Add to ansible** — append to the corresponding var list (most common).
+2. **New role** — if a whole category is unmanaged (e.g. VS Code extensions).
+3. **Manual step** — keep it in the "Day 1 runbook" for stuff that can't be automated (SSH keys, 1Password login, Tailscale auth, NVIDIA driver install + reboot).
+
+The final section of the report is already a manual-bootstrap checklist — use it as the starting point for your Day-1 runbook.
 
 ## Dependencies
 
