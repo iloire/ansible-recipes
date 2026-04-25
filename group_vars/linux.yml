@@ -49,7 +49,6 @@ apt_packages:
   - cmus
   - code
   - conky-std
-  - du-dust
   - fd-find
   - ffmpeg
   - filezilla
@@ -70,7 +69,6 @@ apt_packages:
   - libreoffice
   - mysql-client
   - nautilus-admin
-  - nautilus-compare
   - nautilus-image-converter
   - nvidia-driver-525
   - pavucontrol
@@ -81,7 +79,6 @@ apt_packages:
   - torbrowser-launcher
   - virtualbox
   - vlc
-  - wgrib2
   - wmctrl
   - workrave
   - yara
@@ -110,6 +107,9 @@ apt_third_party_repos:
   - name: nvidia-container-toolkit
     key_url: https://nvidia.github.io/libnvidia-container/gpgkey
     repo: "deb [signed-by=/etc/apt/keyrings/nvidia-container-toolkit.gpg] https://nvidia.github.io/libnvidia-container/stable/deb/$(ARCH) /"
+  - name: stripe
+    key_url: https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public
+    repo: "deb [signed-by=/etc/apt/keyrings/stripe.gpg] https://packages.stripe.dev/stripe-cli-debian-local stable main"
   - name: virtualbox
     key_url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
     repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/virtualbox.gpg] http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib"
