@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = "pepinaco-test"
-    vb.gui = false             # set to true if you want to watch the GNOME install live
+    vb.gui = ENV.fetch("VB_GUI", "false") == "true"  # VB_GUI=true vagrant up to watch
     vb.memory = 6144           # apt install of ubuntu-desktop + extras eats memory
     vb.cpus = 4
     vb.linked_clone = true     # faster destroy/up cycles
@@ -57,7 +57,10 @@ Vagrant.configure("2") do |config|
     ansible.playbook = "desktop-ubuntu.yml"
     ansible.compatibility_mode = "2.0"
     ansible.install_mode = "default"   # apt install ansible (latest from PPA in the box)
-    ansible.verbose = false             # set to "v" or "vv" when debugging
+    # ANSIBLE_VERBOSE=v / vv / vvv sets the matching ansible -v level so failed
+    # playbooks have actionable detail. Default is "v" — adds task-level
+    # before/after, which is the right tradeoff between noise and forensics.
+    ansible.verbose = ENV.fetch("ANSIBLE_VERBOSE", "v")
 
     # The playbook says `hosts: linux` — put the vagrant box in that group.
     ansible.groups = {

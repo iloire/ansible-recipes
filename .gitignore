@@ -4,3 +4,4 @@ wget-log*
 .claude/settings.local.json
 .DS_Store
 .vagrant/
+logs/
