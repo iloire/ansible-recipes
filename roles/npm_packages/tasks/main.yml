@@ -1,5 +1,7 @@
 - name: get nvm node path
   shell: . ~/.nvm/nvm.sh && dirname $(which npm)
+  args:
+    executable: /bin/bash
   register: nvm_bin_path
   changed_when: false
 
