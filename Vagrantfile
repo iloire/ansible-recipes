@@ -35,10 +35,10 @@ Vagrant.configure("2") do |config|
   # host's SSH key — saves embedding a key in the box.
   config.ssh.forward_agent = true
 
-  # Repo is mounted at /vagrant inside the VM (Vagrant default). The
-  # ansible_local provisioner reads desktop-ubuntu.yml from there.
-  # Synced-folder type defaults to vboxsf, which works fine for read-only
-  # ansible runs (no fsnotify needed).
+  # Repo is mounted at /vagrant inside the VM. Explicit because the
+  # cloud-image/ubuntu-26.04 box silently skips Vagrant's default
+  # synced-folder step — needs to be declared explicitly.
+  config.vm.synced_folder ".", "/vagrant", type: "virtualbox", automount: true
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = "pepinaco-test"
