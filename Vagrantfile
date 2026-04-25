@@ -42,7 +42,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = "pepinaco-test"
-    vb.gui = ENV.fetch("VB_GUI", "false") == "true"  # VB_GUI=true vagrant up to watch
+    vb.gui = ENV.fetch("VB_GUI", "true") == "true"  # VBox window on by default; VB_GUI=false for headless
     vb.memory = 6144           # apt install of ubuntu-desktop + extras eats memory
     vb.cpus = 4
     vb.linked_clone = true     # faster destroy/up cycles
