@@ -74,3 +74,150 @@
   community.general.dconf:
     key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding'
     value: "'<Super><Shift>4'"
+
+# --- Window manager / workspaces ---------------------------------------
+# Ivan uses fixed workspaces (not GNOME's default dynamic ones) — 7 of
+# them, mirrored across all monitors. This is core to his window
+# habits; without it the smart-auto-move extension and the workspace
+# muscle memory don't work.
+
+- name: disable dynamic workspaces (use fixed count)
+  community.general.dconf:
+    key: '/org/gnome/mutter/dynamic-workspaces'
+    value: 'false'
+
+- name: workspaces span all monitors (not just primary)
+  community.general.dconf:
+    key: '/org/gnome/mutter/workspaces-only-on-primary'
+    value: 'false'
+
+- name: number of workspaces
+  community.general.dconf:
+    key: '/org/gnome/desktop/wm/preferences/num-workspaces'
+    value: '7'
+
+# --- Interface tweaks ---------------------------------------------------
+- name: disable hot corners (Activities trigger on top-left)
+  community.general.dconf:
+    key: '/org/gnome/desktop/interface/enable-hot-corners'
+    value: 'false'
+
+- name: hide weekday in clock
+  community.general.dconf:
+    key: '/org/gnome/desktop/interface/clock-show-weekday'
+    value: 'false'
+
+- name: cursor theme DMZ-Black
+  community.general.dconf:
+    key: '/org/gnome/desktop/interface/cursor-theme'
+    value: "'DMZ-Black'"
+
+- name: font hinting slight
+  community.general.dconf:
+    key: '/org/gnome/desktop/interface/font-hinting'
+    value: "'slight'"
+
+# --- Dash-to-dock (Ubuntu's bottom launcher) ---------------------------
+- name: dash-to-dock smaller icons
+  community.general.dconf:
+    key: '/org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size'
+    value: '40'
+
+- name: dash-to-dock pin to DP-0 monitor by connector name
+  community.general.dconf:
+    key: '/org/gnome/shell/extensions/dash-to-dock/preferred-monitor-by-connector'
+    value: "'DP-0'"
+
+# --- GNOME shell extensions --------------------------------------------
+# These two extension states require the extensions to be installed
+# separately (via Extension Manager — flatpak com.mattjakeman.ExtensionManager
+# is in flatpak_packages). Setting them here is harmless if the extension
+# isn't installed yet — the keys just sit in dconf inert.
+- name: enable smart-auto-move extension
+  community.general.dconf:
+    key: '/org/gnome/shell/enabled-extensions'
+    value: "['smart-auto-move@khimaros.com']"
+
+- name: disable blur-my-shell extension
+  community.general.dconf:
+    key: '/org/gnome/shell/disabled-extensions'
+    value: "['blur-my-shell@aunetx']"
+
+# --- smart-auto-move extension config ----------------------------------
+# Saves window positions across reboots/extension reloads. The defaults
+# are slightly suboptimal — these settings are the result of trial.
+- name: smart-auto-move sync mode RESTORE
+  community.general.dconf:
+    key: '/org/gnome/shell/extensions/smart-auto-move/sync-mode'
+    value: "'RESTORE'"
+
+- name: smart-auto-move startup delay
+  community.general.dconf:
+    key: '/org/gnome/shell/extensions/smart-auto-move/startup-delay'
+    value: '2500'
+
+- name: smart-auto-move save frequency
+  community.general.dconf:
+    key: '/org/gnome/shell/extensions/smart-auto-move/save-frequency'
+    value: '1000'
+
+- name: smart-auto-move match threshold
+  community.general.dconf:
+    key: '/org/gnome/shell/extensions/smart-auto-move/match-threshold'
+    value: '0.7'
+
+- name: smart-auto-move activate workspace on restore
+  community.general.dconf:
+    key: '/org/gnome/shell/extensions/smart-auto-move/activate-workspace'
+    value: 'true'
+
+# --- Nautilus (file manager) -------------------------------------------
+- name: nautilus default to list view
+  community.general.dconf:
+    key: '/org/gnome/nautilus/preferences/default-folder-viewer'
+    value: "'list-view'"
+
+- name: nautilus search uses list view
+  community.general.dconf:
+    key: '/org/gnome/nautilus/preferences/search-view'
+    value: "'list-view'"
+
+- name: nautilus search by last-modified time
+  community.general.dconf:
+    key: '/org/gnome/nautilus/preferences/search-filter-time-type'
+    value: "'last_modified'"
+
+- name: nautilus default compression format zip
+  community.general.dconf:
+    key: '/org/gnome/nautilus/compression/default-compression-format'
+    value: "'zip'"
+
+- name: nautilus show hidden files by default
+  community.general.dconf:
+    key: '/org/gnome/nautilus/preferences/show-hidden-files'
+    value: 'true'
+
+- name: file-chooser show hidden files by default
+  community.general.dconf:
+    key: '/org/gtk/settings/file-chooser/show-hidden'
+    value: 'true'
+
+- name: file-chooser sort directories first
+  community.general.dconf:
+    key: '/org/gtk/settings/file-chooser/sort-directories-first'
+    value: 'true'
+
+- name: nautilus list view shows tree expansion
+  community.general.dconf:
+    key: '/org/gnome/nautilus/list-view/use-tree-view'
+    value: 'true'
+
+- name: nautilus path bar always editable (Ctrl+L always-on)
+  community.general.dconf:
+    key: '/org/gnome/nautilus/preferences/always-use-location-entry'
+    value: 'true'
+
+- name: nautilus recursive search local-folder only (faster on huge dirs)
+  community.general.dconf:
+    key: '/org/gnome/nautilus/preferences/recursive-search'
+    value: "'local-only'"

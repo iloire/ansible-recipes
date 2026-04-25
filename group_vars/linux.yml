@@ -69,6 +69,7 @@ apt_packages:
   - kazam
   - libreoffice
   - mysql-client
+  - nautilus-admin
   - nautilus-image-converter
   - nvidia-driver-525
   - pavucontrol

@@ -159,3 +159,26 @@
   ansible.builtin.command: fc-cache -f ~/.local/share/fonts
   when: dotfiles_fonts_copied is changed
   changed_when: false
+
+# Right-click "New Document" templates — Nautilus reads from ~/Templates.
+# Symlink the dotfiles directory there if the user has no existing
+# regular-file Templates dir (don't clobber).
+- name: check if dotfiles Templates directory exists
+  ansible.builtin.stat:
+    path: "~/dotfiles/Templates"
+  register: dotfiles_templates_dir
+
+- name: check existing ~/Templates
+  ansible.builtin.stat:
+    path: "~/Templates"
+  register: existing_templates
+
+- name: symlink ~/Templates -> ~/dotfiles/Templates
+  ansible.builtin.file:
+    src: "~/dotfiles/Templates"
+    dest: "~/Templates"
+    state: link
+    force: true
+  when:
+    - dotfiles_templates_dir.stat.exists
+    - not existing_templates.stat.exists or existing_templates.stat.islnk
