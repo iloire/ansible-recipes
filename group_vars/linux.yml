@@ -1,6 +1,5 @@
 apt_minimum_packages:
   - arp-scan
-  - awscli
   - curl
   - dconf-cli
   - dconf-editor
