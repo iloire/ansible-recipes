@@ -36,16 +36,22 @@ apt_packages:
   - alacritty
   - aspell-es
   - awesome
+  - bat
   - blueman
+  - btop
   - caffeine
+  - calibre
   - cmatrix
   - cmus
+  - du-dust
+  - fd-find
   - ffmpeg
   - filezilla
   - fish
   - flameshot
   - flatpak
   - gh
+  - git-delta
   - gparted
   - gnome-shell-extension-manager
   - gnome-software-plugin-flatpak
@@ -58,14 +64,15 @@ apt_packages:
   - mysql-client
   - nautilus-image-converter
   - nvidia-driver-525
-  - obs-studio
   - pavucontrol
   - postgresql-client
+  - stripe
   - telegram
   - terminator
   - torbrowser-launcher
   - virtualbox
   - vlc
+  - wgrib2
   - wmctrl
   - workrave
   - yara
@@ -77,7 +84,6 @@ apt_remove_packages:
 apt_ppas:
   - "ppa:atareao/telegram"
   - "ppa:aslatter/ppa"
-  - "ppa:obsproject/obs-studio"
 
 snap_packages:
   - dart-sass

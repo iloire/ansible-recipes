@@ -10,6 +10,7 @@ git_user_email: "317868+iloire@users.noreply.github.com"
 
 npm_packages:
   - nodemon
+  - opencode-ai
   - prettier
   - pyright
   - typescript-language-server
