@@ -24,9 +24,11 @@
 # See docs/testing.md for the full workflow.
 
 Vagrant.configure("2") do |config|
-  # Ubuntu 24.04 — closest available preview of 26.04's apt/t64 world.
-  # Bento boxes ship VirtualBox guest additions baked in; no install dance.
-  config.vm.box = "bento/ubuntu-24.04"
+  # Box defaults to 26.04 — the actual install target. Override with
+  # VAGRANT_BOX=bento/ubuntu-24.04 to test against 24.04 instead
+  # (faster — bento boxes are smaller + ship guest additions baked in,
+  # while cloud-image boxes are minimal Canonical-published OS images).
+  config.vm.box = ENV.fetch("VAGRANT_BOX", "cloud-image/ubuntu-26.04")
   config.vm.hostname = "pepinaco-test"
 
   # Allow git clone of the dotfiles repo from inside the VM using your

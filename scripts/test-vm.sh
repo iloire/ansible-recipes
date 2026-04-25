@@ -76,6 +76,11 @@ healthcheck() {
 # ---------------------------------------------------------------------
 cmd_boot() {
   section "Phase 0: vagrant up (boot VM, no provision)"
+  # Default GUI on — the whole point of these test runs is to be able
+  # to log in and inspect. Override with VB_GUI=false to go headless.
+  : "${VB_GUI:=true}"
+  export VB_GUI
+  log "VB_GUI=$VB_GUI  VAGRANT_BOX=${VAGRANT_BOX:-<default>}"
   vagrant up --no-provision
   healthcheck
 }

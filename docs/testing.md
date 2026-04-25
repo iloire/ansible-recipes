@@ -26,6 +26,12 @@ VirtualBox 7.x also coexists with KVM via the KVM API — no need to `modprobe -
 
 [`scripts/test-vm.sh`](../scripts/test-vm.sh) wraps everything with `set -euo pipefail`, healthchecks with retry, structured logging, and clear failure summaries. Use it instead of raw `vagrant up` / `vagrant provision` — it survives intermittent SSH issues that bare vagrant doesn't.
 
+The Vagrantfile defaults to `cloud-image/ubuntu-26.04` (Canonical's official 26.04 box, the actual install target). To test against 24.04 instead (smaller, faster, comes with VBox guest additions baked in):
+
+```bash
+VAGRANT_BOX=bento/ubuntu-24.04 ./scripts/test-vm.sh up
+```
+
 ```bash
 cd ~/code/ansible-recipes
 
