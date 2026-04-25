@@ -62,6 +62,7 @@ apt_packages:
   - gparted
   - gnome-shell-extension-manager
   - gnome-software-plugin-flatpak
+  - gnome-sushi
   - gnome-tweaks
   - hardinfo
   - imagemagick
@@ -70,6 +71,7 @@ apt_packages:
   - libreoffice
   - mysql-client
   - nautilus-admin
+  - nautilus-compare
   - nautilus-image-converter
   - nvidia-driver-525
   - pavucontrol
