@@ -33,8 +33,17 @@ LOG_FILE="$LOG_DIR/test-vm-${TS}.log"
 LATEST_SYMLINK="$LOG_DIR/latest.log"
 ln -sfn "$(basename "$LOG_FILE")" "$LATEST_SYMLINK"
 
-# tee everything (stdout + stderr) to the log file.
-exec > >(tee -a "$LOG_FILE") 2>&1
+# Send stdout + stderr to the log file. When run interactively (TTY)
+# also tee to the terminal so the user sees live output. When run under
+# nohup/background, write directly to the file — `exec > >(tee)` looks
+# clever but the tee subshell dies if the parent loses its controlling
+# terminal, then SIGPIPE kills the whole script silently. Direct redirect
+# survives nohup correctly. Use `tail -f $LOG_FILE` for live view.
+if [ -t 1 ]; then
+  exec > >(tee -a "$LOG_FILE") 2>&1
+else
+  exec >> "$LOG_FILE" 2>&1
+fi
 
 log()     { printf '[%s] %s\n' "$(date -u +%H:%M:%SZ)" "$*"; }
 section() { printf '\n[%s] === %s ===\n\n' "$(date -u +%H:%M:%SZ)" "$*"; }
