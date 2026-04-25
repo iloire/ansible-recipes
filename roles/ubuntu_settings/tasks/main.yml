@@ -10,15 +10,15 @@
     key: "/org/gnome/shell/favorite-apps"
     value: "['org.gnome.Nautilus.desktop', 'firefox_firefox.desktop', 'google-chrome.desktop', 'libreoffice-writer.desktop', 'terminator.desktop', 'brave-browser.desktop', '1password.desktop', 'spotify_spotify.desktop', 'telegram.desktop']"
 
-- name: set US int keyboard
+- name: set US-intl + Spanish keyboard layouts
   dconf:
     key: "/org/gnome/desktop/input-sources/sources"
-    value: "[('xkb', 'us+altgr-intl')]"
+    value: "[('xkb', 'us+altgr-intl'), ('xkb', 'es')]"
 
-- name: switch caps -> escape (nvim)
+- name: caps -> escape (nvim) + Alt+Shift to toggle layouts
   dconf:
     key: "/org/gnome/desktop/input-sources/xkb-options"
-    value: "['caps:escape']"
+    value: "['caps:escape', 'grp:alt_shift_toggle']"
 
 - name: blank screen delay
   dconf:

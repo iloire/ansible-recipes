@@ -10,6 +10,13 @@
     update_cache: true
   become: true
 
+- name: Install libfuse2 (name varies by Ubuntu version)
+  apt:
+    name: "{{ apt_minimum_libfuse }}"
+    state: present
+  become: true
+  when: apt_minimum_libfuse is defined
+
 - name: adding existing user to group mail
   user:
     name: "{{ ansible_user_id }}"

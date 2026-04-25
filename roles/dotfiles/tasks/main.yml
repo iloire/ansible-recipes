@@ -92,3 +92,70 @@
     state: link
     force: true
   when: motd_local_file.stat.exists
+
+# XDG autostart entries — symlink everything in dotfiles/xdg/autostart/
+# into ~/.config/autostart/ so login-time services come up on a fresh box.
+- name: ensure ~/.config/autostart exists
+  ansible.builtin.file:
+    path: "~/.config/autostart"
+    state: directory
+    mode: "0755"
+
+- name: list autostart .desktop files in dotfiles
+  ansible.builtin.find:
+    paths: "~/dotfiles/xdg/autostart"
+    patterns: "*.desktop"
+    file_type: file
+  register: dotfiles_autostart_entries
+
+- name: symlink autostart .desktop files into ~/.config/autostart
+  ansible.builtin.file:
+    src: "{{ item.path }}"
+    dest: "~/.config/autostart/{{ item.path | basename }}"
+    state: link
+    force: true
+  loop: "{{ dotfiles_autostart_entries.files }}"
+  loop_control:
+    label: "{{ item.path | basename }}"
+
+# Personal/commercial fonts shipped with dotfiles — copy (not symlink, so
+# fc-cache picks them up cleanly) into ~/.local/share/fonts/ and refresh
+# the font cache.
+- name: check if dotfiles fonts directory exists
+  ansible.builtin.stat:
+    path: "~/dotfiles/fonts"
+  register: dotfiles_fonts_dir
+
+- name: ensure ~/.local/share/fonts exists
+  ansible.builtin.file:
+    path: "~/.local/share/fonts"
+    state: directory
+    mode: "0755"
+  when: dotfiles_fonts_dir.stat.exists
+
+- name: list font files in dotfiles
+  ansible.builtin.find:
+    paths: "~/dotfiles/fonts"
+    patterns:
+      - "*.ttf"
+      - "*.otf"
+    file_type: file
+  register: dotfiles_fonts
+  when: dotfiles_fonts_dir.stat.exists
+
+- name: copy fonts into ~/.local/share/fonts
+  ansible.builtin.copy:
+    src: "{{ item.path }}"
+    dest: "~/.local/share/fonts/{{ item.path | basename }}"
+    remote_src: true
+    mode: "0644"
+    force: false
+  loop: "{{ dotfiles_fonts.files | default([]) }}"
+  loop_control:
+    label: "{{ item.path | basename }}"
+  register: dotfiles_fonts_copied
+
+- name: refresh font cache
+  ansible.builtin.command: fc-cache -f ~/.local/share/fonts
+  when: dotfiles_fonts_copied is changed
+  changed_when: false

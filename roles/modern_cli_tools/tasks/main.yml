@@ -2,6 +2,7 @@
 #   ls → eza, cat → bat, find → fd, du → dust,
 #   top → btop, man → tldr (tealdeer), diff → delta
 #   shell history → atuin
+#   secrets scanner → gitleaks
 #
 # On macOS these are installed via Homebrew (see group_vars/osx.yml).
 
@@ -91,3 +92,26 @@
   args:
     creates: /usr/local/bin/atuin
   become: true
+
+- name: check if gitleaks is installed
+  ansible.builtin.stat:
+    path: /usr/local/bin/gitleaks
+  register: gitleaks_bin
+
+- name: install gitleaks
+  when: not gitleaks_bin.stat.exists
+  block:
+    - name: get latest gitleaks version
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/gitleaks/gitleaks/releases/latest
+        return_content: yes
+      register: gitleaks_release
+
+    - name: download and extract gitleaks
+      ansible.builtin.unarchive:
+        src: "https://github.com/gitleaks/gitleaks/releases/download/{{ gitleaks_release.json.tag_name }}/gitleaks_{{ gitleaks_release.json.tag_name | regex_replace('^v', '') }}_linux_x64.tar.gz"
+        dest: /usr/local/bin
+        remote_src: yes
+        include: gitleaks
+        mode: "0755"
+      become: true
