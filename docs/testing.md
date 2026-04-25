@@ -32,6 +32,53 @@ The Vagrantfile defaults to `cloud-image/ubuntu-26.04` (Canonical's official 26.
 VAGRANT_BOX=bento/ubuntu-24.04 ./scripts/test-vm.sh up
 ```
 
+### Validation status
+
+| Box | Date | Default tags | Full play (`ANSIBLE_TAGS=all`) |
+|---|---|---|---|
+| `bento/ubuntu-24.04` | 2026-04-25 | ✅ 92 ok / 69 changed / 0 failed (14 min) | partial — npm_packages dash bug fixed, vscode dual-registration bug fixed (commits `ee9aa26`, `4fdadc6`); didn't finish |
+| `cloud-image/ubuntu-26.04` | 2026-04-25 | ❌ blocked (see "26.04 prep needed" below) | not attempted yet |
+
+### 26.04 prep needed (one-time, when you come back to this)
+
+The 26.04 path took most of an afternoon to fight through. **Do these in order before `./scripts/test-vm.sh up`:**
+
+1. **Install + patch vagrant-vbguest plugin** — cloud-image boxes don't ship Guest Additions, and the plugin has a Ruby bug:
+   ```bash
+   vagrant plugin install vagrant-vbguest
+   sed -i 's/File\.exists?/File.exist?/g' \
+     ~/.vagrant.d/gems/3.3.8/gems/vagrant-vbguest-0.32.0/lib/vagrant-vbguest/hosts/virtualbox.rb
+   ```
+   *(check the plugin version — 0.32.0 had this bug; later versions may have fixed it)*
+
+2. **First boot needs three reloads** to settle Guest Additions properly:
+   ```bash
+   vagrant up                              # boots, GA mismatch (cloud-image ships 6.0.0, host has 7.1)
+   vagrant vbguest --do install            # rebuilds GA modules to match host
+   vagrant reload --no-provision           # mounts /vagrant via vboxsf (now that GA matches)
+   ```
+   Verify: `vagrant ssh -c 'ls /vagrant/'` should list the repo. If `mount | grep vagrant` is empty, do another `vagrant reload` — sometimes it takes two passes.
+
+3. **Set the vagrant user password** (cloud-image vagrant user is key-only; GUI login at GDM needs a password):
+   ```bash
+   vagrant ssh -c "echo 'vagrant:vagrant' | sudo chpasswd"
+   ```
+
+4. **Pre-install ansible from Ubuntu's universe repo** — Vagrant's default `install_mode` adds the Ansible PPA via `apt-add-repository ppa:ansible/ansible`, which on 26.04 (`resolute`) fails because the Ansible PPA hasn't published builds for resolute yet:
+   ```bash
+   E: The repository 'https://ppa.launchpadcontent.net/ansible/ansible/ubuntu resolute Release' does not have a Release file.
+   ```
+   Workaround until the PPA catches up:
+   ```bash
+   vagrant ssh -c "sudo DEBIAN_FRONTEND=noninteractive apt install -y ansible"
+   ```
+   *(Confirms ansible 2.20+ is in 26.04's universe — recent enough for this playbook.)*
+   Then in the Vagrantfile, set `ansible.install = false` in the ansible_local provisioner so vagrant doesn't try to (re-)install ansible via the broken PPA path. **Revert this once the Ansible PPA publishes a resolute build** (probably weeks after 26.04 GA).
+
+5. Now `./scripts/test-vm.sh up` should run desktop install + Phase 3 cleanly.
+
+**Also consider** switching to `bento/ubuntu-26.04` once it exists (probably summer 2026). Bento boxes ship working GA + ansible pre-installed, eliminating steps 1, 2, 4 above. As of 2026-04-25 only `cloud-image/ubuntu-26.04`, `konstruktoid/ubuntu-26.04` (20 downloads), and `apavy/ubuntu-26.04-desktop-amd64` (3 downloads) exist on Vagrant Cloud.
+
 ```bash
 cd ~/code/ansible-recipes
 
