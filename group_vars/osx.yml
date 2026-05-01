@@ -38,6 +38,7 @@ brew_packages:
   - deskflow
   - dockutil
   - dust
+  - exiftool
   - eza
   - fastfetch
   - fd
