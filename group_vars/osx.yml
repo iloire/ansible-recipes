@@ -55,7 +55,6 @@ brew_packages:
   - java
   - jq
   - lazygit
-  - mc
   - midnight-commander
   - neovim
   - nmap
