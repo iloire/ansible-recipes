@@ -12,6 +12,7 @@ brew_cask_packages:
   - google-chrome
   - google-cloud-sdk
   - google-drive
+  - inkscape
   - keepassxc
   - ngrok
   - postman
